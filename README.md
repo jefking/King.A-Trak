@@ -17,7 +17,7 @@ It is meant to allow developers to easily leverage Windows Azure's CDN services.
 
 ### Screenshot of configuration arguments
 
-![A-Track Configuration](/images/logo.png)
+![A-Track Configuration](https://github.com/AgileBusinessCloud/A-Track/raw/master/Config.PNG)
 
 ## About the Author
 
