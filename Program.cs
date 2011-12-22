@@ -1,4 +1,4 @@
-﻿namespace BlobUploader
+﻿namespace Abc.Atrack
 {
     using System;
     using System.Collections.Generic;
@@ -33,7 +33,7 @@
                         var container = client.GetContainerReference(args[1]);
                         container.CreateIfNotExist();
 
-                        Upload(folder, container);
+                        UploadFolderContents(folder, container);
                     }
                     else
                     {
@@ -46,10 +46,15 @@
                 }
             }
 
-            Console.Read();
+            Console.WriteLine("Completed.");
         }
 
-        private static void Upload(string folder, CloudBlobContainer container)
+        /// <summary>
+        /// Upload Folder Contents
+        /// </summary>
+        /// <param name="folder">Folder</param>
+        /// <param name="container">Container</param>
+        private static void UploadFolderContents(string folder, CloudBlobContainer container)
         {
             var files = GetFiles(folder, new List<string>());
             Parallel.ForEach<string>(files, (file, state) =>
@@ -58,7 +63,7 @@
                 var blob = container.GetBlobReference(objId);
                 blob.UploadByteArray(File.ReadAllBytes(file));
 
-                var contentType = GetMIMEType(file);
+                var contentType = ContentType(file);
                 if (!string.IsNullOrWhiteSpace(contentType))
                 {
                     blob.Properties.ContentType = contentType;
@@ -66,7 +71,13 @@
                 }
             });
         }
-        public static string GetMIMEType(string filepath)
+
+        /// <summary>
+        /// Content Type
+        /// </summary>
+        /// <param name="filepath">File Path</param>
+        /// <returns>Content Type</returns>
+        public static string ContentType(string filepath)
         {
             var regPerm = new RegistryPermission(RegistryPermissionAccess.Read, "\\\\HKEY_CLASSES_ROOT");
             var classesRoot = Registry.ClassesRoot;
@@ -75,7 +86,7 @@
 
             var dotExt = fi.Extension.ToLowerInvariant();
 
-            RegistryKey typeKey = classesRoot.OpenSubKey("MIME\\Database\\Content Type");
+            var typeKey = classesRoot.OpenSubKey("MIME\\Database\\Content Type");
 
             foreach (var keyname in typeKey.GetSubKeyNames())
             {
@@ -89,6 +100,13 @@
 
             return null;
         }
+
+        /// <summary>
+        /// Get Files
+        /// </summary>
+        /// <param name="folder">Folder</param>
+        /// <param name="files">Files</param>
+        /// <returns>Files</returns>
         private static List<string> GetFiles(string folder, List<string> files)
         {
             foreach (var dir in Directory.GetDirectories(folder))
