@@ -12,10 +12,10 @@ We have built this to help you with your development and deployment process. Agi
 * Clone the repository at <code>git@github.com:AgileBusinessCloud/A-Track.git</code>
 * Run the csproj file in Visual Studio
 * Configure the command line arguments in DEBUG tab of Project Properties
-** Example: <code>"C:\Project\MyMVCWebSite\Content" "content" "UseDevelopmentStorage=true"</code>
-** first argument: location of files you wish to push to Azure on your local environment
-** second argument: name of the container you want to push to on Azure
-** third argument: connection string
+  * Example: <code>"C:\Project\MyMVCWebSite\Content" "content" "UseDevelopmentStorage=true"</code>
+  * first argument: location of files you wish to push to Azure on your local environment
+  * second argument: name of the container you want to push to on Azure
+  * third argument: connection string
 * Run that puppy (Hit F5)!
 
 ### Screenshot of configuration arguments
