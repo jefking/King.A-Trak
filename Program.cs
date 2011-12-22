@@ -10,8 +10,15 @@
     using Microsoft.WindowsAzure;
     using Microsoft.WindowsAzure.StorageClient;
 
+    /// <summary>
+    /// Program
+    /// </summary>
     class Program
     {
+        /// <summary>
+        /// Program Main Entry
+        /// </summary>
+        /// <param name="args"></param>
         static void Main(string[] args)
         {
             if (null == args || 3 != args.Length || args.Any(a => string.IsNullOrWhiteSpace(a)))
