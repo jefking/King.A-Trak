@@ -1,8 +1,11 @@
-# A-Track -- Blob Uploader Tool
+# A-Track - Blob Uploader Tool
 
-This is a utility for easily uploading files (CSS/JS) to Blob Storage on Windows Azure. 
+This is a utility for easily uploading files to Blob Storage on Windows Azure. It is meant to allow developers to easily leverage Windows Azure's CDN services.
 
-It is meant to allow developers to easily leverage Windows Azure's CDN services.
+This is an application to help you upload the contents of a folder into Blob storage on Windows Azure; which can then be configured to be accessed via the Windows Azure CDN.
+
+We have built this to help you with your development and deployment process. Agile Business Cloud Solutions uses this tool as part of an automated deployment solution to Windows Azure.
+
 
 ## Getting Started
 
