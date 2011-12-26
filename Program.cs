@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics;
     using System.IO;
     using System.Linq;
     using System.Security.Permissions;
@@ -18,21 +19,23 @@
         /// <summary>
         /// Program Main Entry
         /// </summary>
-        /// <param name="args"></param>
+        /// <param name="args">Program Arguments</param>
         static void Main(string[] args)
         {
             if (null == args || 3 != args.Length || args.Any(a => string.IsNullOrWhiteSpace(a)))
             {
-                Console.WriteLine("Invalid Arguments: 1.) Folder, 2.) Container to upload to, 3.) Blob Storage Account");
+                Trace.WriteLine("Invalid Arguments: 1.) Folder, 2.) Container to upload to, 3.) Blob Storage Account.");
             }
             else
             {
+                var folder = args[0];
+
                 try
                 {
-                    var folder = args[0];
-
                     if (Directory.Exists(folder))
                     {
+                        Trace.WriteLine(string.Format("Uploading from folder: '{0}'", folder));
+
                         var connectionString = args[2];
                         var account = CloudStorageAccount.Parse(connectionString);
                         var client = account.CreateCloudBlobClient();
@@ -44,16 +47,16 @@
                     }
                     else
                     {
-                        Console.WriteLine(string.Format("Unknown Directory: '{0}'", folder));
+                        Trace.WriteLine(string.Format("Unknown Directory: '{0}'", folder));
                     }
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine(ex.Message);
+                    Trace.WriteLine(ex.Message);
                 }
             }
 
-            Console.WriteLine("Completed.");
+            Trace.WriteLine("Completed.");
         }
 
         /// <summary>
@@ -63,10 +66,18 @@
         /// <param name="container">Container</param>
         private static void UploadFolderContents(string folder, CloudBlobContainer container)
         {
+            var path = folder;
+            if (!path.EndsWith("\\"))
+            {
+                path += '\\';
+            }
+
             var files = GetFiles(folder, new List<string>());
             Parallel.ForEach<string>(files, (file, state) =>
             {
-                var objId = file.Replace(folder, string.Empty).ToLowerInvariant();
+                Trace.WriteLine(string.Format("Uploading file: '{0}'.", file));
+
+                var objId = file.Replace(path, string.Empty).ToLowerInvariant();
                 var blob = container.GetBlobReference(objId);
                 blob.UploadByteArray(File.ReadAllBytes(file));
 
@@ -119,9 +130,9 @@
             foreach (var dir in Directory.GetDirectories(folder))
             {
                 GetFiles(dir, files);
-
-                files.AddRange(Directory.GetFiles(dir));
             }
+
+            files.AddRange(Directory.GetFiles(folder));
 
             return files;
         }
