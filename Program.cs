@@ -28,7 +28,7 @@
         /// Program Main Entry
         /// </summary>
         /// <param name="args">Program Arguments</param>
-        static void Main(string[] args)
+        public static void Main(string[] args)
         {
             if (null == args || 3 != args.Length || args.Any(a => string.IsNullOrWhiteSpace(a)))
             {
