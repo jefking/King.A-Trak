@@ -28,7 +28,7 @@ Jef King has worked in the software industry for twelve years. Over this time he
 
 ## Apache 2.0 Licence
 
-   Copyright 2011 Agile Business Cloud
+   Copyright 2012 Agile Business Cloud Solutions LTD
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
