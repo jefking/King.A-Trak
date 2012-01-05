@@ -3,7 +3,7 @@ using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
 [assembly: AssemblyTitle("A-Track Windows Azure Blob Uploader")]
-[assembly: AssemblyDescription("Uploaded blobs to Windows Azure")]
+[assembly: AssemblyDescription("Command line tool for uploading files to Windows Azure blob storage.")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Agile Business Cloud Solutions Ltd.")]
 [assembly: AssemblyProduct("A-Track")]

@@ -87,7 +87,7 @@
 
                 var objId = file.Replace(path, string.Empty);
                 var blob = container.GetBlobReference(objId);
-                bool exists = false;
+                var exists = false;
 
                 try
                 {
