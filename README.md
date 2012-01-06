@@ -1,4 +1,4 @@
-# A-Track - Blob Uploader Tool
+# A-Trak - Blob Uploader Tool
 
 This is a utility for easily uploading files to Blob Storage on Windows Azure. It is meant to allow developers to easily leverage Windows Azure's CDN services.
 
@@ -9,7 +9,7 @@ We have built this to help you with your development and deployment process. Agi
 
 ## Getting Started
 
-* Clone the repository at <code>git@github.com:AgileBusinessCloud/A-Track.git</code>
+* Clone the repository at <code>git@github.com:AgileBusinessCloud/A-Trak.git</code>
 * Run the csproj file in Visual Studio
 * Configure the command line arguments in DEBUG tab of Project Properties
   * Example: <code>"C:\Project\MyMVCWebSite\Content" "content" "UseDevelopmentStorage=true"</code>
@@ -20,7 +20,7 @@ We have built this to help you with your development and deployment process. Agi
 
 ### Screenshot of configuration arguments
 
-![A-Track Configuration](https://github.com/AgileBusinessCloud/A-Track/raw/master/Config.PNG)
+![A-Trak Configuration](https://github.com/AgileBusinessCloud/A-Trak/raw/master/config.png)
 
 ## About the Author
 
