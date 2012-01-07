@@ -83,7 +83,7 @@
         /// <returns>Data for object</returns>
         public byte[] GetData()
         {
-            throw new NotImplementedException();
+            return blob.DownloadByteArray();
         }
 
         /// <summary>

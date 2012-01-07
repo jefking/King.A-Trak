@@ -59,7 +59,7 @@
         /// <returns>Exists</returns>
         public bool Exists()
         {
-            throw new NotImplementedException();
+            return File.Exists(this.Path);
         }
 
         /// <summary>
@@ -69,7 +69,7 @@
         /// <param name="exists">Exists</param>
         public void Save(IStorageItem storageItem, bool exists = false)
         {
-            throw new NotImplementedException();
+            File.WriteAllBytes(storageItem.Path, storageItem.GetData());
         }
 
         /// <summary>
