@@ -62,6 +62,9 @@
     <Reference Include="Microsoft.CSharp" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Cloud.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="ContentTypes.cs" />
     <Compile Include="Disk.cs" />
     <Compile Include="IStorageItem.cs">

@@ -5,7 +5,6 @@
     using System.Diagnostics;
     using System.IO;
     using System.Linq;
-    using System.Security.Cryptography;
     using System.Threading.Tasks;
     using Microsoft.WindowsAzure;
     using Microsoft.WindowsAzure.StorageClient;
@@ -15,13 +14,6 @@
     /// </summary>
     public class Program
     {
-        #region Members
-        /// <summary>
-        /// MD5 Key for Metadata
-        /// </summary>
-        private const string MD5MetadataKey = "MD5";
-        #endregion
-
         /// <summary>
         /// Program Main Entry
         /// </summary>
@@ -79,50 +71,27 @@
             }
 
             var files = GetFiles(folder, new List<Disk>());
-            Parallel.ForEach<Disk>(files, (file, state) =>
+            Parallel.ForEach<IStorageItem>(files, (file, state) =>
             {
                 Trace.WriteLine(string.Format("Processing file: '{0}'.", file));
 
                 var objId = file.Path.Replace(path, string.Empty);
-                var blob = container.GetBlobReference(objId);
-                var exists = false;
-
-                try
-                {
-                    blob.FetchAttributes();
-                    exists = true;
-                }
-                catch (StorageClientException)
+                IStorageItem blob = new Cloud(container, objId);
+                var exists = blob.Exists();
+                if (!exists)
                 {
                     Trace.WriteLine(string.Format("Uploading new file: '{0}'.", file));
                 }
 
-
-                if (!exists || blob.Metadata[MD5MetadataKey] != file.MD5)
+                if (!exists || blob.MD5 != file.MD5)
                 {
-                    if (!string.IsNullOrWhiteSpace(blob.Properties.ContentType))
-                    {
-                        blob.CreateSnapshot();
-
-                        Trace.WriteLine(string.Format("Created snapshot of blob: '{0}'.", blob.Uri));
-                    }
-                    else
-                    {
-                        blob.Properties.ContentType = file.ContentType;
-                    }
-
-                    // Currently there is a bug in the library that this isn't being stored or retrieved properly, this will be compatible when the new library comes out
-                    blob.Properties.ContentMD5 = file.MD5;
-                    blob.UploadByteArray(file.GetData());
-
-                    blob.Metadata[MD5MetadataKey] = file.MD5;
-                    blob.SetMetadata();
+                    blob.Save(file, exists);
 
                     Trace.WriteLine(string.Format("Uploaded file: '{0}'.", file));
                 }
                 else
                 {
-                    Trace.WriteLine(string.Format("File '{0}' already exists at '{1}', upload avoided.", file, blob.Uri));
+                    Trace.WriteLine(string.Format("File '{0}' already exists at '{1}', upload avoided.", file.Path, blob.Path));
                 }
             });
         }

@@ -54,6 +54,25 @@
         }
 
         /// <summary>
+        /// Check to see if item exists
+        /// </summary>
+        /// <returns>Exists</returns>
+        public bool Exists()
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// Save Storage Item
+        /// </summary>
+        /// <param name="storageItem">Storage Item</param>
+        /// <param name="exists">Exists</param>
+        public void Save(IStorageItem storageItem, bool exists = false)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <summary>
         /// To String
         /// </summary>
         /// <returns>String reprensentation of object</returns>
