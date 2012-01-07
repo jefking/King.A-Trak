@@ -78,12 +78,12 @@
                 path += '\\';
             }
 
-            var files = GetFiles(folder, new List<string>());
-            Parallel.ForEach<string>(files, (file, state) =>
+            var files = GetFiles(folder, new List<Disk>());
+            Parallel.ForEach<Disk>(files, (file, state) =>
             {
                 Trace.WriteLine(string.Format("Processing file: '{0}'.", file));
 
-                var objId = file.Replace(path, string.Empty);
+                var objId = file.Path.Replace(path, string.Empty);
                 var blob = container.GetBlobReference(objId);
                 var exists = false;
 
@@ -97,15 +97,8 @@
                     Trace.WriteLine(string.Format("Uploading new file: '{0}'.", file));
                 }
 
-                var fileContents = File.ReadAllBytes(file);
-                string md5 = null;
-                using (var md5Hash = MD5.Create())
-                {
-                    var data = md5Hash.ComputeHash(fileContents);
-                    md5 = System.Convert.ToBase64String(data);
-                }
 
-                if (!exists || blob.Metadata[MD5MetadataKey] != md5)
+                if (!exists || blob.Metadata[MD5MetadataKey] != file.MD5)
                 {
                     if (!string.IsNullOrWhiteSpace(blob.Properties.ContentType))
                     {
@@ -115,14 +108,14 @@
                     }
                     else
                     {
-                        blob.Properties.ContentType = ContentTypes.ContentType(file);
+                        blob.Properties.ContentType = file.ContentType;
                     }
 
                     // Currently there is a bug in the library that this isn't being stored or retrieved properly, this will be compatible when the new library comes out
-                    blob.Properties.ContentMD5 = md5;
-                    blob.UploadByteArray(fileContents);
+                    blob.Properties.ContentMD5 = file.MD5;
+                    blob.UploadByteArray(file.GetData());
 
-                    blob.Metadata[MD5MetadataKey] = md5;
+                    blob.Metadata[MD5MetadataKey] = file.MD5;
                     blob.SetMetadata();
 
                     Trace.WriteLine(string.Format("Uploaded file: '{0}'.", file));
@@ -140,14 +133,14 @@
         /// <param name="folder">Folder</param>
         /// <param name="files">Files</param>
         /// <returns>Files</returns>
-        private static List<string> GetFiles(string folder, List<string> files)
+        private static List<Disk> GetFiles(string folder, List<Disk> files)
         {
             foreach (var dir in Directory.GetDirectories(folder))
             {
                 GetFiles(dir, files);
             }
 
-            files.AddRange(Directory.GetFiles(folder));
+            files.AddRange(Directory.GetFiles(folder).AsParallel().Select(f => new Disk(f)));
 
             return files;
         }
