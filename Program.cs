@@ -1,4 +1,4 @@
-﻿namespace Abc.Atrak
+﻿namespace Abc.ATrak
 {
     using System;
     using System.Collections.Generic;
@@ -6,16 +6,14 @@
     using System.IO;
     using System.Linq;
     using System.Security.Cryptography;
-    using System.Security.Permissions;
     using System.Threading.Tasks;
-    using Microsoft.Win32;
     using Microsoft.WindowsAzure;
     using Microsoft.WindowsAzure.StorageClient;
 
     /// <summary>
-    /// Program
+    /// A-Trak Blob Uploader
     /// </summary>
-    class Program
+    public class Program
     {
         #region Members
         /// <summary>
@@ -32,7 +30,7 @@
         {
             if (null == args || 3 != args.Length || args.Any(a => string.IsNullOrWhiteSpace(a)))
             {
-                Trace.WriteLine("Invalid Arguments: 1.) Folder, 2.) Container to upload to, 3.) Blob Storage Account.");
+                Trace.WriteLine(string.Format("Invalid Arguments: {0}1.) Folder {0}2.) Container to upload to {0}3.) Blob Storage Account", Environment.NewLine));
             }
             else
             {
@@ -117,7 +115,7 @@
                     }
                     else
                     {
-                        blob.Properties.ContentType = ContentType(file);
+                        blob.Properties.ContentType = ContentTypes.ContentType(file);
                     }
 
                     // Currently there is a bug in the library that this isn't being stored or retrieved properly, this will be compatible when the new library comes out
@@ -134,35 +132,6 @@
                     Trace.WriteLine(string.Format("File '{0}' already exists at '{1}', upload avoided.", file, blob.Uri));
                 }
             });
-        }
-
-        /// <summary>
-        /// Content Type
-        /// </summary>
-        /// <param name="filepath">File Path</param>
-        /// <returns>Content Type</returns>
-        public static string ContentType(string filepath)
-        {
-            var regPerm = new RegistryPermission(RegistryPermissionAccess.Read, "\\\\HKEY_CLASSES_ROOT");
-            var classesRoot = Registry.ClassesRoot;
-
-            var fi = new FileInfo(filepath);
-
-            var dotExt = fi.Extension.ToLowerInvariant();
-
-            var typeKey = classesRoot.OpenSubKey("MIME\\Database\\Content Type");
-
-            foreach (var keyname in typeKey.GetSubKeyNames())
-            {
-                var curKey = classesRoot.OpenSubKey("MIME\\Database\\Content Type\\" + keyname);
-                var extension = curKey.GetValue("Extension");
-                if (null != extension && extension.ToString().ToLowerInvariant() == dotExt)
-                {
-                    return keyname;
-                }
-            }
-
-            return null;
         }
 
         /// <summary>
