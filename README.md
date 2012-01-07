@@ -23,7 +23,7 @@ We have built this to help you with your development and deployment process. Agi
 
 ### Screenshot of configuration arguments
 
-![A-Trak Configuration](https://github.com/AgileBusinessCloud/A-Trak/raw/master/config.png)
+![A-Trak Configuration](https://github.com/AgileBusinessCloud/A-Trak/raw/master/Config.PNG)
 
 ## About the Author
 
