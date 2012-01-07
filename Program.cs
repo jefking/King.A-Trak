@@ -1,16 +1,14 @@
 ﻿namespace Abc.ATrak
 {
     using System;
-    using System.Collections.Generic;
     using System.Diagnostics;
     using System.IO;
     using System.Linq;
     using System.Threading.Tasks;
     using Microsoft.WindowsAzure;
-    using Microsoft.WindowsAzure.StorageClient;
 
     /// <summary>
-    /// A-Trak Blob Uploader
+    /// A-Trak synchronizer, for Azure Storage Blobs (containers) and folders
     /// </summary>
     public class Program
     {
@@ -20,32 +18,58 @@
         /// <param name="args">Program Arguments</param>
         public static void Main(string[] args)
         {
-            if (null == args || 3 != args.Length || args.Any(a => string.IsNullOrWhiteSpace(a)))
+            if (null == args)
             {
-                Trace.WriteLine(string.Format("Invalid Arguments: {0}1.) Folder {0}2.) Container to upload to {0}3.) Blob Storage Account", Environment.NewLine));
+                Trace.WriteLine("No arguments specified, please view help file for information on how to use A-Trak.");
+            }
+            else if (2 > args.Length || args.Any(a => string.IsNullOrWhiteSpace(a)))
+            {
+                Trace.WriteLine("You must specify a source and destination which you want to synchronize.");
             }
             else
             {
-                var folder = args[0];
+                var factory = new StorageFactory();
 
                 try
                 {
-                    if (Directory.Exists(folder))
+                    CloudStorageAccount account;
+                    for (int i = 0; i < args.Length; i++)
                     {
-                        Trace.WriteLine(string.Format("Uploading from folder: '{0}'", folder));
+                        if (Directory.Exists(args[i]))
+                        {
+                            Trace.WriteLine(string.Format("Synchronizing folder: '{0}'", args[i]));
 
-                        var connectionString = args[2];
-                        var account = CloudStorageAccount.Parse(connectionString);
-                        var client = account.CreateCloudBlobClient();
-                        client.RetryPolicy = RetryPolicies.Retry(3, TimeSpan.FromSeconds(5));
-                        var container = client.GetContainerReference(args[1]);
-                        container.CreateIfNotExist();
+                            factory.AddDirectory(args[i]);
+                        }
+                        else if (CloudStorageAccount.TryParse(args[i], out account))
+                        {
+                            if (i + 1 < args.Length)
+                            {
+                                i++;
 
-                        UploadFolderContents(folder, container);
+                                Trace.WriteLine(string.Format("Synchronizing container: '{0}'", args[i]));
+
+                                factory.AddContainer(account, args[i]);
+                            }
+                            else
+                            {
+                                Trace.WriteLine("Storage Account Credentials must be coupled with container; please specify a container to synchronize to.");
+                            }
+                        }
+                        else
+                        {
+                            Trace.Fail(string.Format("Unknown parameter: '{0}'", args[i]));
+                            break;
+                        }
+                    }
+
+                    if (factory.Validate())
+                    {
+                        SynchronizeContents(factory);
                     }
                     else
                     {
-                        Trace.WriteLine(string.Format("Unknown Directory: '{0}'", folder));
+                        Trace.WriteLine("Failed to initialize; invalid parameters");
                     }
                 }
                 catch (Exception ex)
@@ -58,60 +82,33 @@
         }
 
         /// <summary>
-        /// Upload Folder Contents
+        /// Synchronize Contents
         /// </summary>
-        /// <param name="folder">Folder</param>
-        /// <param name="container">Container</param>
-        private static void UploadFolderContents(string folder, CloudBlobContainer container)
+        /// <param name="factory">Storage Factory</param>
+        private static void SynchronizeContents(StorageFactory factory)
         {
-            var path = folder;
-            if (!path.EndsWith("\\"))
+            Parallel.ForEach<IStorageItem>(factory.From(), (from, state) =>
             {
-                path += '\\';
-            }
+                Trace.WriteLine(string.Format("Processing file: '{0}'.", from));
 
-            var files = GetFiles(folder, new List<Disk>());
-            Parallel.ForEach<IStorageItem>(files, (file, state) =>
-            {
-                Trace.WriteLine(string.Format("Processing file: '{0}'.", file));
-
-                var objId = file.Path.Replace(path, string.Empty);
-                IStorageItem blob = new Cloud(container, objId);
-                var exists = blob.Exists();
+                var to = factory.To(from.Path);
+                var exists = to.Exists();
                 if (!exists)
                 {
-                    Trace.WriteLine(string.Format("Uploading new file: '{0}'.", file));
+                    Trace.WriteLine(string.Format("Synchronizing new file: '{0}'.", from));
                 }
 
-                if (!exists || blob.MD5 != file.MD5)
+                if (!exists || to.MD5 != from.MD5)
                 {
-                    blob.Save(file, exists);
+                    to.Save(from, exists);
 
-                    Trace.WriteLine(string.Format("Uploaded file: '{0}'.", file));
+                    Trace.WriteLine(string.Format("Synchronizing file: '{0}'.", from));
                 }
                 else
                 {
-                    Trace.WriteLine(string.Format("File '{0}' already exists at '{1}', upload avoided.", file.Path, blob.Path));
+                    Trace.WriteLine(string.Format("File '{0}' already exists at '{1}', synchronization avoided.", from.Path, to.Path));
                 }
             });
-        }
-
-        /// <summary>
-        /// Get Files
-        /// </summary>
-        /// <param name="folder">Folder</param>
-        /// <param name="files">Files</param>
-        /// <returns>Files</returns>
-        private static List<Disk> GetFiles(string folder, List<Disk> files)
-        {
-            foreach (var dir in Directory.GetDirectories(folder))
-            {
-                GetFiles(dir, files);
-            }
-
-            files.AddRange(Directory.GetFiles(folder).AsParallel().Select(f => new Disk(f)));
-
-            return files;
         }
     }
 }

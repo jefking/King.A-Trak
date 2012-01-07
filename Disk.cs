@@ -69,7 +69,9 @@
         /// <param name="exists">Exists</param>
         public void Save(IStorageItem storageItem, bool exists = false)
         {
-            File.WriteAllBytes(storageItem.Path, storageItem.GetData());
+            Directory.CreateDirectory(System.IO.Path.GetDirectoryName(this.Path));
+
+            File.WriteAllBytes(this.Path, storageItem.GetData());
         }
 
         /// <summary>

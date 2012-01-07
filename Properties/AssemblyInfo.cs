@@ -2,8 +2,8 @@
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
-[assembly: AssemblyTitle("A-Trak Windows Azure Blob Uploader")]
-[assembly: AssemblyDescription("Command line tool for uploading files to Windows Azure blob storage.")]
+[assembly: AssemblyTitle("A-Trak Windows Azure Blob and File system Synchronization")]
+[assembly: AssemblyDescription("Command line tool for synchronizing Blobs and Files.")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Agile Business Cloud Solutions Ltd.")]
 [assembly: AssemblyProduct("A-Trak")]
@@ -12,5 +12,5 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyCulture("")]
 [assembly: ComVisible(false)]
 [assembly: Guid("a4b17f6c-7cba-4b4b-9826-ec4cafc828ae")]
-[assembly: AssemblyVersion("1.0.0.5")]
-[assembly: AssemblyFileVersion("1.0.0.5")]
+[assembly: AssemblyVersion("1.0.1.0")]
+[assembly: AssemblyFileVersion("1.0.1.0")]
