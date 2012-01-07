@@ -19,16 +19,22 @@
         /// <summary>
         /// Initializes a Disk
         /// </summary>
+        /// <param name="root">Root Path of File</param>
         /// <param name="path">Path of File</param>
-        public Disk(string path)
+        public Disk(string root, string path)
         {
             if (string.IsNullOrWhiteSpace(path))
+            {
+                throw new ArgumentNullException("path");
+            }
+            else if (string.IsNullOrWhiteSpace(path))
             {
                 throw new ArgumentNullException("path");
             }
             else
             {
                 this.Path = path;
+                this.RelativePath = path.Replace(root, string.Empty);
             }
         }
         #endregion
@@ -109,6 +115,15 @@
         /// Gets the Path
         /// </summary>
         public string Path
+        {
+            get;
+            private set;
+        }
+
+        /// <summary>
+        /// Gets the Relative Path
+        /// </summary>
+        public string RelativePath
         {
             get;
             private set;

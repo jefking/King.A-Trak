@@ -50,6 +50,14 @@
         {
             get;
         }
+
+        /// <summary>
+        /// Gets the Relative Path
+        /// </summary>
+        string RelativePath
+        {
+            get;
+        }
         #endregion
     }
 }

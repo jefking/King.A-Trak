@@ -111,47 +111,52 @@
         {
             if (null == fromContainer)
             {
-                return GetFiles(from, new List<IStorageItem>());
+                return GetFiles(from, from, new List<IStorageItem>());
             }
             else
             {
-                throw new NotImplementedException();
+                var options = new BlobRequestOptions()
+                {
+                    UseFlatBlobListing = true,
+                };
+                return fromContainer.ListBlobs(options).Select(b => new Cloud(fromContainer, b.Uri.ToString())).Where(c => c.Exists());
             }
         }
 
         /// <summary>
         /// Create to storage item
         /// </summary>
-        /// <param name="existing">existing path</param>
+        /// <param name="existing">existing storage Item</param>
         /// <returns>Storage item</returns>
-        public IStorageItem To(string existing)
+        public IStorageItem To(IStorageItem existing)
         {
             if (null == toContainer)
             {
-                var newPath = existing.Replace(from, to);
-                return new Disk(newPath);
+                //var newPath = existing.Replace(from, to);
+                return new Disk(to, System.IO.Path.Combine(to, existing.RelativePath));
             }
             else
             {
-                var objId = existing.Replace(from, string.Empty);
-                return new Cloud(toContainer, objId);
+                //var objId = existing.Replace(from, string.Empty);
+                return new Cloud(toContainer, existing.RelativePath);
             }
         }
 
         /// <summary>
         /// Get Files
         /// </summary>
+        /// <param name="root">Root Folder</param>
         /// <param name="folder">Folder</param>
         /// <param name="files">Files</param>
         /// <returns>Files</returns>
-        private List<IStorageItem> GetFiles(string folder, List<IStorageItem> files)
+        private List<IStorageItem> GetFiles(string root, string folder, List<IStorageItem> files)
         {
             foreach (var dir in Directory.GetDirectories(folder))
             {
-                GetFiles(dir, files);
+                GetFiles(root, dir, files);
             }
 
-            files.AddRange(Directory.GetFiles(folder).AsParallel().Select(f => new Disk(f)));
+            files.AddRange(Directory.GetFiles(folder).AsParallel().Select(f => new Disk(root, f)));
 
             return files;
         }

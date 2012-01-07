@@ -91,7 +91,7 @@
             {
                 Trace.WriteLine(string.Format("Processing file: '{0}'.", from));
 
-                var to = factory.To(from.Path);
+                var to = factory.To(from);
                 var exists = to.Exists();
                 if (!exists)
                 {
