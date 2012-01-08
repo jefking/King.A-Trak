@@ -1,4 +1,4 @@
-# A-Trak - Synchronizer, for Azure Storage Blobs (containers) and folders
+# A-Trak - Synchronizer for Azure Storage Blobs (containers) and folders
 
 This is a utility for easily synchronizing files to Blob Storage on Windows Azure. It is meant to allow developers to easily leverage Windows Azure's CDN services.
 
