@@ -2,15 +2,13 @@
 
 This is a utility for easily synchronizing files to Blob Storage on Windows Azure. It is meant to allow developers to easily leverage Windows Azure's CDN services.
 
-This is an application to help you syncrhonize the contents of a folder with Blob storage on Windows Azure; which can then be configured to be accessed via the Windows Azure CDN.
-
 We have built this to help you with your development and deployment process. Agile Business Cloud Solutions uses this tool as part of an automated deployment solution to Windows Azure.
 
 
 ## Getting Started
 
-* Clone the repository at <code>git@github.com:AgileBusinessCloud/A-Trak.git</code>
-* Run the csproj file in Visual Studio
+* Clone the repository at <code>git clone git@github.com:AgileBusinessCloud/A-Trak.git</code>
+* Run the A-Trak.csproj file in Visual Studio
 * Configure the command line arguments in DEBUG tab of Project Properties
   * Example Folder to Blob: <code>"C:\Project\MyMVCWebSite\FromFolder" "UseDevelopmentStorage=true" "tocontainer"</code>
   * Example Folder to Folder: <code>"C:\Project\MyMVCWebSite\FromFolder" "C:\Project\MyMVCWebSite\ToFolder"</code>
