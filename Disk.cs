@@ -36,7 +36,10 @@
                 this.Path = path;
                 this.RelativePath = path.Replace(root, string.Empty);
 
-                this.GetData();
+                if (File.Exists(this.Path))
+                {
+                    this.GetData();
+                }
             }
         }
         #endregion

@@ -130,16 +130,7 @@
         /// <returns>Storage item</returns>
         public IStorageItem To(IStorageItem existing)
         {
-            if (null == toContainer)
-            {
-                //var newPath = existing.Replace(from, to);
-                return new Disk(to, System.IO.Path.Combine(to, existing.RelativePath));
-            }
-            else
-            {
-                //var objId = existing.Replace(from, string.Empty);
-                return new Cloud(toContainer, existing.RelativePath);
-            }
+            return null == toContainer ? (IStorageItem)new Disk(to, System.IO.Path.Combine(to, existing.RelativePath)) : (IStorageItem)new Cloud(toContainer, existing.RelativePath);
         }
 
         /// <summary>
