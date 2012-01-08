@@ -35,6 +35,8 @@
             {
                 this.Path = path;
                 this.RelativePath = path.Replace(root, string.Empty);
+
+                this.GetData();
             }
         }
         #endregion
