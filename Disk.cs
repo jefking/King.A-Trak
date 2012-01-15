@@ -17,7 +17,7 @@
 
         #region Constructor
         /// <summary>
-        /// Initializes a Disk
+        /// Initializes a new instance of the Disk
         /// </summary>
         /// <param name="root">Root Path of File</param>
         /// <param name="path">Path of File</param>
@@ -41,57 +41,6 @@
                     this.GetData();
                 }
             }
-        }
-        #endregion
-
-        #region Methods
-        /// <summary>
-        /// Get Data
-        /// </summary>
-        /// <returns>Data for object</returns>
-        public byte[] GetData()
-        {
-            if (data == null)
-            {
-                data = File.ReadAllBytes(this.Path);
-                using (var md5Hash = System.Security.Cryptography.MD5.Create())
-                {
-                    var hash = md5Hash.ComputeHash(data);
-                    this.MD5 = System.Convert.ToBase64String(hash);
-                }
-            }
-
-            return data;
-        }
-
-        /// <summary>
-        /// Check to see if item exists
-        /// </summary>
-        /// <returns>Exists</returns>
-        public bool Exists()
-        {
-            return File.Exists(this.Path);
-        }
-
-        /// <summary>
-        /// Save Storage Item
-        /// </summary>
-        /// <param name="storageItem">Storage Item</param>
-        /// <param name="exists">Exists</param>
-        public void Save(IStorageItem storageItem, bool exists = false)
-        {
-            Directory.CreateDirectory(System.IO.Path.GetDirectoryName(this.Path));
-
-            File.WriteAllBytes(this.Path, storageItem.GetData());
-        }
-
-        /// <summary>
-        /// To String
-        /// </summary>
-        /// <returns>String reprensentation of object</returns>
-        public override string ToString()
-        {
-            return string.Format("{0}", this.Path);
         }
         #endregion
 
@@ -132,6 +81,57 @@
         {
             get;
             private set;
+        }
+        #endregion
+
+        #region Methods
+        /// <summary>
+        /// Get Data
+        /// </summary>
+        /// <returns>Data for object</returns>
+        public byte[] GetData()
+        {
+            if (this.data == null)
+            {
+                this.data = File.ReadAllBytes(this.Path);
+                using (var createHash = System.Security.Cryptography.MD5.Create())
+                {
+                    var hash = createHash.ComputeHash(this.data);
+                    this.MD5 = System.Convert.ToBase64String(hash);
+                }
+            }
+
+            return this.data;
+        }
+
+        /// <summary>
+        /// Check to see if item exists
+        /// </summary>
+        /// <returns>Exists</returns>
+        public bool Exists()
+        {
+            return File.Exists(this.Path);
+        }
+
+        /// <summary>
+        /// Save Storage Item
+        /// </summary>
+        /// <param name="storageItem">Storage Item</param>
+        /// <param name="exists">Exists</param>
+        public void Save(IStorageItem storageItem, bool exists = false)
+        {
+            Directory.CreateDirectory(System.IO.Path.GetDirectoryName(this.Path));
+
+            File.WriteAllBytes(this.Path, storageItem.GetData());
+        }
+
+        /// <summary>
+        /// To String
+        /// </summary>
+        /// <returns>String reprensentation of object</returns>
+        public override string ToString()
+        {
+            return string.Format("{0}", this.Path);
         }
         #endregion
     }

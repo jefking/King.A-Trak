@@ -4,11 +4,10 @@
     using System.Collections.Generic;
     using System.IO;
     using System.Linq;
-    using Microsoft.WindowsAzure;
-    using Microsoft.WindowsAzure.StorageClient;
-    using Amazon;
     using Amazon.S3;
     using Amazon.S3.Model;
+    using Microsoft.WindowsAzure;
+    using Microsoft.WindowsAzure.StorageClient;
 
     /// <summary>
     /// Storage Factory
@@ -17,7 +16,7 @@
     {
         #region Members
         /// <summary>
-        /// From
+        /// From folder/container/bucket
         /// </summary>
         private string from;
 
@@ -32,7 +31,7 @@
         private AmazonS3 fromClient;
 
         /// <summary>
-        /// To
+        /// To Folder, Container, Bucket
         /// </summary>
         private string to;
 
@@ -59,13 +58,13 @@
                 path += '\\';
             }
 
-            if (string.IsNullOrWhiteSpace(from))
+            if (string.IsNullOrWhiteSpace(this.from))
             {
-                from = path;
+                this.from = path;
             }
             else
             {
-                to = path;
+                this.to = path;
             }
         }
 
@@ -79,19 +78,19 @@
             var client = account.CreateCloudBlobClient();
             client.RetryPolicy = RetryPolicies.Retry(3, TimeSpan.FromSeconds(5));
 
-            if (string.IsNullOrWhiteSpace(from))
+            if (string.IsNullOrWhiteSpace(this.from))
             {
-                from = container;
+                this.from = container;
 
-                fromContainer = client.GetContainerReference(container);
-                fromContainer.CreateIfNotExist();
+                this.fromContainer = client.GetContainerReference(container);
+                this.fromContainer.CreateIfNotExist();
             }
             else
             {
-                to = container;
+                this.to = container;
 
-                toContainer = client.GetContainerReference(container);
-                toContainer.CreateIfNotExist();
+                this.toContainer = client.GetContainerReference(container);
+                this.toContainer.CreateIfNotExist();
             }
         }
 
@@ -102,26 +101,26 @@
         /// <param name="bucket">Bucket</param>
         public void AddBucket(AmazonS3 client, string bucket)
         {
-            if (string.IsNullOrWhiteSpace(from))
+            if (string.IsNullOrWhiteSpace(this.from))
             {
-                from = bucket;
+                this.from = bucket;
 
-                fromClient = client;
+                this.fromClient = client;
             }
             else
             {
-                to = bucket;
+                this.to = bucket;
 
-                toClient = client;
-            }
+                this.toClient = client;
 
-            var request = new PutBucketRequest()
-            {
-                BucketName = bucket,
-            };
+                var request = new PutBucketRequest()
+                {
+                    BucketName = bucket,
+                };
 
-            using (var response = client.PutBucket(request))
-            {
+                using (var response = client.PutBucket(request))
+                {
+                }
             }
         }
 
@@ -131,7 +130,7 @@
         /// <returns>Is Valid</returns>
         public bool Validate()
         {
-            return this.Validate(from, fromContainer, fromClient) && this.Validate(to, toContainer, toClient);
+            return this.Validate(this.from, this.fromContainer, this.fromClient) && this.Validate(this.to, this.toContainer, this.toClient);
         }
 
         /// <summary>
@@ -153,29 +152,29 @@
         /// <returns>Storage Items</returns>
         public IEnumerable<IStorageItem> From()
         {
-            if (null != fromContainer)
+            if (null != this.fromContainer)
             {
                 var options = new BlobRequestOptions()
                 {
                     UseFlatBlobListing = true,
                 };
-                return fromContainer.ListBlobs(options).Select(b => new Azure(fromContainer, b.Uri.ToString())).Where(c => c.Exists());
+                return this.fromContainer.ListBlobs(options).Select(b => new Azure(this.fromContainer, b.Uri.ToString())).Where(c => c.Exists());
             }
-            else if (null != fromClient)
+            else if (null != this.fromClient)
             {
                 var request = new ListObjectsRequest()
                 {
-                    BucketName = from,
+                    BucketName = this.from,
                 };
 
-                using (var response = fromClient.ListObjects(request))
+                using (var response = this.fromClient.ListObjects(request))
                 {
-                    return response.S3Objects.Select(s3 => new S3(fromClient, from, s3.Key, s3.ETag));
+                    return response.S3Objects.Select(s3 => new S3(this.fromClient, this.from, s3.Key, s3.ETag));
                 }
             }
             else
             {
-                return GetFiles(from, from, new List<IStorageItem>());
+                return this.GetFiles(this.from, this.from, new List<IStorageItem>());
             }
         }
 
@@ -186,17 +185,17 @@
         /// <returns>Storage item</returns>
         public IStorageItem To(IStorageItem existing)
         {
-            if (null != toContainer)
+            if (null != this.toContainer)
             {
-                return new Azure(toContainer, existing.RelativePath);
+                return new Azure(this.toContainer, existing.RelativePath);
             }
-            else if (null != toClient)
+            else if (null != this.toClient)
             {
-                return new S3(toClient, to, existing.RelativePath);
+                return new S3(this.toClient, this.to, existing.RelativePath);
             }
             else
             {
-                return new Disk(to, System.IO.Path.Combine(to, existing.RelativePath));
+                return new Disk(this.to, System.IO.Path.Combine(this.to, existing.RelativePath));
             }
         }
 
@@ -211,7 +210,7 @@
         {
             foreach (var dir in Directory.GetDirectories(folder))
             {
-                GetFiles(root, dir, files);
+                this.GetFiles(root, dir, files);
             }
 
             files.AddRange(Directory.GetFiles(folder).AsParallel().Select(f => new Disk(root, f)));

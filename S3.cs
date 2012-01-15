@@ -1,10 +1,10 @@
 ﻿namespace Abc.ATrak
 {
+    using System;
     using System.IO;
+    using System.Linq;
     using Amazon.S3;
     using Amazon.S3.Model;
-    using System;
-    using System.Linq;
 
     /// <summary>
     /// Amazon S3 Storage Item
@@ -18,14 +18,14 @@
         private readonly AmazonS3 client = null;
 
         /// <summary>
-        /// Bucket
+        /// S3 Bucket
         /// </summary>
         private readonly string bucket = null;
         #endregion
 
         #region Constructor
         /// <summary>
-        /// Initializes an S3 Object
+        /// Initializes a new instance of the S3
         /// </summary>
         /// <param name="client">Client</param>
         /// <param name="bucket">Bucket</param>
@@ -83,6 +83,26 @@
 
         #region Methods
         /// <summary>
+        /// Read Fully
+        /// </summary>
+        /// <param name="input">Input Stream</param>
+        /// <returns>Bytes</returns>
+        public static byte[] ReadFully(Stream input)
+        {
+            var buffer = new byte[64 * 1024];
+            using (var ms = new MemoryStream())
+            {
+                int read;
+                while ((read = input.Read(buffer, 0, buffer.Length)) > 0)
+                {
+                    ms.Write(buffer, 0, read);
+                }
+
+                return ms.ToArray();
+            }
+        }
+
+        /// <summary>
         /// Get Data
         /// </summary>
         /// <returns>Data for object</returns>
@@ -94,28 +114,9 @@
                 Key = this.RelativePath,
             };
 
-            using (var response = client.GetObject(request))
+            using (var response = this.client.GetObject(request))
             {
                 return ReadFully(response.ResponseStream);
-            }
-        }
-
-        /// <summary>
-        /// Read Fully
-        /// </summary>
-        /// <param name="input">Input Stream</param>
-        /// <returns>Bytes</returns>
-        public static byte[] ReadFully(Stream input)
-        {
-            var buffer = new byte[128 * 1024];
-            using (var ms = new MemoryStream())
-            {
-                int read;
-                while ((read = input.Read(buffer, 0, buffer.Length)) > 0)
-                {
-                    ms.Write(buffer, 0, read);
-                }
-                return ms.ToArray();
             }
         }
 
@@ -129,11 +130,11 @@
             {
                 var request = new GetObjectMetadataRequest()
                 {
-                    BucketName = bucket,
+                    BucketName = this.bucket,
                     Key = this.RelativePath,
                 };
 
-                using (var response = client.GetObjectMetadata(request))
+                using (var response = this.client.GetObjectMetadata(request))
                 {
                     this.ContentType = response.ContentType;
                     this.MD5 = System.Convert.ToBase64String(StringToByteArray(response.ETag.Replace("\"", string.Empty)));
@@ -141,16 +142,22 @@
 
                 return true;
             }
-
             catch (AmazonS3Exception ex)
             {
                 if (ex.StatusCode == System.Net.HttpStatusCode.NotFound)
+                {
                     return false;
+                }
 
                 throw;
             }
         }
 
+        /// <summary>
+        /// String To Byte[]
+        /// </summary>
+        /// <param name="hex">Hexidecimal Value</param>
+        /// <returns>Bytes</returns>
         internal static byte[] StringToByteArray(string hex)
         {
             return Enumerable.Range(0, hex.Length)
@@ -170,7 +177,7 @@
             {
                 var request = new PutObjectRequest()
                 {
-                    BucketName = bucket,
+                    BucketName = this.bucket,
                     InputStream = stream,
                     Key = storageItem.RelativePath,
                     CannedACL = S3CannedACL.Private,
@@ -179,7 +186,7 @@
                     ContentType = storageItem.ContentType,
                 };
 
-                using (var response = client.PutObject(request))
+                using (var response = this.client.PutObject(request))
                 {
                 }
             }
