@@ -36,6 +36,7 @@ Amazon S3: http://aws.amazon.com/sdkfornet/
 
 ## Compiled Version
 Agile Business Cloud Website: http://content.agilebusinesscloud.com/download/Abc.Atrak.1.0.2.1.zip
+Contains both Microsoft Windows Azure and Amazon S3 dependant SDK DLL's
 
 ### Screenshot of configuration arguments
 
