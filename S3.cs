@@ -199,7 +199,7 @@
         /// <returns>String reprensentation of object</returns>
         public override string ToString()
         {
-            return string.Format("{0}", this.Path);
+            return string.Format("{0}", this.RelativePath);
         }
         #endregion
     }
