@@ -35,7 +35,7 @@
         {
             this.client = client;
             this.bucket = bucket;
-            this.RelativePath = relativePath;
+            this.RelativePath = relativePath.Replace('\\', '/');
             if (!string.IsNullOrWhiteSpace(etag))
             {
                 this.MD5 = System.Convert.ToBase64String(StringToByteArray(etag.Replace("\"", string.Empty)));
