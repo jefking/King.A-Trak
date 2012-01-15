@@ -7,12 +7,21 @@
     using System.Threading.Tasks;
     using Amazon;
     using Microsoft.WindowsAzure;
+    using System.Text.RegularExpressions;
 
     /// <summary>
     /// A-Trak synchronizer, for Azure Storage Blobs (containers) and folders
     /// </summary>
     public class Program
     {
+        #region Members
+        /// <summary>
+        /// Directory Match Regex Statement
+        /// </summary>
+        private const string directoryMatch = @"^(([a-zA-Z]:)|(\\{2}\w+)\$?)(\\(\w[\w ]*))+";
+        #endregion
+
+        #region Methods
         /// <summary>
         /// Program Main Entry
         /// </summary>
@@ -36,7 +45,7 @@
                     CloudStorageAccount account;
                     for (int i = 0; i < args.Length; i++)
                     {
-                        if (Directory.Exists(args[i]))
+                        if (Directory.Exists(args[i]) || (i > 0 && Regex.IsMatch(args[i], directoryMatch)))
                         {
                             Trace.WriteLine(string.Format("Synchronizing folder: '{0}'", args[i]));
 
@@ -121,5 +130,6 @@
                 }
             });
         }
+        #endregion
     }
 }

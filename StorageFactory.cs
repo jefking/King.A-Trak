@@ -65,6 +65,11 @@
             else
             {
                 this.to = path;
+
+                if (!Directory.Exists(this.to))
+                {
+                    Directory.CreateDirectory(this.to);
+                }
             }
         }
 
