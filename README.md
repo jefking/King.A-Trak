@@ -34,6 +34,9 @@ We have built this to help you with your development and deployment process. Agi
 Microsoft Windows Azure: https://www.windowsazure.com/en-us/develop/net/
 Amazon S3: http://aws.amazon.com/sdkfornet/
 
+## Compiled Version
+Agile Business Cloud Website: http://content.agilebusinesscloud.com/download/Abc.Atrak.1.0.1.2.zip
+
 ### Screenshot of configuration arguments
 
 ![A-Trak Configuration](https://github.com/AgileBusinessCloud/A-Trak/raw/master/Config.PNG)
