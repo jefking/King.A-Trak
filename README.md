@@ -28,9 +28,6 @@ We have built this to help you with your development and deployment process. Agi
   * Example Amazon S3 to Folder: <code>"SecretKey" "SecretAccessKey" "frombucket" "C:\Project\MyMVCWebSite\ToFolder"</code>
   * Example Amazon S3 to Azure Blob: <code>"SecretKey" "SecretAccessKey" "frombucket"  "UseDevelopmentStorage=true" "tocontainer"</code>
   * Example Amazon S3 to Amazon S3: <code>"SecretKey" "SecretAccessKey" "frombucket" "SecretKey" "SecretAccessKey" "tobucket"</code>
-  * first argument: location of files you wish to push to Azure on your local environment
-  * second argument: name of the container you want to push to on Azure
-  * third argument: connection string
 * Run that puppy (Hit F5)!
 
 ## SDK's
