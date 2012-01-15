@@ -1,8 +1,8 @@
 # A-Trak - Synchronizer for Azure Storage Blobs (containers) and folders
 
-This is a utility for easily synchronizing files to Blob Storage on Windows Azure. It is meant to allow developers to easily leverage Windows Azure's CDN services.
+This is a utility for easily pushing files to Blob Storage on Windows Azure or S3 on Amazon. It is for developers to easily leverage Windows Azure's or Amazon's CDN services.
 
-We have built this to help you with your development and deployment process. Agile Business Cloud Solutions uses this tool as part of an automated deployment solution to Windows Azure.
+We have built this to help you with your development and deployment process. Agile Business Cloud Solutions Ltd. uses this tool as part of an automated deployment solution to Windows Azure.
 
 
 ## Getting Started
@@ -11,16 +11,13 @@ We have built this to help you with your development and deployment process. Agi
 * Run the A-Trak.csproj file in Visual Studio
 * Configure the command line arguments in DEBUG tab of Project Properties
   * Example Folder to Azure Blob: <code>"C:\Project\MyMVCWebSite\FromFolder" "UseDevelopmentStorage=true" "tocontainer"</code>
+  * Example Folder to Amazon S3: <code>"C:\Project\MyMVCWebSite\FromFolder" "SecretKey" "SecretAccessKey" "tobucket"</code>
   * Example Folder to Folder: <code>"C:\Project\MyMVCWebSite\FromFolder" "C:\Project\MyMVCWebSite\ToFolder"</code>
-<<<<<<< HEAD
-  * Example Azure Blob to Azure Blob: <code>"UseDevelopmentStorage=true" "fromcontainer" "UseDevelopmentStorage=true" "tocontainer"</code>
   * Example Azure Blob to Folder: <code>"UseDevelopmentStorage=true" "fromcontainer" "C:\Project\MyMVCWebSite\ToFolder"</code>
-
-  * Example Folder to S3 Bucket: <code>"C:\Project\MyMVCWebSite\ToFolder" "SecretKey" "SecretAccessKey" "bucket"</code>
-
-=======
-  * Example Blob to Blob: <code>"UseDevelopmentStorage=true" "fromcontainer" "UseDevelopmentStorage=true" "tocontainer"</code>
->>>>>>> origin/master
+  * Example Azure Blob to Azure Blob: <code>"UseDevelopmentStorage=true" "fromcontainer" "UseDevelopmentStorage=true" "tocontainer"</code>
+  * Example Azure Blob to Amazon S3: <code>"UseDevelopmentStorage=true" "fromcontainer" "SecretKey" "SecretAccessKey" "tobucket"</code>
+  * Example Amazon S3 to Folder: <code>"SecretKey" "SecretAccessKey" "frombucket" "C:\Project\MyMVCWebSite\ToFolder"</code>
+  * Example Amazon S3 to Amazon S3: <code>"SecretKey" "SecretAccessKey" "frombucket" "SecretKey" "SecretAccessKey" "tobucket"</code>
   * first argument: location of files you wish to push to Azure on your local environment
   * second argument: name of the container you want to push to on Azure
   * third argument: connection string
