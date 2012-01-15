@@ -56,13 +56,18 @@
     <StartupObject>Abc.ATrak.Program</StartupObject>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AWSSDK, Version=1.3.19.0, Culture=neutral, PublicKeyToken=cd2d24cd2bace800, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Program Files (x86)\AWS SDK for .NET\bin\AWSSDK.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.WindowsAzure.StorageClient, Version=1.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="Microsoft.CSharp" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Cloud.cs">
+    <Compile Include="S3.cs" />
+    <Compile Include="Azure.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="ContentTypes.cs" />

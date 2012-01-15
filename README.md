@@ -12,14 +12,21 @@ We have built this to help you with your development and deployment process. Agi
 * Clone the repository at <code>git@github.com:AgileBusinessCloud/A-Trak.git</code>
 * Run the csproj file in Visual Studio
 * Configure the command line arguments in DEBUG tab of Project Properties
-  * Example Folder to Blob: <code>"C:\Project\MyMVCWebSite\FromFolder" "UseDevelopmentStorage=true" "tocontainer"</code>
+  * Example Folder to Azure Blob: <code>"C:\Project\MyMVCWebSite\FromFolder" "UseDevelopmentStorage=true" "tocontainer"</code>
   * Example Folder to Folder: <code>"C:\Project\MyMVCWebSite\FromFolder" "C:\Project\MyMVCWebSite\ToFolder"</code>
-  * Example Blob to Blob: <code>"UseDevelopmentStorage=true" "fromcontainer" "UseDevelopmentStorage=true" "tocontainer"</code>
-  * Example Blob to Folder: <code>"UseDevelopmentStorage=true" "fromcontainer" "C:\Project\MyMVCWebSite\ToFolder"</code>
+  * Example Azure Blob to Azure Blob: <code>"UseDevelopmentStorage=true" "fromcontainer" "UseDevelopmentStorage=true" "tocontainer"</code>
+  * Example Azure Blob to Folder: <code>"UseDevelopmentStorage=true" "fromcontainer" "C:\Project\MyMVCWebSite\ToFolder"</code>
+
+  * Example Folder to S3 Bucket: <code>"C:\Project\MyMVCWebSite\ToFolder" "SecretKey" "SecretAccessKey" "bucket"</code>
+
   * first argument: location of files you wish to push to Azure on your local environment
   * second argument: name of the container you want to push to on Azure
   * third argument: connection string
 * Run that puppy (Hit F5)!
+
+## SDK's
+Microsoft Windows Azure: https://www.windowsazure.com/en-us/develop/net/
+Amazon S3: http://aws.amazon.com/sdkfornet/
 
 ### Screenshot of configuration arguments
 

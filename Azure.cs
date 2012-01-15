@@ -5,9 +5,9 @@
     using Microsoft.WindowsAzure.StorageClient;
 
     /// <summary>
-    /// Cloud Storage Item
+    /// Azure Storage Item
     /// </summary>
-    public class Cloud : IStorageItem
+    public class Azure : IStorageItem
     {
         #region Members
         /// <summary>
@@ -27,7 +27,7 @@
         /// </summary>
         /// <param name="container">Container</param>
         /// <param name="objId">Object Id</param>
-        public Cloud(CloudBlobContainer container, string objId)
+        public Azure(CloudBlobContainer container, string objId)
         {
             this.Path = objId;
             blob = container.GetBlobReference(objId);

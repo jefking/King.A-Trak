@@ -5,6 +5,7 @@
     using System.IO;
     using System.Linq;
     using System.Threading.Tasks;
+    using Amazon;
     using Microsoft.WindowsAzure;
 
     /// <summary>
@@ -55,6 +56,16 @@
                             {
                                 Trace.WriteLine("Storage Account Credentials must be coupled with container; please specify a container to synchronize to.");
                             }
+                        }
+                        else if (args.Length >= i + 3)
+                        {
+                            var accessKey = args[i];
+                            i++;
+                            var secretAccessKey = args[i];
+                            i++;
+                            var bucket = args[i];
+                            var client = AWSClientFactory.CreateAmazonS3Client(accessKey, secretAccessKey);
+                            factory.AddBucket(client, bucket);
                         }
                         else
                         {
