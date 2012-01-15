@@ -33,11 +33,11 @@
             else
             {
                 var fi = new FileInfo(filepath);
-                var dotExt = fi.Extension.ToLowerInvariant();
+                var dotExt = fi.Extension.ToUpperInvariant();
 
-                if (string.IsNullOrWhiteSpace(filepath))
+                if (string.IsNullOrWhiteSpace(dotExt))
                 {
-                    throw new InvalidOperationException(string.Format("Unknown extension; file: {0}", filepath));
+                    throw new InvalidOperationException(string.Format("Unknown extension: {0}", dotExt));
                 }
                 else if (types.ContainsKey(dotExt))
                 {
@@ -55,7 +55,7 @@
                                 using (var curKey = classesRoot.OpenSubKey("MIME\\Database\\Content Type\\" + keyname))
                                 {
                                     var extension = curKey.GetValue("Extension");
-                                    if (null != extension && extension.ToString().ToLowerInvariant() == dotExt)
+                                    if (null != extension && extension.ToString().ToUpperInvariant() == dotExt)
                                     {
                                         return keyname;
                                     }
