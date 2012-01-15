@@ -1,4 +1,6 @@
-# A-Trak - Synchronizer for Azure Storage Blobs (containers) and folders
+# A-Trak - Push files to the Cloud!
+A-Trak is a tool to manage deploying content and resources to the cloud. It can also be used to backup content off of your primary cloud.
+Choose to move data in 9 different directions, between Windows Azure, Amazon S3 and Windows Folders.
 
 This is a utility for easily pushing files to Blob Storage on Windows Azure or S3 on Amazon. It is for developers to easily leverage Windows Azure's or Amazon's CDN services.
 
@@ -17,6 +19,7 @@ We have built this to help you with your development and deployment process. Agi
   * Example Azure Blob to Azure Blob: <code>"UseDevelopmentStorage=true" "fromcontainer" "UseDevelopmentStorage=true" "tocontainer"</code>
   * Example Azure Blob to Amazon S3: <code>"UseDevelopmentStorage=true" "fromcontainer" "SecretKey" "SecretAccessKey" "tobucket"</code>
   * Example Amazon S3 to Folder: <code>"SecretKey" "SecretAccessKey" "frombucket" "C:\Project\MyMVCWebSite\ToFolder"</code>
+  * Example Amazon S3 to Azure Blob: <code>"SecretKey" "SecretAccessKey" "frombucket"  "UseDevelopmentStorage=true" "tocontainer"</code>
   * Example Amazon S3 to Amazon S3: <code>"SecretKey" "SecretAccessKey" "frombucket" "SecretKey" "SecretAccessKey" "tobucket"</code>
   * first argument: location of files you wish to push to Azure on your local environment
   * second argument: name of the container you want to push to on Azure
