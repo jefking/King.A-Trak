@@ -144,7 +144,7 @@
             }
             catch (AmazonS3Exception ex)
             {
-                if (ex.StatusCode == System.Net.HttpStatusCode.NotFound)
+                if (ex.StatusCode == System.Net.HttpStatusCode.NotFound || ex.StatusCode == System.Net.HttpStatusCode.Forbidden)
                 {
                     return false;
                 }
@@ -173,19 +173,20 @@
         /// <param name="exists">Exists</param>
         public void Save(IStorageItem storageItem, bool exists = false)
         {
+            var path = storageItem.RelativePath.Replace('\\', '/');
+            var request = new PutObjectRequest()
+            {
+                BucketName = this.bucket,
+                Key = path,
+                CannedACL = S3CannedACL.Private,
+                Timeout = 3600000,
+                MD5Digest = storageItem.MD5,
+                ContentType = storageItem.ContentType,
+            };
+
             using (var stream = new MemoryStream(storageItem.GetData()))
             {
-                var request = new PutObjectRequest()
-                {
-                    BucketName = this.bucket,
-                    InputStream = stream,
-                    Key = storageItem.RelativePath,
-                    CannedACL = S3CannedACL.Private,
-                    Timeout = 3600000,
-                    MD5Digest = storageItem.MD5,
-                    ContentType = storageItem.ContentType,
-                };
-
+                request.InputStream = stream;
                 using (var response = this.client.PutObject(request))
                 {
                 }
