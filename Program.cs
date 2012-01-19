@@ -118,7 +118,7 @@
                     Trace.WriteLine(string.Format("Synchronizing new file: '{0}'.", from));
                 }
 
-                if (!exists || to.MD5 != from.MD5)
+                if (!exists || to.MD5 != from.MD5 || to.MD5 == null)
                 {
                     to.Save(from, exists);
 

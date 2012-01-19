@@ -114,8 +114,11 @@
                 this.blob.Properties.ContentMD5 = source.MD5;
                 this.blob.UploadByteArray(source.GetData());
 
-                this.blob.Metadata[MD5MetadataKey] = source.MD5;
-                this.blob.SetMetadata();
+                if (!string.IsNullOrWhiteSpace(source.MD5))
+                {
+                    this.blob.Metadata[MD5MetadataKey] = source.MD5;
+                    this.blob.SetMetadata();
+                }
             }
         }
 
@@ -125,7 +128,22 @@
         /// <returns>Data for object</returns>
         public byte[] GetData()
         {
-            return this.blob.DownloadByteArray();
+            var bytes = this.blob.DownloadByteArray();
+            if (string.IsNullOrWhiteSpace(this.MD5))
+            {
+                using (var createHash = System.Security.Cryptography.MD5.Create())
+                {
+                    var hash = createHash.ComputeHash(bytes);
+                    this.MD5 = System.Convert.ToBase64String(hash);
+                }
+
+                blob.CreateSnapshot();
+                blob.Properties.ContentMD5 = this.MD5;
+                this.blob.Metadata[MD5MetadataKey] = this.MD5;
+                this.blob.SetMetadata();
+            }
+
+            return bytes;
         }
 
         /// <summary>
