@@ -1,4 +1,7 @@
+![A-Trak Logo](https://github.com/jbueza/A-Trak/raw/add_logo/logo.png)
+
 # A-Trak - Push files to the Cloud!
+
 A-Trak is a tool to manage deploying content and resources to the cloud. It can also be used to backup content off of your primary cloud.
 Choose to move data in 9 different directions, between Windows Azure, Amazon S3 and Windows Folders.
 
