@@ -14,13 +14,6 @@
     /// </summary>
     public class Program
     {
-        #region Members
-        /// <summary>
-        /// Directory Match Regex Statement
-        /// </summary>
-        private const string directoryMatch = @"^(([a-zA-Z]:)|(\\{2}\w+)\$?)(\\(\w[\w ]*))+";
-        #endregion
-
         #region Methods
         /// <summary>
         /// Program Main Entry
@@ -28,74 +21,24 @@
         /// <param name="args">Program Arguments</param>
         public static void Main(string[] args)
         {
-            if (null == args)
-            {
-                Trace.WriteLine("No arguments specified, please view help file for information on how to use A-Trak.");
-            }
-            else if (2 > args.Length || args.Any(a => string.IsNullOrWhiteSpace(a)))
-            {
-                Trace.WriteLine("You must specify a source and destination which you want to synchronize.");
-            }
-            else
-            {
-                var factory = new StorageFactory();
 
-                try
+            try
+            {
+                var parameters = new Parameters(args);
+                var factory = parameters.Process();
+
+                if (factory.Validate())
                 {
-                    CloudStorageAccount account;
-                    for (int i = 0; i < args.Length; i++)
-                    {
-                        if (Directory.Exists(args[i]) || (i > 0 && Regex.IsMatch(args[i], directoryMatch)))
-                        {
-                            Trace.WriteLine(string.Format("Synchronizing folder: '{0}'", args[i]));
-
-                            factory.AddDirectory(args[i]);
-                        }
-                        else if (CloudStorageAccount.TryParse(args[i], out account))
-                        {
-                            if (i + 1 < args.Length)
-                            {
-                                i++;
-
-                                Trace.WriteLine(string.Format("Synchronizing container: '{0}'", args[i]));
-
-                                factory.AddContainer(account, args[i]);
-                            }
-                            else
-                            {
-                                Trace.WriteLine("Storage Account Credentials must be coupled with container; please specify a container to synchronize to.");
-                            }
-                        }
-                        else if (args.Length >= i + 3)
-                        {
-                            var accessKey = args[i];
-                            i++;
-                            var secretAccessKey = args[i];
-                            i++;
-                            var bucket = args[i];
-                            var client = AWSClientFactory.CreateAmazonS3Client(accessKey, secretAccessKey);
-                            factory.AddBucket(client, bucket);
-                        }
-                        else
-                        {
-                            Trace.Fail(string.Format("Unknown parameter: '{0}'", args[i]));
-                            break;
-                        }
-                    }
-
-                    if (factory.Validate())
-                    {
-                        SynchronizeContents(factory);
-                    }
-                    else
-                    {
-                        Trace.WriteLine("Failed to initialize; invalid parameters");
-                    }
+                    SynchronizeContents(factory);
                 }
-                catch (Exception ex)
+                else
                 {
-                    Trace.Fail(ex.Message);
+                    Trace.WriteLine("Failed to initialize; invalid parameters");
                 }
+            }
+            catch (Exception ex)
+            {
+                Trace.Fail(ex.Message);
             }
 
             Trace.WriteLine("Completed.");
