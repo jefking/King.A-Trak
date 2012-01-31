@@ -27,7 +27,7 @@
         /// <summary>
         /// Values Regex Statement
         /// </summary>
-        private static readonly string valuesRegexStatement = "[" + quote + "]*(?<value>.[^" + quote + "]*)[" + quote + " ]*";
+        private static readonly string valuesRegexStatement = "[" + quote + "']*(?<value>.[^" + quote + "']*)[" + quote + "' ]*";
 
         /// <summary>
         /// Quote
