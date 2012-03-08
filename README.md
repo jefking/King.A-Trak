@@ -38,7 +38,7 @@ Microsoft Windows Azure: https://www.windowsazure.com/en-us/develop/net/
 Amazon S3: http://aws.amazon.com/sdkfornet/
 
 ## Compiled Version
-Agile Business Cloud Website: http://content.agilebusinesscloud.com/download/Abc.Atrak.1.0.2.2.zip
+Agile Business Cloud Website: http://cdn.agilebusinesscloud.com/download/Abc.Atrak.1.0.2.2.zip
 Contains both Microsoft Windows Azure and Amazon S3 dependant SDK DLL's
 
 ### Screenshot of configuration arguments
@@ -55,7 +55,7 @@ Contributions are always welcome. If you have find any issues with A-Trak, pleas
 
 ## Apache 2.0 Licence
 
-Copyright 2012 [Agile Business Cloud Solutions Ltd](http://www.agilebusinesscloud.com)
+Copyright 2012 [Agile Business Cloud Solutions Ltd.](http://www.agilebusinesscloud.com)
 
 Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at
 
