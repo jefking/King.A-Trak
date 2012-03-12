@@ -3,6 +3,7 @@
     using System;
     using System.Diagnostics;
     using Microsoft.WindowsAzure.StorageClient;
+    using System.Configuration;
 
     /// <summary>
     /// Azure Storage Item
@@ -102,9 +103,14 @@
         {
             if (exists)
             {
-                this.blob.CreateSnapshot();
+                var createSnapShot = true;
+                bool.TryParse(ConfigurationManager.AppSettings["CreateSnapShot"], out createSnapShot);
+                if (createSnapShot)
+                {
+                    this.blob.CreateSnapshot();
 
-                Trace.WriteLine(string.Format("Created snapshot of blob: '{0}'.", this.blob.Uri));
+                    Trace.WriteLine(string.Format("Created snapshot of blob: '{0}'.", this.blob.Uri));
+                }
             }
 
             if (source.Exists())
