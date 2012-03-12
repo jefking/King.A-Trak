@@ -20,9 +20,22 @@
         /// Cloud Blob
         /// </summary>
         private readonly CloudBlob blob;
+
+        /// <summary>
+        /// Create Snap Shot of blobs
+        /// </summary>
+        private static readonly bool createSnapShot = true;
         #endregion
 
         #region Constructors
+        /// <summary>
+        /// Staticly initializes Azure members
+        /// </summary>
+        static Azure()
+        {
+            bool.TryParse(ConfigurationManager.AppSettings["CreateSnapShot"], out createSnapShot);
+        }
+
         /// <summary>
         /// Initializes a new instance of the Azure
         /// </summary>
@@ -103,8 +116,6 @@
         {
             if (exists)
             {
-                var createSnapShot = true;
-                bool.TryParse(ConfigurationManager.AppSettings["CreateSnapShot"], out createSnapShot);
                 if (createSnapShot)
                 {
                     this.blob.CreateSnapshot();
@@ -143,7 +154,11 @@
                     this.MD5 = System.Convert.ToBase64String(hash);
                 }
 
-                blob.CreateSnapshot();
+                if (createSnapShot)
+                {
+                    blob.CreateSnapshot();
+                }
+
                 blob.Properties.ContentMD5 = this.MD5;
                 this.blob.Metadata[MD5MetadataKey] = this.MD5;
                 this.blob.SetMetadata();
