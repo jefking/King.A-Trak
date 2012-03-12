@@ -2,12 +2,7 @@
 {
     using System;
     using System.Diagnostics;
-    using System.IO;
-    using System.Linq;
     using System.Threading.Tasks;
-    using Amazon;
-    using Microsoft.WindowsAzure;
-    using System.Text.RegularExpressions;
 
     /// <summary>
     /// A-Trak synchronizer, for Azure Storage Blobs (containers) and folders
