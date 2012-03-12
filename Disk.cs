@@ -39,6 +39,7 @@
                 if (File.Exists(this.Path))
                 {
                     this.GetData();
+                    this.data = null;
                 }
             }
         }
@@ -93,7 +94,7 @@
         {
             if (this.data == null)
             {
-                this.data = File.ReadAllBytes(this.Path);
+                this.data = File.ReadAllBytes(this.Path); // < 2 gigs
                 using (var createHash = System.Security.Cryptography.MD5.Create())
                 {
                     var hash = createHash.ComputeHash(this.data);

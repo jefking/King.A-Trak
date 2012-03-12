@@ -21,7 +21,6 @@
         /// <param name="args">Program Arguments</param>
         public static void Main(string[] args)
         {
-
             try
             {
                 var parameters = new Parameters(args);
@@ -71,6 +70,9 @@
                 {
                     Trace.WriteLine(string.Format("File '{0}' already exists at '{1}', synchronization avoided.", from.Path, to.Path));
                 }
+
+                to = null;
+                from = null;
             });
         }
         #endregion
