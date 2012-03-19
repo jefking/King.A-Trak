@@ -7,12 +7,13 @@ Choose to move data in 9 different directions, between Windows Azure, Amazon S3 
 
 This is a utility for easily pushing files to Blob Storage on Windows Azure, S3 on Amazon or Folders.
 
-Current applications:
-For Development teams to enable continuous deployment
-Make use of CDN's in place
-Release static websites
-Backup data on secondary account
-Backup data off of your primary service provider
+## Current applications
+
+* For Development teams to enable continuous deployment
+* Make use of CDN's in place
+* Release static websites
+* Backup data on secondary account
+* Backup data off of your primary service provider
 
 We have built this to help you with your development and deployment process. Agile Business Cloud Solutions Ltd. uses this tool as part of an automated deployment solution to Windows Azure.
 
