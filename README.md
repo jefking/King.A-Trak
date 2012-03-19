@@ -34,12 +34,14 @@ We have built this to help you with your development and deployment process. Agi
 * Run that puppy (Hit F5)!
 
 ## SDK's
-Microsoft Windows Azure: https://www.windowsazure.com/en-us/develop/net/
-Amazon S3: http://aws.amazon.com/sdkfornet/
+
+* Microsoft Windows Azure: https://www.windowsazure.com/en-us/develop/net/
+* Amazon S3: http://aws.amazon.com/sdkfornet/
 
 ## Compiled Version
-Agile Business Cloud Website: http://cdn.agilebusinesscloud.com/download/Abc.Atrak.1.0.2.2.zip
-Contains both Microsoft Windows Azure and Amazon S3 dependant SDK DLL's
+
+* Agile Business Cloud Website: http://cdn.agilebusinesscloud.com/download/Abc.Atrak.1.0.2.2.zip
+* Contains both Microsoft Windows Azure and Amazon S3 dependant SDK DLL's
 
 ### Screenshot of configuration arguments
 
