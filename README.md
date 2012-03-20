@@ -1,11 +1,11 @@
 ![A-Trak Logo](https://github.com/jbueza/A-Trak/raw/add_logo/logo.png)
 
-# A-Trak - Push files to the Cloud!
+# A-Trak - Synchronize files to the Cloud!
 
-A-Trak is a tool to manage deploying content and resources to the cloud. It can also be used to backup content off of your primary cloud.
-Choose to move data in 9 different directions, between Windows Azure, Amazon S3 and Windows Folders.
+A-Trak is a tool to manage deploying content and resources to the cloud. It can also be used to backup content off of your primary service provider.
+Choose to synchronize data in 9 different directions, between Windows Azure, Amazon S3 and Windows Folders.
 
-This is a utility for easily pushing files to Blob Storage on Windows Azure, S3 on Amazon or Folders.
+This is a utility for easily synchronize files with Blob Storage on Windows Azure, S3 on Amazon or Folders.
 
 Current applications:
 For Development teams to enable continuous deployment
@@ -14,7 +14,7 @@ Release static websites
 Backup data on secondary account
 Backup data off of your primary service provider
 
-We have built this to help you with your development and deployment process. Agile Business Cloud Solutions Ltd. uses this tool as part of an automated deployment solution to Windows Azure.
+We have built this to help you with your development and deployment process. Agile Business Cloud Solutions Ltd. uses this tool as part of an automated continuous deployment solution from Jenkins to Windows Azure.
 
 
 ## Getting Started
@@ -36,9 +36,10 @@ We have built this to help you with your development and deployment process. Agi
 ## SDK's
 Microsoft Windows Azure: https://www.windowsazure.com/en-us/develop/net/
 Amazon S3: http://aws.amazon.com/sdkfornet/
+SDK's included via NuGet
 
 ## Compiled Version
-Agile Business Cloud Website: http://cdn.agilebusinesscloud.com/download/Abc.Atrak.1.0.2.2.zip
+ABC's Website: http://cdn.agilebusinesscloud.com/download/Abc.Atrak.1.0.2.6.zip
 Contains both Microsoft Windows Azure and Amazon S3 dependant SDK DLL's
 
 ### Screenshot of configuration arguments
