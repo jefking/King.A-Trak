@@ -1,6 +1,7 @@
 ﻿namespace Abc.ATrak
 {
     using System;
+    using System.Diagnostics;
     using System.IO;
     using System.Linq;
     using Amazon.S3;
@@ -190,6 +191,22 @@
                 using (var response = this.client.PutObject(request))
                 {
                 }
+            }
+        }
+
+        /// <summary>
+        /// Delete
+        /// </summary>
+        public void Delete()
+        {
+            var request = new DeleteBucketRequest()
+            {
+                BucketName = this.bucket,
+            };
+
+            using (var response = this.client.DeleteBucket(request))
+            {
+                Trace.Write(string.Format("{0} deleted.", this.bucket));
             }
         }
 

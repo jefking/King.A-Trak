@@ -1,9 +1,8 @@
 ﻿namespace Abc.ATrak
 {
-    using System;
+    using System.Configuration;
     using System.Diagnostics;
     using Microsoft.WindowsAzure.StorageClient;
-    using System.Configuration;
 
     /// <summary>
     /// Azure Storage Item
@@ -165,6 +164,23 @@
             }
 
             return bytes;
+        }
+
+        /// <summary>
+        /// Delete
+        /// </summary>
+        public void Delete()
+        {
+            var options = new BlobRequestOptions()
+            {
+                DeleteSnapshotsOption = DeleteSnapshotsOption.IncludeSnapshots,
+            };
+
+            var deleted = this.blob.DeleteIfExists(options);
+            if (deleted)
+            {
+                Trace.Write(string.Format("{0} deleted.", this.Path));
+            }
         }
 
         /// <summary>

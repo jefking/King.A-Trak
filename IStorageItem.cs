@@ -58,6 +58,11 @@
         /// <param name="storageItem">Storage Item</param>
         /// <param name="exists">Exists</param>
         void Save(IStorageItem storageItem, bool exists = false);
+
+        /// <summary>
+        /// Delete Storage Item
+        /// </summary>
+        void Delete();
         #endregion
     }
 }

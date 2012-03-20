@@ -1,6 +1,8 @@
 ﻿namespace Abc.ATrak
 {
     using System;
+    using System.Collections.Generic;
+    using System.Configuration;
     using System.Diagnostics;
     using System.Threading.Tasks;
 
@@ -23,7 +25,7 @@
 
                 if (factory.Validate())
                 {
-                    SynchronizeContents(factory);
+                    Synchronize(factory);
                 }
                 else
                 {
@@ -42,9 +44,27 @@
         /// Synchronize Contents
         /// </summary>
         /// <param name="factory">Storage Factory</param>
-        private static void SynchronizeContents(StorageFactory factory)
+        private static void Synchronize(StorageFactory factory)
         {
-            Parallel.ForEach<IStorageItem>(factory.From(), (from, state) =>
+            Program.Push(factory);
+
+            var delete = false;
+            bool.TryParse(ConfigurationManager.AppSettings["Synchronize"], out delete);
+            if (delete)
+            {
+                Trace.Write("Deleting items which are not in source.");
+
+                Program.Delete(factory);
+            }
+        }
+
+        /// <summary>
+        /// Push data from source to destination
+        /// </summary>
+        /// <param name="factory">Storage Factory</param>
+        private static void Push(StorageFactory factory)
+        {
+            Parallel.ForEach<IStorageItem>(factory.Source(), (from, state) =>
             {
                 Trace.WriteLine(string.Format("Processing file: '{0}'.", from));
 
@@ -68,6 +88,27 @@
 
                 to = null;
                 from = null;
+            });
+        }
+
+        /// <summary>
+        /// Delete items from destination
+        /// </summary>
+        /// <param name="factory">Storage Factory</param>
+        private static void Delete(StorageFactory factory)
+        {
+            var items = new HashSet<string>();
+            foreach (var item in factory.Source())
+            {
+                items.Add(item.RelativePath);
+            }
+
+            Parallel.ForEach<IStorageItem>(factory.Destination(), (item, state) =>
+            {
+                if (!items.Contains(item.RelativePath))
+                {
+                    item.Delete();
+                }
             });
         }
         #endregion

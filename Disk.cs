@@ -1,6 +1,7 @@
 ﻿namespace Abc.ATrak
 {
     using System;
+    using System.Diagnostics;
     using System.IO;
 
     /// <summary>
@@ -124,6 +125,15 @@
             Directory.CreateDirectory(System.IO.Path.GetDirectoryName(this.Path));
 
             File.WriteAllBytes(this.Path, storageItem.GetData());
+        }
+
+        /// <summary>
+        /// Delete
+        /// </summary>
+        public void Delete()
+        {
+            File.Delete(this.Path);
+            Trace.Write(string.Format("{0} deleted.", this.Path));
         }
 
         /// <summary>

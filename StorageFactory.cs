@@ -152,34 +152,55 @@
         }
 
         /// <summary>
-        /// Storage items from source
+        /// Storage items source
         /// </summary>
         /// <returns>Storage Items</returns>
-        public IEnumerable<IStorageItem> From()
+        public IEnumerable<IStorageItem> Source()
         {
-            if (null != this.fromContainer)
+            return this.GetItems(this.fromContainer, this.fromClient, this.from);
+        }
+
+        /// <summary>
+        /// Storage items destination
+        /// </summary>
+        /// <returns>Storage Items</returns>
+        public IEnumerable<IStorageItem> Destination()
+        {
+            return this.GetItems(this.toContainer, this.toClient, this.to);
+        }
+
+        /// <summary>
+        /// Get Items
+        /// </summary>
+        /// <param name="container">Container</param>
+        /// <param name="client">Client</param>
+        /// <param name="path">Path</param>
+        /// <returns>Storage Items</returns>
+        private IEnumerable<IStorageItem> GetItems(CloudBlobContainer container, AmazonS3 client, string path)
+        {
+            if (null != container)
             {
                 var options = new BlobRequestOptions()
                 {
                     UseFlatBlobListing = true,
                 };
-                return this.fromContainer.ListBlobs(options).Select(b => new Azure(this.fromContainer, b.Uri.ToString())).Where(c => c.Exists());
+                return container.ListBlobs(options).Select(b => new Azure(container, b.Uri.ToString())).Where(c => c.Exists());
             }
-            else if (null != this.fromClient)
+            else if (null != client)
             {
                 var request = new ListObjectsRequest()
                 {
-                    BucketName = this.from,
+                    BucketName = path,
                 };
 
-                using (var response = this.fromClient.ListObjects(request))
+                using (var response = client.ListObjects(request))
                 {
-                    return response.S3Objects.Select(s3 => new S3(this.fromClient, this.from, s3.Key, s3.ETag));
+                    return response.S3Objects.Select(s3 => new S3(client, path, s3.Key, s3.ETag));
                 }
             }
             else
             {
-                return this.GetFiles(this.from, this.from, new List<IStorageItem>());
+                return this.GetFiles(path, path, new List<IStorageItem>());
             }
         }
 
