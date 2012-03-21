@@ -7,12 +7,13 @@ Choose to synchronize data in 9 different directions, between Windows Azure, Ama
 
 This is a utility for easily synchronize files with Blob Storage on Windows Azure, S3 on Amazon or Folders.
 
-Current applications:
-For Development teams to enable continuous deployment
-Make use of CDN's in place
-Release static websites
-Backup data on secondary account
-Backup data off of your primary service provider
+## Current applications
+
+* For Development teams to enable continuous deployment
+* Make use of CDN's in place
+* Release static websites
+* Backup data on secondary account
+* Backup data off of your primary service provider
 
 We have built this to help you with your development and deployment process. Agile Business Cloud Solutions Ltd. uses this tool as part of an automated continuous deployment solution from Jenkins to Windows Azure.
 
@@ -34,13 +35,13 @@ We have built this to help you with your development and deployment process. Agi
 * Run that puppy (Hit F5)!
 
 ## SDK's
-Microsoft Windows Azure: https://www.windowsazure.com/en-us/develop/net/
-Amazon S3: http://aws.amazon.com/sdkfornet/
+* Microsoft Windows Azure: https://www.windowsazure.com/en-us/develop/net/
+* Amazon S3: http://aws.amazon.com/sdkfornet/
 SDK's included via NuGet
 
 ## Compiled Version
-ABC's Website: http://cdn.agilebusinesscloud.com/download/Abc.Atrak.1.0.2.6.zip
-Contains both Microsoft Windows Azure and Amazon S3 dependant SDK DLL's
+* ABC's Website: http://cdn.agilebusinesscloud.com/download/Abc.Atrak.1.0.2.6.zip
+* Contains both Microsoft Windows Azure and Amazon S3 dependant SDK DLL's
 
 ### Screenshot of configuration arguments
 
