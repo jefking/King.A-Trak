@@ -23,15 +23,15 @@ We have built this to help you with your development and deployment process. Agi
 * Clone the repository at <code>git clone git@github.com:AgileBusinessCloud/A-Trak.git</code>
 * Run the A-Trak.csproj file in Visual Studio
 * Configure the command line arguments in DEBUG tab of Project Properties
-  * Example Folder to Azure Blob: <code>"C:\Project\MyMVCWebSite\FromFolder" "UseDevelopmentStorage=true" "tocontainer"</code>
-  * Example Folder to Amazon S3: <code>"C:\Project\MyMVCWebSite\FromFolder" "SecretKey" "SecretAccessKey" "tobucket"</code>
-  * Example Folder to Folder: <code>"C:\Project\MyMVCWebSite\FromFolder" "C:\Project\MyMVCWebSite\ToFolder"</code>
-  * Example Azure Blob to Folder: <code>"UseDevelopmentStorage=true" "fromcontainer" "C:\Project\MyMVCWebSite\ToFolder"</code>
-  * Example Azure Blob to Azure Blob: <code>"UseDevelopmentStorage=true" "fromcontainer" "UseDevelopmentStorage=true" "tocontainer"</code>
-  * Example Azure Blob to Amazon S3: <code>"UseDevelopmentStorage=true" "fromcontainer" "SecretKey" "SecretAccessKey" "tobucket"</code>
-  * Example Amazon S3 to Folder: <code>"SecretKey" "SecretAccessKey" "frombucket" "C:\Project\MyMVCWebSite\ToFolder"</code>
-  * Example Amazon S3 to Azure Blob: <code>"SecretKey" "SecretAccessKey" "frombucket"  "UseDevelopmentStorage=true" "tocontainer"</code>
-  * Example Amazon S3 to Amazon S3: <code>"SecretKey" "SecretAccessKey" "frombucket" "SecretKey" "SecretAccessKey" "tobucket"</code>
+  * Example Folder to Azure Blob: <code>/From "C:\Project\MyMVCWebSite\FromFolder" /To "UseDevelopmentStorage=true" "tocontainer"</code>
+  * Example Folder to Amazon S3: <code>/From "C:\Project\MyMVCWebSite\FromFolder" /To "SecretKey" "SecretAccessKey" "tobucket"</code>
+  * Example Folder to Folder: <code>/From "C:\Project\MyMVCWebSite\FromFolder" /To "C:\Project\MyMVCWebSite\ToFolder"</code>
+  * Example Azure Blob to Folder: <code>/From "UseDevelopmentStorage=true" "fromcontainer" /To "C:\Project\MyMVCWebSite\ToFolder"</code>
+  * Example Azure Blob to Azure Blob: <code>/From "UseDevelopmentStorage=true" "fromcontainer" /To "UseDevelopmentStorage=true" "tocontainer"</code>
+  * Example Azure Blob to Amazon S3: <code>/From "UseDevelopmentStorage=true" "fromcontainer" /To "SecretKey" "SecretAccessKey" "tobucket"</code>
+  * Example Amazon S3 to Folder: <code>/From "SecretKey" "SecretAccessKey" "frombucket" /To "C:\Project\MyMVCWebSite\ToFolder"</code>
+  * Example Amazon S3 to Azure Blob: <code>/From "SecretKey" "SecretAccessKey" "frombucket" /To  "UseDevelopmentStorage=true" "tocontainer"</code>
+  * Example Amazon S3 to Amazon S3: <code>/From "SecretKey" "SecretAccessKey" "frombucket" /To "SecretKey" "SecretAccessKey" "tobucket"</code>
 * Run that puppy (Hit F5)!
 
 ## SDK's
