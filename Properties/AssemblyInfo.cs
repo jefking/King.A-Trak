@@ -2,8 +2,8 @@
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
-[assembly: AssemblyTitle("A-Trak Windows Azure Blob, Amazon S3 and File Push")]
-[assembly: AssemblyDescription("Command line tool for pushing File, Windows Azure Blobs and Amazon S3 Buckets.")]
+[assembly: AssemblyTitle("A-Trak Windows Azure Blob, Amazon S3 and File Synchronizer")]
+[assembly: AssemblyDescription("Command line tool for synchronizing File, Windows Azure Blobs and Amazon S3 Buckets.")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Agile Business Cloud Solutions Ltd.")]
 [assembly: AssemblyProduct("A-Trak")]
