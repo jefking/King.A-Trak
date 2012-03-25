@@ -24,6 +24,11 @@
         /// Create Snap Shot of blobs
         /// </summary>
         private static readonly bool createSnapShot = true;
+
+        /// <summary>
+        /// Cache Control
+        /// </summary>
+        private static readonly string cacheControl = null;
         #endregion
 
         #region Constructors
@@ -33,6 +38,8 @@
         static Azure()
         {
             bool.TryParse(ConfigurationManager.AppSettings["CreateSnapShot"], out createSnapShot);
+            cacheControl = ConfigurationManager.AppSettings["CacheControl"];
+            cacheControl = string.IsNullOrWhiteSpace(cacheControl) ? null : cacheControl;
         }
 
         /// <summary>
@@ -128,6 +135,7 @@
                 this.blob.Properties.ContentType = source.ContentType;
                 //// Currently there is a bug in the library that this isn't being stored or retrieved properly, this will be compatible when the new library comes out
                 this.blob.Properties.ContentMD5 = source.MD5;
+                this.blob.Properties.CacheControl = cacheControl;
                 this.blob.UploadByteArray(source.GetData());
 
                 if (!string.IsNullOrWhiteSpace(source.MD5))
