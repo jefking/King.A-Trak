@@ -37,7 +37,7 @@ We have built this to help you with your development and deployment process. Agi
 ## Configuration
 * From
   * Specify From in configuration file, if you are not dynamically passing in the From argument
-*To
+* To
   * Specify To in configuration file, if you are not dynamically passing in the To argument
 * CreateSnapShot
   * Specify CreateSnapShot if you want to turn off Windows Azure Blob SnapShot ability (values: true, false)
