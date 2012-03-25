@@ -35,11 +35,16 @@ We have built this to help you with your development and deployment process. Agi
 * Run that puppy (Hit F5)!
 
 ## Configuration
-From: Specify From in configuration file, if you are not dynamically passing in the From argument
-To: Specify To in configuration file, if you are not dynamically passing in the To argument
-CreateSnapShot: Specify CreateSnapShot if you want to turn off Windows Azure Blob SnapShot ability (values: true, false)
-Synchronize: Will delete files out of destination if they do not exist in source; acts like a purge (values: true, false)
-CacheControl: Specify the cache-control header in the HTTP Response; great for integration with Windows Azure CDN.
+* From
+** Specify From in configuration file, if you are not dynamically passing in the From argument
+*To
+** Specify To in configuration file, if you are not dynamically passing in the To argument
+* CreateSnapShot
+** Specify CreateSnapShot if you want to turn off Windows Azure Blob SnapShot ability (values: true, false)
+* Synchronize
+** Will delete files out of destination if they do not exist in source; acts like a purge (values: true, false)
+* CacheControl
+** Specify the cache-control header in the HTTP Response; great for integration with Windows Azure CDN.
 
 ## SDK's
 * Microsoft Windows Azure: https://www.windowsazure.com/en-us/develop/net/
@@ -47,7 +52,7 @@ CacheControl: Specify the cache-control header in the HTTP Response; great for i
 SDK's included via NuGet
 
 ## Compiled Version
-* ABC's Website: http://cdn.agilebusinesscloud.com/download/Abc.Atrak.1.0.2.6.zip
+* ABC's Website: http://cdn.agilebusinesscloud.com/download/Abc.Atrak.1.0.2.7.zip
 * Contains both Microsoft Windows Azure and Amazon S3 dependant SDK DLL's
 
 ### Screenshot of configuration arguments
