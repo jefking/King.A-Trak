@@ -34,6 +34,13 @@ We have built this to help you with your development and deployment process. Agi
   * Example Amazon S3 to Amazon S3: <code>/From "SecretKey" "SecretAccessKey" "frombucket" /To "SecretKey" "SecretAccessKey" "tobucket"</code>
 * Run that puppy (Hit F5)!
 
+## Configuration
+From: Specify From in configuration file, if you are not dynamically passing in the From argument
+To: Specify To in configuration file, if you are not dynamically passing in the To argument
+CreateSnapShot: Specify CreateSnapShot if you want to turn off Windows Azure Blob SnapShot ability (values: true, false)
+Synchronize: Will delete files out of destination if they do not exist in source; acts like a purge (values: true, false)
+CacheControl: Specify the cache-control header in the HTTP Response; great for integration with Windows Azure CDN.
+
 ## SDK's
 * Microsoft Windows Azure: https://www.windowsazure.com/en-us/develop/net/
 * Amazon S3: http://aws.amazon.com/sdkfornet/
