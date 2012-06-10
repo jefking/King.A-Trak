@@ -1,8 +1,10 @@
 ﻿namespace Abc.ATrak
 {
     using System.Configuration;
-    using System.Diagnostics;
-    using Microsoft.WindowsAzure.StorageClient;
+using System.Diagnostics;
+using System.IO;
+using Microsoft.WindowsAzure.StorageClient;
+    using System;
 
     /// <summary>
     /// Azure Storage Item
@@ -152,23 +154,36 @@
         /// <returns>Data for object</returns>
         public byte[] GetData()
         {
-            var bytes = this.blob.DownloadByteArray();
-            if (string.IsNullOrWhiteSpace(this.MD5))
+            byte[] bytes = null;
+            using (var stream = new MemoryStream())
             {
-                using (var createHash = System.Security.Cryptography.MD5.Create())
+                this.blob.DownloadToStream(stream, new BlobRequestOptions()
                 {
-                    var hash = createHash.ComputeHash(bytes);
-                    this.MD5 = System.Convert.ToBase64String(hash);
-                }
+                    Timeout = TimeSpan.FromMinutes(15)
+                });
 
-                if (createSnapShot)
+                bytes = stream.ToArray();
+            }
+
+            if (null != bytes)
+            {
+                if (string.IsNullOrWhiteSpace(this.MD5))
                 {
-                    blob.CreateSnapshot();
-                }
+                    using (var createHash = System.Security.Cryptography.MD5.Create())
+                    {
+                        var hash = createHash.ComputeHash(bytes);
+                        this.MD5 = System.Convert.ToBase64String(hash);
+                    }
 
-                blob.Properties.ContentMD5 = this.MD5;
-                this.blob.Metadata[MD5MetadataKey] = this.MD5;
-                this.blob.SetMetadata();
+                    if (createSnapShot)
+                    {
+                        blob.CreateSnapshot();
+                    }
+
+                    blob.Properties.ContentMD5 = this.MD5;
+                    this.blob.Metadata[MD5MetadataKey] = this.MD5;
+                    this.blob.SetMetadata();
+                }
             }
 
             return bytes;
