@@ -23,6 +23,14 @@
         private readonly CloudBlob blob;
 
         /// <summary>
+        /// Blob Request Options
+        /// </summary>
+        private readonly BlobRequestOptions options = new BlobRequestOptions()
+        {
+            Timeout = TimeSpan.FromMinutes(15),
+        };
+
+        /// <summary>
         /// Create Snap Shot of blobs
         /// </summary>
         private static readonly bool createSnapShot = true;
@@ -104,10 +112,7 @@
         {
             try
             {
-                this.blob.FetchAttributes(new BlobRequestOptions()
-                {
-                    Timeout = TimeSpan.FromMinutes(15)
-                });
+                this.blob.FetchAttributes(options);
 
                 this.ContentType = this.blob.Properties.ContentType;
                 this.MD5 = this.blob.Metadata[MD5MetadataKey];
@@ -130,7 +135,7 @@
             {
                 if (createSnapShot)
                 {
-                    this.blob.CreateSnapshot();
+                    this.blob.CreateSnapshot(options);
 
                     Trace.WriteLine(string.Format("Created snapshot of blob: '{0}'.", this.blob.Uri));
                 }
@@ -142,12 +147,12 @@
                 //// Currently there is a bug in the library that this isn't being stored or retrieved properly, this will be compatible when the new library comes out
                 this.blob.Properties.ContentMD5 = source.MD5;
                 this.blob.Properties.CacheControl = cacheControl;
-                this.blob.UploadByteArray(source.GetData());
+                this.blob.UploadByteArray(source.GetData(), options);
 
                 if (!string.IsNullOrWhiteSpace(source.MD5))
                 {
                     this.blob.Metadata[MD5MetadataKey] = source.MD5;
-                    this.blob.SetMetadata();
+                    this.blob.SetMetadata(options);
                 }
             }
         }
@@ -161,10 +166,7 @@
             byte[] bytes = null;
             using (var stream = new MemoryStream())
             {
-                this.blob.DownloadToStream(stream, new BlobRequestOptions()
-                {
-                    Timeout = TimeSpan.FromMinutes(15)
-                });
+                this.blob.DownloadToStream(stream, options);
 
                 bytes = stream.ToArray();
             }
@@ -181,12 +183,12 @@
 
                     if (createSnapShot)
                     {
-                        blob.CreateSnapshot();
+                        blob.CreateSnapshot(options);
                     }
 
                     blob.Properties.ContentMD5 = this.MD5;
                     this.blob.Metadata[MD5MetadataKey] = this.MD5;
-                    this.blob.SetMetadata();
+                    this.blob.SetMetadata(options);
                 }
             }
 
