@@ -1,10 +1,10 @@
 ﻿namespace Abc.ATrak
 {
-    using System.Configuration;
-using System.Diagnostics;
-using System.IO;
-using Microsoft.WindowsAzure.StorageClient;
     using System;
+    using System.Configuration;
+    using System.Diagnostics;
+    using System.IO;
+    using Microsoft.WindowsAzure.StorageClient;
 
     /// <summary>
     /// Azure Storage Item
@@ -104,7 +104,11 @@ using Microsoft.WindowsAzure.StorageClient;
         {
             try
             {
-                this.blob.FetchAttributes();
+                this.blob.FetchAttributes(new BlobRequestOptions()
+                {
+                    Timeout = TimeSpan.FromMinutes(15)
+                });
+
                 this.ContentType = this.blob.Properties.ContentType;
                 this.MD5 = this.blob.Metadata[MD5MetadataKey];
                 return true;
