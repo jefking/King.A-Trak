@@ -1,10 +1,10 @@
 ﻿namespace Abc.ATrak
 {
+    using Microsoft.Win32;
     using System;
     using System.Collections.Generic;
     using System.IO;
     using System.Security.Permissions;
-    using Microsoft.Win32;
 
     /// <summary>
     /// Content Types

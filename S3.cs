@@ -1,11 +1,11 @@
 ﻿namespace Abc.ATrak
 {
+    using Amazon.S3;
+    using Amazon.S3.Model;
     using System;
     using System.Diagnostics;
     using System.IO;
     using System.Linq;
-    using Amazon.S3;
-    using Amazon.S3.Model;
 
     /// <summary>
     /// Amazon S3 Storage Item

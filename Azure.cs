@@ -14,11 +14,6 @@
     {
         #region Members
         /// <summary>
-        /// MD5 Key for Metadata
-        /// </summary>
-        private const string MD5MetadataKey = "MD5";
-
-        /// <summary>
         /// Cloud Blob
         /// </summary>
         private readonly CloudBlockBlob blob;
@@ -116,7 +111,7 @@
                 this.blob.FetchAttributes(null, options);
 
                 this.ContentType = this.blob.Properties.ContentType;
-                this.MD5 = this.blob.Metadata[MD5MetadataKey];
+                this.MD5 = this.blob.Properties.ContentMD5;
                 return this.blob.Exists();
             }
             catch (StorageException)
@@ -153,12 +148,6 @@
                 {
                     this.blob.UploadFromStream(stream);
                 }
-
-                if (!string.IsNullOrWhiteSpace(source.MD5))
-                {
-                    this.blob.Metadata[MD5MetadataKey] = source.MD5;
-                    this.blob.SetMetadata(AccessCondition.GenerateEmptyCondition(), options);
-                }
             }
         }
 
@@ -192,8 +181,7 @@
                     }
 
                     blob.Properties.ContentMD5 = this.MD5;
-                    this.blob.Metadata[MD5MetadataKey] = this.MD5;
-                    this.blob.SetMetadata(AccessCondition.GenerateEmptyCondition(), options);
+                    blob.SetProperties(null, options);
                 }
             }
 
