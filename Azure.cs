@@ -21,7 +21,7 @@
         /// <summary>
         /// Cloud Blob
         /// </summary>
-        private readonly ICloudBlob blob;
+        private readonly CloudBlockBlob blob;
 
         /// <summary>
         /// Blob Request Options
@@ -61,7 +61,7 @@
         public Azure(CloudBlobContainer container, string objId)
         {
             this.Path = objId;
-            this.blob = container.GetBlobReferenceFromServer(objId);
+            this.blob = container.GetBlockBlobReference(objId);
             this.RelativePath = this.blob.Name;
         }
         #endregion
@@ -113,11 +113,11 @@
         {
             try
             {
-                this.blob.FetchAttributes(AccessCondition.GenerateEmptyCondition(), options);
+                this.blob.FetchAttributes(null, options);
 
                 this.ContentType = this.blob.Properties.ContentType;
                 this.MD5 = this.blob.Metadata[MD5MetadataKey];
-                return true;
+                return this.blob.Exists();
             }
             catch (StorageException)
             {
@@ -148,9 +148,10 @@
                 //// Currently there is a bug in the library that this isn't being stored or retrieved properly, this will be compatible when the new library comes out
                 this.blob.Properties.ContentMD5 = source.MD5;
                 this.blob.Properties.CacheControl = cacheControl;
+
                 using (var stream = new MemoryStream(source.GetData()))
                 {
-                    this.blob.UploadFromStream(stream, AccessCondition.GenerateEmptyCondition(), options);
+                    this.blob.UploadFromStream(stream);
                 }
 
                 if (!string.IsNullOrWhiteSpace(source.MD5))
