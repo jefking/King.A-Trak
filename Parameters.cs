@@ -8,6 +8,7 @@
     using Amazon;
     using Microsoft.WindowsAzure;
     using Microsoft.WindowsAzure.Storage;
+    using Microsoft.WindowsAzure.Storage.Auth;
 
     /// <summary>
     /// Parameters
@@ -122,10 +123,19 @@
                         }
                         break;
                     case 2:
-                        CloudStorageAccount account = null;
                         var accountArgument = fromValues[0].Groups["value"].Value;
                         var container = fromValues[1].Groups["value"].Value;
-                        if (CloudStorageAccount.TryParse(accountArgument, out account))
+                        CloudStorageAccount account;
+                        if (accountArgument == "UseDevelopmentStorage=true")
+                        {
+                            account = CloudStorageAccount.DevelopmentStorageAccount;
+                        }
+                        else if (!CloudStorageAccount.TryParse(accountArgument, out account))
+                        {
+                            account = null;
+                        }
+
+                        if (null != account)
                         {
                             if (!string.IsNullOrWhiteSpace(container))
                             {
@@ -171,10 +181,19 @@
                         }
                         break;
                     case 2:
-                        CloudStorageAccount account = null;
                         var accountArgument = toValues[0].Groups["value"].Value;
                         var container = toValues[1].Groups["value"].Value;
-                        if (CloudStorageAccount.TryParse(accountArgument, out account))
+                        CloudStorageAccount account;
+                        if (accountArgument == "UseDevelopmentStorage=true")
+                        {
+                            account = CloudStorageAccount.DevelopmentStorageAccount;
+                        }
+                        else if (!CloudStorageAccount.TryParse(accountArgument, out account))
+                        {
+                            account = null;
+                        }
+
+                        if (null != account)
                         {
                             if (!string.IsNullOrWhiteSpace(container))
                             {
