@@ -1,10 +1,11 @@
 ﻿namespace Abc.ATrak
 {
+    using Microsoft.WindowsAzure.Storage;
+    using Microsoft.WindowsAzure.Storage.Blob;
     using System;
     using System.Configuration;
     using System.Diagnostics;
     using System.IO;
-    using Microsoft.WindowsAzure.StorageClient;
 
     /// <summary>
     /// Azure Storage Item
@@ -20,14 +21,14 @@
         /// <summary>
         /// Cloud Blob
         /// </summary>
-        private readonly CloudBlob blob;
+        private readonly ICloudBlob blob;
 
         /// <summary>
         /// Blob Request Options
         /// </summary>
         private readonly BlobRequestOptions options = new BlobRequestOptions()
         {
-            Timeout = TimeSpan.FromMinutes(15),
+            ServerTimeout = TimeSpan.FromMinutes(15),
         };
 
         /// <summary>
@@ -60,7 +61,7 @@
         public Azure(CloudBlobContainer container, string objId)
         {
             this.Path = objId;
-            this.blob = container.GetBlobReference(objId);
+            this.blob = container.GetBlobReferenceFromServer(objId);
             this.RelativePath = this.blob.Name;
         }
         #endregion
@@ -112,13 +113,13 @@
         {
             try
             {
-                this.blob.FetchAttributes(options);
+                this.blob.FetchAttributes(AccessCondition.GenerateEmptyCondition(), options);
 
                 this.ContentType = this.blob.Properties.ContentType;
                 this.MD5 = this.blob.Metadata[MD5MetadataKey];
                 return true;
             }
-            catch (StorageClientException)
+            catch (StorageException)
             {
                 return false;
             }
@@ -135,7 +136,7 @@
             {
                 if (createSnapShot)
                 {
-                    this.blob.CreateSnapshot(options);
+                    this.CreateSnapshot(this.blob);
 
                     Trace.WriteLine(string.Format("Created snapshot of blob: '{0}'.", this.blob.Uri));
                 }
@@ -147,12 +148,15 @@
                 //// Currently there is a bug in the library that this isn't being stored or retrieved properly, this will be compatible when the new library comes out
                 this.blob.Properties.ContentMD5 = source.MD5;
                 this.blob.Properties.CacheControl = cacheControl;
-                this.blob.UploadByteArray(source.GetData(), options);
+                using (var stream = new MemoryStream(source.GetData()))
+                {
+                    this.blob.UploadFromStream(stream, AccessCondition.GenerateEmptyCondition(), options);
+                }
 
                 if (!string.IsNullOrWhiteSpace(source.MD5))
                 {
                     this.blob.Metadata[MD5MetadataKey] = source.MD5;
-                    this.blob.SetMetadata(options);
+                    this.blob.SetMetadata(AccessCondition.GenerateEmptyCondition(), options);
                 }
             }
         }
@@ -166,7 +170,7 @@
             byte[] bytes = null;
             using (var stream = new MemoryStream())
             {
-                this.blob.DownloadToStream(stream, options);
+                this.blob.DownloadToStream(stream, AccessCondition.GenerateEmptyCondition(), options);
 
                 bytes = stream.ToArray();
             }
@@ -183,12 +187,12 @@
 
                     if (createSnapShot)
                     {
-                        blob.CreateSnapshot(options);
+                        this.CreateSnapshot(this.blob);
                     }
 
                     blob.Properties.ContentMD5 = this.MD5;
                     this.blob.Metadata[MD5MetadataKey] = this.MD5;
-                    this.blob.SetMetadata(options);
+                    this.blob.SetMetadata(AccessCondition.GenerateEmptyCondition(), options);
                 }
             }
 
@@ -200,12 +204,7 @@
         /// </summary>
         public void Delete()
         {
-            var options = new BlobRequestOptions()
-            {
-                DeleteSnapshotsOption = DeleteSnapshotsOption.IncludeSnapshots,
-            };
-
-            var deleted = this.blob.DeleteIfExists(options);
+            var deleted = this.blob.DeleteIfExists(DeleteSnapshotsOption.IncludeSnapshots);
             if (deleted)
             {
                 Trace.Write(string.Format("{0} deleted.", this.Path));
@@ -219,6 +218,21 @@
         public override string ToString()
         {
             return string.Format("{0}", this.Path);
+        }
+
+        private void CreateSnapshot(ICloudBlob blob)
+        {
+            var page = blob as CloudPageBlob;
+            if (null != page)
+            {
+                page.CreateSnapshot();
+            }
+
+            var block = blob as CloudBlockBlob;
+            if (null != block)
+            {
+                block.CreateSnapshot();
+            }
         }
         #endregion
     }

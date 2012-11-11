@@ -1,13 +1,13 @@
 ﻿namespace Abc.ATrak
 {
+    using Amazon.S3;
+    using Amazon.S3.Model;
+    using Microsoft.WindowsAzure.Storage;
+    using Microsoft.WindowsAzure.Storage.Blob;
     using System;
     using System.Collections.Generic;
     using System.IO;
     using System.Linq;
-    using Amazon.S3;
-    using Amazon.S3.Model;
-    using Microsoft.WindowsAzure;
-    using Microsoft.WindowsAzure.StorageClient;
 
     /// <summary>
     /// Storage Factory
@@ -81,21 +81,21 @@
         public void AddContainer(CloudStorageAccount account, string container)
         {
             var client = account.CreateCloudBlobClient();
-            client.RetryPolicy = RetryPolicies.Retry(3, TimeSpan.FromSeconds(5));
+            client.RetryPolicy = new Microsoft.WindowsAzure.Storage.RetryPolicies.ExponentialRetry(TimeSpan.FromSeconds(5), 3);
 
             if (string.IsNullOrWhiteSpace(this.from))
             {
                 this.from = container;
 
                 this.fromContainer = client.GetContainerReference(container);
-                this.fromContainer.CreateIfNotExist();
+                this.fromContainer.CreateIfNotExists();
             }
             else
             {
                 this.to = container;
 
                 this.toContainer = client.GetContainerReference(container);
-                this.toContainer.CreateIfNotExist();
+                this.toContainer.CreateIfNotExists();
             }
         }
 
@@ -180,11 +180,7 @@
         {
             if (null != container)
             {
-                var options = new BlobRequestOptions()
-                {
-                    UseFlatBlobListing = true,
-                };
-                return container.ListBlobs(options).Select(b => new Azure(container, b.Uri.ToString())).Where(c => c.Exists());
+                return container.ListBlobs(null, true, BlobListingDetails.None).Select(b => new Azure(container, b.Uri.ToString())).Where(c => c.Exists());
             }
             else if (null != client)
             {

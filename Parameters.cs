@@ -7,6 +7,7 @@
     using System.Text.RegularExpressions;
     using Amazon;
     using Microsoft.WindowsAzure;
+    using Microsoft.WindowsAzure.Storage;
 
     /// <summary>
     /// Parameters
