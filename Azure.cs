@@ -140,7 +140,6 @@
             if (source.Exists())
             {
                 this.blob.Properties.ContentType = source.ContentType;
-                //// Currently there is a bug in the library that this isn't being stored or retrieved properly, this will be compatible when the new library comes out
                 this.blob.Properties.ContentMD5 = source.MD5;
                 this.blob.Properties.CacheControl = cacheControl;
 
