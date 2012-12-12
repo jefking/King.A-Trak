@@ -209,6 +209,10 @@
             return string.Format("{0}", this.Path);
         }
 
+        /// <summary>
+        /// Create Snapshot
+        /// </summary>
+        /// <param name="blob">Cloud Blob</param>
         private void CreateSnapshot(ICloudBlob blob)
         {
             var page = blob as CloudPageBlob;

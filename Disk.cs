@@ -24,24 +24,23 @@
         /// <param name="path">Path of File</param>
         public Disk(string root, string path)
         {
+            if (string.IsNullOrWhiteSpace(root))
+            {
+                throw new ArgumentNullException("root");
+            }
+
             if (string.IsNullOrWhiteSpace(path))
             {
                 throw new ArgumentNullException("path");
             }
-            else if (string.IsNullOrWhiteSpace(path))
-            {
-                throw new ArgumentNullException("path");
-            }
-            else
-            {
-                this.Path = path;
-                this.RelativePath = path.Replace(root, string.Empty);
 
-                if (File.Exists(this.Path))
-                {
-                    this.GetData();
-                    this.data = null;
-                }
+            this.Path = path;
+            this.RelativePath = path.Replace(root, string.Empty);
+
+            if (File.Exists(this.Path))
+            {
+                this.GetData();
+                this.data = null;
             }
         }
         #endregion

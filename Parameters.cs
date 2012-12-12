@@ -1,9 +1,7 @@
 ﻿namespace Abc.ATrak
 {
     using Amazon;
-    using Microsoft.WindowsAzure;
     using Microsoft.WindowsAzure.Storage;
-    using Microsoft.WindowsAzure.Storage.Auth;
     using System;
     using System.Configuration;
     using System.Diagnostics;
