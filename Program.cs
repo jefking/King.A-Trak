@@ -34,7 +34,7 @@
             }
             catch (Exception ex)
             {
-                Trace.Fail(ex.Message);
+                Trace.Fail(ex.Message + Environment.NewLine + ex.StackTrace);
             }
 
             Trace.WriteLine("Completed.");
