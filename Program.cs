@@ -7,7 +7,7 @@
     using System.Threading.Tasks;
 
     /// <summary>
-    /// A-Trak synchronizer, for Azure Storage Blobs (containers) and folders
+    /// A-Trak synchronizer, for Azure Storage Blobs (containers), folders and Amazon S3 Buckets
     /// </summary>
     public class Program
     {
