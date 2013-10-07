@@ -142,11 +142,14 @@
                 this.blob.Properties.ContentType = source.ContentType;
                 this.blob.Properties.ContentMD5 = source.MD5;
                 this.blob.Properties.CacheControl = cacheControl;
-
-                using (var stream = new MemoryStream(source.GetData()))
+                try
                 {
-                    this.blob.UploadFromStream(stream);
+                    using (var stream = new MemoryStream(source.GetData()))
+                    {
+                        this.blob.UploadFromStream(stream);
+                    }
                 }
+                catch { }
             }
         }
 
