@@ -28,7 +28,7 @@
         /// <summary>
         /// From S3
         /// </summary>
-        private AmazonS3 fromClient;
+        private IAmazonS3 fromClient;
 
         /// <summary>
         /// To Folder, Container, Bucket
@@ -43,7 +43,7 @@
         /// <summary>
         /// To S3
         /// </summary>
-        private AmazonS3 toClient;
+        private IAmazonS3 toClient;
         #endregion
 
         #region Methods
@@ -104,7 +104,7 @@
         /// </summary>
         /// <param name="client">Client</param>
         /// <param name="bucket">Bucket</param>
-        public void AddBucket(AmazonS3 client, string bucket)
+        public void AddBucket(IAmazonS3 client, string bucket)
         {
             if (string.IsNullOrWhiteSpace(this.from))
             {
@@ -123,9 +123,7 @@
                     BucketName = bucket,
                 };
 
-                using (var response = client.PutBucket(request))
-                {
-                }
+                var response = client.PutBucket(request);
             }
         }
 
@@ -144,7 +142,7 @@
         /// <param name="item">Item</param>
         /// <param name="container">Container</param>
         /// <returns>Is Valid</returns>
-        private bool Validate(string item, CloudBlobContainer container, AmazonS3 s3)
+        private bool Validate(string item, CloudBlobContainer container, IAmazonS3 s3)
         {
             return (null == container && Directory.Exists(item))
                 || (null != container && !string.IsNullOrWhiteSpace(item))
@@ -176,7 +174,7 @@
         /// <param name="client">Client</param>
         /// <param name="path">Path</param>
         /// <returns>Storage Items</returns>
-        private IEnumerable<IStorageItem> GetItems(CloudBlobContainer container, AmazonS3 client, string path)
+        private IEnumerable<IStorageItem> GetItems(CloudBlobContainer container, IAmazonS3 client, string path)
         {
             if (null != container)
             {
@@ -189,10 +187,8 @@
                     BucketName = path,
                 };
 
-                using (var response = client.ListObjects(request))
-                {
-                    return response.S3Objects.Select(s3 => new S3(client, path, s3.Key, s3.ETag));
-                }
+                var response = client.ListObjects(request);
+                return response.S3Objects.Select(s3 => new S3(client, path, s3.Key, s3.ETag));
             }
             else
             {

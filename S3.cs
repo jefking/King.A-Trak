@@ -16,7 +16,7 @@
         /// <summary>
         /// Amazon S3
         /// </summary>
-        private readonly AmazonS3 client = null;
+        private readonly IAmazonS3 client = null;
 
         /// <summary>
         /// S3 Bucket
@@ -32,7 +32,7 @@
         /// <param name="bucket">Bucket</param>
         /// <param name="relativePath">Relative Path</param>
         /// <param name="etag">ETag</param>
-        public S3(AmazonS3 client, string bucket, string relativePath, string etag = null)
+        public S3(IAmazonS3 client, string bucket, string relativePath, string etag = null)
         {
             this.client = client;
             this.bucket = bucket;
@@ -135,11 +135,9 @@
                     Key = this.RelativePath,
                 };
 
-                using (var response = this.client.GetObjectMetadata(request))
-                {
-                    this.ContentType = response.ContentType;
-                    this.MD5 = System.Convert.ToBase64String(StringToByteArray(response.ETag.Replace("\"", string.Empty)));
-                }
+                var response = this.client.GetObjectMetadata(request);
+                this.ContentType = response.Headers.ContentType;
+                this.MD5 = System.Convert.ToBase64String(StringToByteArray(response.ETag.Replace("\"", string.Empty)));
 
                 return true;
             }
@@ -180,7 +178,6 @@
                 BucketName = this.bucket,
                 Key = path,
                 CannedACL = S3CannedACL.Private,
-                Timeout = 3600000,
                 MD5Digest = storageItem.MD5,
                 ContentType = storageItem.ContentType,
             };
@@ -188,9 +185,7 @@
             using (var stream = new MemoryStream(storageItem.GetData()))
             {
                 request.InputStream = stream;
-                using (var response = this.client.PutObject(request))
-                {
-                }
+                var response = this.client.PutObject(request);
             }
         }
 
@@ -204,10 +199,8 @@
                 BucketName = this.bucket,
             };
 
-            using (var response = this.client.DeleteBucket(request))
-            {
-                Trace.Write(string.Format("{0} deleted.", this.bucket));
-            }
+            var response = this.client.DeleteBucket(request);
+            Trace.Write(string.Format("{0} deleted.", this.bucket));
         }
 
         /// <summary>
