@@ -55,8 +55,8 @@
         /// <param name="objId">Object Id</param>
         public Azure(CloudBlobContainer container, string objId)
         {
-            this.Path = objId;
-            this.blob = container.GetBlockBlobReference(objId);
+            this.Path = objId.Replace('\\', '/');
+            this.blob = container.GetBlockBlobReference(this.Path);
             this.RelativePath = this.blob.Name;
         }
         #endregion
