@@ -173,8 +173,9 @@
                 {
                     using (var createHash = System.Security.Cryptography.MD5.Create())
                     {
-                        var hash = createHash.ComputeHash(bytes);
-                        this.MD5 = System.Convert.ToBase64String(hash);
+                        createHash.TransformBlock(bytes, 0, bytes.Length, null, 0);
+                        createHash.TransformFinalBlock(new byte[0], 0, 0);
+                        this.MD5 = System.Convert.ToBase64String(createHash.Hash);
                     }
 
                     if (createSnapShot)
