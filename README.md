@@ -1,5 +1,3 @@
-![A-Trak Logo](https://github.com/jbueza/A-Trak/raw/add_logo/logo.png)
-
 # A-Trak - Synchronize files to the Cloud!
 
 A-Trak is a tool to manage deploying content and resources to the cloud. It can also be used to backup content off of your primary service provider.
@@ -48,7 +46,7 @@ We have built this to help you with your development and deployment process. Com
 
 ## About the Author
 
-Jef King has worked in the software industry for twelve years. Over this time he has experienced a range of responsibilities in various industries. His passion for technology and motivating teams has kept his drive and focus strong. Early on in his career he showed an entrepreneurial spirit, starting multiple small companies. He departed from this to learn more about the software industry by working with larger companies, such as Microsoft. These diverse experiences have given a very unique perspective on teams and software engineering. Since moving back to Vancouver he has built several highly productive software development teams, and inspired others to try similar techniques.
+Jef King has worked in the software industry for fourteen years. Over this time he has experienced a range of responsibilities in various industries. His passion for technology and motivating teams has kept his drive and focus strong. Early on in his career he showed an entrepreneurial spirit, starting multiple small companies. He departed from this to learn more about the software industry by working with larger companies, such as Microsoft. These diverse experiences have given a very unique perspective on teams and software engineering. Since moving back to Vancouver he has built several highly productive software development teams, and inspired others to try similar techniques.
 
 ## Contributing
 
@@ -56,7 +54,7 @@ Contributions are always welcome. If you have find any issues with A-Trak, pleas
 
 ## Apache 2.0 Licence
 
-Copyright 2014 [Jef King]
+Copyright 2014 Jef King
 
 Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at
 
