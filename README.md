@@ -3,9 +3,9 @@
 # A-Trak - Synchronize files to the Cloud!
 
 A-Trak is a tool to manage deploying content and resources to the cloud. It can also be used to backup content off of your primary service provider.
-Choose to synchronize data in 9 different directions, between Windows Azure, Amazon S3 and Windows Folders.
+Choose to synchronize data in 9 different directions, between Azure, Amazon S3 and Windows Folders.
 
-This is a utility for easily synchronize files with Blob Storage on Windows Azure, S3 on Amazon or Folders.
+This is a utility for easily synchronize files with Blob Storage on Azure, S3 on Amazon or Folders.
 
 ## Current applications
 
@@ -15,7 +15,7 @@ This is a utility for easily synchronize files with Blob Storage on Windows Azur
 * Backup data on secondary account
 * Backup data off of your primary service provider
 
-We have built this to help you with your development and deployment process. Agile Business Cloud Solutions Ltd. uses this tool as part of an automated continuous deployment solution from Jenkins to Windows Azure.
+We have built this to help you with your development and deployment process. Companies use this tool as part of an automated continuous deployment solution from Jenkins/TeamCity etc. to Amazon and Azure.
 
 
 ## Getting Started
@@ -40,15 +40,11 @@ We have built this to help you with your development and deployment process. Agi
 * To
   * Specify To in configuration file, if you are not dynamically passing in the To argument
 * CreateSnapShot
-  * Specify CreateSnapShot if you want to turn off Windows Azure Blob SnapShot ability (values: true, false)
+  * Specify CreateSnapShot if you want to turn off Azure Blob SnapShot ability (values: true, false)
 * Synchronize
   * Will delete files out of destination if they do not exist in source; acts like a purge (values: true, false)
 * CacheControl
-  * Specify the cache-control header in the HTTP Response; great for integration with Windows Azure CDN.
-
-### Screenshot of configuration arguments
-
-![A-Trak Configuration](https://github.com/AgileBusinessCloud/A-Trak/raw/master/Config.PNG)
+  * Specify the cache-control header in the HTTP Response; great for integration with Azure CDN.
 
 ## About the Author
 
@@ -56,11 +52,11 @@ Jef King has worked in the software industry for twelve years. Over this time he
 
 ## Contributing
 
-Contributions are always welcome. If you have find any issues with A-Trak, please report them to the [Github Issues Tracker](https://github.com/AgileBusinessCloud/A-Trak/issues?sort=created&direction=desc&state=open).
+Contributions are always welcome. If you have find any issues with A-Trak, please report them to the [Github Issues Tracker](https://github.com/jefkingabc/A-Trak/issues?sort=created&direction=desc&state=open).
 
 ## Apache 2.0 Licence
 
-Copyright 2012 [Agile Business Cloud Solutions Ltd.](http://www.agilebusinesscloud.com)
+Copyright 2014 [Jef King]
 
 Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at
 
