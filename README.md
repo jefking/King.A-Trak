@@ -46,15 +46,6 @@ We have built this to help you with your development and deployment process. Agi
 * CacheControl
   * Specify the cache-control header in the HTTP Response; great for integration with Windows Azure CDN.
 
-## SDK's
-* Microsoft Windows Azure: https://www.windowsazure.com/en-us/develop/net/
-* Amazon S3: http://aws.amazon.com/sdkfornet/
-SDK's included via NuGet
-
-## Compiled Version
-* ABC's Website: http://cdn.agilebusinesscloud.com/download/Abc.Atrak.1.0.2.7.zip
-* Contains both Microsoft Windows Azure and Amazon S3 dependant SDK DLL's
-
 ### Screenshot of configuration arguments
 
 ![A-Trak Configuration](https://github.com/AgileBusinessCloud/A-Trak/raw/master/Config.PNG)
