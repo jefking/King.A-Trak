@@ -81,8 +81,6 @@
         public void AddContainer(CloudStorageAccount account, string container)
         {
             var client = account.CreateCloudBlobClient();
-            client.RetryPolicy = new Microsoft.WindowsAzure.Storage.RetryPolicies.ExponentialRetry(TimeSpan.FromSeconds(5), 3);
-
             if (string.IsNullOrWhiteSpace(this.from))
             {
                 this.from = container;
