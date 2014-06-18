@@ -1,14 +1,18 @@
 ﻿namespace King.ATrak.Test
 {
+    using Abc.ATrak;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
 
     [TestClass]
     public class ContentTypesTests
     {
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public void ContentTypeFilePathInvalid()
+        {
+            ContentTypes.ContentType(null);
+        }
     }
 }

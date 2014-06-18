@@ -1,14 +1,23 @@
 ﻿namespace King.ATrak.Test
 {
+    using Abc.ATrak;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
 
     [TestClass]
     public class DiskTests
     {
+        [TestMethod]
+        public void Constructor()
+        {
+            new Disk(Guid.NewGuid().ToString(), Guid.NewGuid().ToString());
+        }
+
+        [TestMethod]
+        public void IsIStorageItem()
+        {
+            var d = new Disk(Guid.NewGuid().ToString(), Guid.NewGuid().ToString());
+            Assert.IsNotNull(d as IStorageItem);
+        }
     }
 }
