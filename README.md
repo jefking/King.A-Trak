@@ -47,7 +47,7 @@ We have built this to help you with your development and deployment process. Com
 
 Contributions are always welcome. If you have find any issues with A-Trak, please report them to the [Github Issues Tracker](https://github.com/jefking/A-Trak/issues?sort=created&direction=desc&state=open).
 
-## Apache 2.0 Licence
+## Apache 2.0 License
 
 Copyright 2014 Jef King
 
