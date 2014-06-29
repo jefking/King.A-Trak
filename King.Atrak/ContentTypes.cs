@@ -38,7 +38,8 @@
             {
                 throw new InvalidOperationException(string.Format("Unknown extension: {0}", dotExt));
             }
-            else if (types.ContainsKey(dotExt))
+           
+            if (types.ContainsKey(dotExt))
             {
                 return types[dotExt];
             }
