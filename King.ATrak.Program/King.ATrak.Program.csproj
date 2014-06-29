@@ -83,9 +83,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\King.Atrak\A-Trak.csproj">
+    <ProjectReference Include="..\King.Atrak\King.ATrak.Core.csproj">
       <Project>{fefe7b1e-c843-46d6-b4a0-e9f0e1f95136}</Project>
-      <Name>A-Trak</Name>
+      <Name>King.ATrak.Core</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

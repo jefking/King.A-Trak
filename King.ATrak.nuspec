@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+    <metadata>
+        <id>King.ATrak</id>
+        <version>1.0.0</version>
+        <title>King.ATrak</title>
+        <authors>Jef King</authors>
+        <owners>Jef King</owners>
+        <licenseUrl>https://github.com/jefking/King.Mapper.Generator/blob/master/LICENSE</licenseUrl>
+        <projectUrl>https://github.com/jefking/King.Mapper.Generator</projectUrl>
+        <requireLicenseAcceptance>false</requireLicenseAcceptance>
+        <description>Synchronize files between Azure, to Amazon and Windows.</description>
+        <summary>Synchronize files between Azure, to Amazon and Windows.</summary>
+        <releaseNotes>Production Release</releaseNotes>
+        <copyright>Jef King</copyright>
+        <language>en-US</language>
+        <tags>Azure Amazon Windows File Sync Data Sync Blob EC2 Cloud Files Synchronize</tags>
+    </metadata>
+    <files>
+        <file src="King.ATrak.Program\bin\Release\King.ATrak.Program.exe" target="tools\King.ATrak.Program.exe" />
+        <file src="King.ATrak.Program\bin\Release\King.ATrak.Core.dll" target="tools\King.ATrak.Core.dll" />
+    </files>
+</package>

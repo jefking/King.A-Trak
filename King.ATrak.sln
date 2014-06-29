@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.30501.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "A-Trak", "King.Atrak\A-Trak.csproj", "{FEFE7B1E-C843-46D6-B4A0-E9F0E1F95136}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "King.ATrak.Core", "King.Atrak\King.ATrak.Core.csproj", "{FEFE7B1E-C843-46D6-B4A0-E9F0E1F95136}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "King.ATrak.Program", "King.ATrak.Program\King.ATrak.Program.csproj", "{A54F8F4C-C851-4ED1-9B24-47312D0BB97F}"
 EndProject
