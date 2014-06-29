@@ -2,12 +2,12 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
     <metadata>
         <id>King.ATrak</id>
-        <version>1.0.0</version>
+        <version>1.0.1</version>
         <title>King.ATrak</title>
         <authors>Jef King</authors>
         <owners>Jef King</owners>
-        <licenseUrl>https://github.com/jefking/King.Mapper.Generator/blob/master/LICENSE</licenseUrl>
-        <projectUrl>https://github.com/jefking/King.Mapper.Generator</projectUrl>
+        <licenseUrl>https://github.com/jefking/King.A-Trak/blob/master/LICENSE</licenseUrl>
+        <projectUrl>https://github.com/jefking/King.A-Trak</projectUrl>
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
         <description>Synchronize files between Azure, to Amazon and Windows.</description>
         <summary>Synchronize files between Azure, to Amazon and Windows.</summary>
