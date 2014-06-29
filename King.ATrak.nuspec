@@ -1,32 +1,32 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
-  <metadata>
-    <id>King.ATrak</id>
-    <version>1.0.3</version>
-    <title>King.ATrak</title>
-    <authors>Jef King</authors>
-    <owners>Jef King</owners>
-    <licenseUrl>https://github.com/jefking/King.A-Trak/blob/master/LICENSE</licenseUrl>
-    <projectUrl>https://github.com/jefking/King.A-Trak</projectUrl>
-    <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>Synchronize files between Azure, Amazon and Windows.</description>
-    <summary>Synchronize files between Azure, Amazon and Windows.</summary>
-    <releaseNotes>updating nuget</releaseNotes>
-    <copyright>Jef King</copyright>
-    <language>en-US</language>
-    <tags>Azure Amazon Windows File Sync Data Blob EC2 Cloud Files Synchronize</tags>
-  </metadata>
-  <files>
-    <file src="King.ATrak.Program\bin\Release\King.ATrak.Core.dll" target="tools\King.ATrak.Core.dll" />
-    <file src="King.ATrak.Program\bin\Release\King.ATrak.exe" target="tools\King.ATrak.exe" />
-    <file src="King.ATrak.Program\bin\Release\King.ATrak.exe.config" target="tools\King.ATrak.exe.config" />
-    <file src="King.ATrak.Program\bin\Release\AWSSDK.dll" target="tools\AWSSDK.dll" />
-    <file src="King.ATrak.Program\bin\Release\Microsoft.Data.Edm.dll" target="tools\Microsoft.Data.Edm.dll" />
-    <file src="King.ATrak.Program\bin\Release\Microsoft.Data.OData.dll" target="tools\Microsoft.Data.OData.dll" />
-    <file src="King.ATrak.Program\bin\Release\Microsoft.Data.Services.Client.dll" target="tools\Microsoft.Data.Services.Client.dll" />
-    <file src="King.ATrak.Program\bin\Release\Microsoft.WindowsAzure.Configuration.dll" target="tools\Microsoft.WindowsAzure.Configuration.dll" />
-    <file src="King.ATrak.Program\bin\Release\Microsoft.WindowsAzure.Storage.dll" target="tools\Microsoft.WindowsAzure.Storage.dll" />
-    <file src="King.ATrak.Program\bin\Release\Newtonsoft.Json.dll" target="tools\Newtonsoft.Json.dll" />
-    <file src="King.ATrak.Program\bin\Release\System.Spatial.dll" target="tools\System.Spatial.dll" />
-  </files>
+    <metadata>
+        <id>King.ATrak</id>
+        <version>1.0.4</version>
+        <title>King.ATrak</title>
+        <authors>Jef King</authors>
+        <owners>Jef King</owners>
+        <licenseUrl>https://github.com/jefking/King.A-Trak/blob/master/LICENSE</licenseUrl>
+        <projectUrl>https://github.com/jefking/King.A-Trak</projectUrl>
+        <requireLicenseAcceptance>false</requireLicenseAcceptance>
+        <description>Synchronize files between Azure, Amazon and Windows.</description>
+        <summary>Synchronize files between Azure, Amazon and Windows.</summary>
+        <releaseNotes>updating nuget; all resources included</releaseNotes>
+        <copyright>Jef King</copyright>
+        <language>en-US</language>
+        <tags>Azure Amazon Windows File Sync Data Blob EC2 Cloud Files Synchronize</tags>
+    </metadata>
+    <files>
+        <file src="King.ATrak.Program\bin\Release\AWSSDK.dll" target="content\King.ATrak\AWSSDK.dll" />
+        <file src="King.ATrak.Program\bin\Release\King.ATrak.Core.dll" target="content\King.ATrak\King.ATrak.Core.dll" />
+        <file src="King.ATrak.Program\bin\Release\King.ATrak.exe" target="content\King.ATrak\King.ATrak.exe" />
+        <file src="King.ATrak.Program\bin\Release\King.ATrak.exe.config" target="content\King.ATrak\King.ATrak.exe.config" />
+        <file src="King.ATrak.Program\bin\Release\Microsoft.Data.Edm.dll" target="content\King.ATrak\Microsoft.Data.Edm.dll" />
+        <file src="King.ATrak.Program\bin\Release\Microsoft.Data.OData.dll" target="content\King.ATrak\Microsoft.Data.OData.dll" />
+        <file src="King.ATrak.Program\bin\Release\Microsoft.Data.Services.Client.dll" target="content\King.ATrak\Microsoft.Data.Services.Client.dll" />
+        <file src="King.ATrak.Program\bin\Release\Microsoft.WindowsAzure.Configuration.dll" target="content\King.ATrak\Microsoft.WindowsAzure.Configuration.dll" />
+        <file src="King.ATrak.Program\bin\Release\Microsoft.WindowsAzure.Storage.dll" target="content\King.ATrak\Microsoft.WindowsAzure.Storage.dll" />
+        <file src="King.ATrak.Program\bin\Release\Newtonsoft.Json.dll" target="content\King.ATrak\Newtonsoft.Json.dll" />
+        <file src="King.ATrak.Program\bin\Release\System.Spatial.dll" target="content\King.ATrak\System.Spatial.dll" />
+    </files>
 </package>
