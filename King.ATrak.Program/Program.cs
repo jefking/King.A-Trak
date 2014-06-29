@@ -7,7 +7,7 @@
     using System.Threading.Tasks;
 
     /// <summary>
-    /// A-Trak synchronizer, for Azure Storage Blobs (containers), folders and Amazon S3 Buckets
+    /// A-Trak synchronizer, for Azure, folders and Amazon
     /// </summary>
     public class Program
     {
@@ -34,10 +34,10 @@
             }
             catch (Exception ex)
             {
-                Trace.Fail(ex.Message + Environment.NewLine + ex.StackTrace);
+                Trace.Fail(ex.Message, ex.StackTrace);
             }
 
-            Trace.WriteLine("Completed.");
+            Trace.TraceInformation("Completed.");
         }
 
         /// <summary>
@@ -50,9 +50,10 @@
 
             var delete = false;
             bool.TryParse(CloudConfigurationManager.GetSetting("Synchronize"), out delete);
+
             if (delete)
             {
-                Trace.Write("Deleting items which are not in source.");
+                Trace.TraceInformation("Deleting items which are not in source.");
 
                 Program.Delete(factory);
             }
@@ -66,24 +67,24 @@
         {
             Parallel.ForEach<IStorageItem>(factory.Source(), (from, state) =>
             {
-                Trace.WriteLine(string.Format("Processing file: '{0}'.", from));
+                Trace.TraceInformation("Processing file: '{0}'.", from);
 
                 var to = factory.To(from);
                 var exists = to.Exists();
                 if (!exists)
                 {
-                    Trace.WriteLine(string.Format("Synchronizing new file: '{0}'.", from));
+                    Trace.TraceInformation("Synchronizing new file: '{0}'.", from);
                 }
 
                 if (!exists || to.MD5 != from.MD5 || to.MD5 == null)
                 {
                     to.Save(from, exists);
 
-                    Trace.WriteLine(string.Format("Synchronizing file: '{0}'.", from));
+                    Trace.TraceInformation("Synchronizing file: '{0}'.", from);
                 }
                 else
                 {
-                    Trace.WriteLine(string.Format("File '{0}' already exists at '{1}', synchronization avoided.", from.Path, to.Path));
+                    Trace.TraceInformation("File '{0}' already exists at '{1}', synchronization avoided.", from.Path, to.Path);
                 }
 
                 to = null;
