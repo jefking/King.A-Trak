@@ -1,9 +1,9 @@
 # A-Trak - Synchronize files to the Cloud!
 
 A-Trak is a tool to manage deploying content and resources to the cloud. It can also be used to backup content off of your primary service provider.
-Choose to synchronize data in 9 different directions, between Azure, Amazon S3 and Windows Folders.
+Choose to synchronize data in 9 different directions, between Azure, Amazon and Windows.
 
-This is a utility for easily synchronize files with Blob Storage on Azure, S3 on Amazon or Folders.
+This is a utility to synchronize files between Azure, Amazon and Windows.
 
 ## Current applications
 
