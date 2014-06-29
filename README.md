@@ -22,7 +22,7 @@ We have built this to help you with your development and deployment process. Com
 * Configure the command line arguments in DEBUG tab of Project Properties
   * Example Folder to Azure Blob: <code>/From "C:\\FromFolder" /To "UseDevelopmentStorage=true" "tocontainer"</code>
   * Example Folder to Amazon S3: <code>/From "C:\\FromFolder" /To "SecretKey" "SecretAccessKey" "tobucket"</code>
-  * Example Folder to Folder: <code>/From "C:\FromFolder" /To "C:\Project\MyMVCWebSite\ToFolder"</code>
+  * Example Folder to Folder: <code>/From "C:\FromFolder" /To "C:\ToFolder"</code>
   * Example Azure Blob to Folder: <code>/From "UseDevelopmentStorage=true" "fromcontainer" /To "C:\ToFolder"</code>
   * Example Azure Blob to Azure Blob: <code>/From "UseDevelopmentStorage=true" "fromcontainer" /To "UseDevelopmentStorage=true" "tocontainer"</code>
   * Example Azure Blob to Amazon S3: <code>/From "UseDevelopmentStorage=true" "fromcontainer" /To "SecretKey" "SecretAccessKey" "tobucket"</code>
