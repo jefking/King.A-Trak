@@ -7,8 +7,8 @@
     <ProjectGuid>{A54F8F4C-C851-4ED1-9B24-47312D0BB97F}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>King.ATrak.Program</RootNamespace>
-    <AssemblyName>King.ATrak.Program</AssemblyName>
+    <RootNamespace>King.ATrak</RootNamespace>
+    <AssemblyName>King.ATrak</AssemblyName>
     <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
