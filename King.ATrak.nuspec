@@ -8,6 +8,7 @@
         <owners>Jef King</owners>
         <licenseUrl>https://github.com/jefking/King.A-Trak/blob/master/LICENSE</licenseUrl>
         <projectUrl>https://github.com/jefking/King.A-Trak</projectUrl>
+        <iconUrl>https://raw.githubusercontent.com/jefking/King.A-Trak/master/icon.png</iconUrl>
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
         <description>Synchronize files between Azure, Amazon and Windows.</description>
         <summary>Synchronize files between Azure, Amazon and Windows.</summary>
