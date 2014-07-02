@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
     <metadata>
         <id>King.ATrak</id>
-        <version>1.0.4</version>
+        <version>1.0.5</version>
         <title>King.ATrak</title>
         <authors>Jef King</authors>
         <owners>Jef King</owners>
@@ -12,7 +12,7 @@
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
         <description>Synchronize files between Azure, Amazon and Windows.</description>
         <summary>Synchronize files between Azure, Amazon and Windows.</summary>
-        <releaseNotes>updating nuget; all resources included</releaseNotes>
+        <releaseNotes />
         <copyright>Jef King</copyright>
         <language>en-US</language>
         <tags>Azure Amazon Windows File Sync Data Blob EC2 Cloud Files Synchronize</tags>
