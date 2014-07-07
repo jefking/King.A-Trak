@@ -42,17 +42,3 @@ We have built this to help you with your development and deployment process. Com
   * Will delete files out of destination if they do not exist in source; acts like a purge (values: true, false)
 * CacheControl
   * Specify the cache-control header in the HTTP Response; great for integration with Azure CDN.
-
-## Contributing
-
-Contributions are always welcome. If you have find any issues with A-Trak, please report them to the [Github Issues Tracker](https://github.com/jefking/A-Trak/issues?sort=created&direction=desc&state=open).
-
-## Apache 2.0 License
-
-Copyright 2014 Jef King
-
-Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at
-
-[http://www.apache.org/licenses/LICENSE-2.0](http://www.apache.org/licenses/LICENSE-2.0)
-
-Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.
