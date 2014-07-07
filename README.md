@@ -1,12 +1,15 @@
-# A-Trak - Synchronize files to the Cloud!
-
 A-Trak is a tool to manage deploying content and resources to the cloud. It can also be used to backup content off of your primary service provider.
 Choose to synchronize data in 9 different directions, between Azure, Amazon and Windows.
 
 This is a utility to synchronize files between Azure, Amazon and Windows.
 
-## Current applications
+## NuGet
+[Add via NuGet](https://www.nuget.org/packages/King.ATrak)
+```
+PM> Install-Package King.ATrak
+```
 
+## Current applications
 * For Development teams to enable continuous deployment
 * Make use of CDN's in place
 * Release static websites
@@ -16,7 +19,6 @@ This is a utility to synchronize files between Azure, Amazon and Windows.
 We have built this to help you with your development and deployment process. Companies use this tool as part of an automated continuous deployment solution from Jenkins/TeamCity etc. to Amazon and Azure.
 
 ## Getting Started
-
 * Clone the repository
 * Run the A-Trak.csproj file in Visual Studio
 * Configure the command line arguments in DEBUG tab of Project Properties
