@@ -15,7 +15,7 @@
         <releaseNotes />
         <copyright>Jef King</copyright>
         <language>en-US</language>
-        <tags>Azure Amazon Windows File Sync Data Blob EC2 Cloud Files Synchronize</tags>
+        <tags>King.ATrak Azure Amazon Windows File Sync Data Blob EC2 Cloud Files Synchronize</tags>
     </metadata>
     <files>
         <file src="King.ATrak.Program\bin\Release\AWSSDK.dll" target="content\King.ATrak\AWSSDK.dll" />
