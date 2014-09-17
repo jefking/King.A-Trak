@@ -8,7 +8,7 @@
     <ProjectGuid>{FEFE7B1E-C843-46D6-B4A0-E9F0E1F95136}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>King.ATrak.Core</RootNamespace>
+    <RootNamespace>King.ATrak</RootNamespace>
     <AssemblyName>King.ATrak.Core</AssemblyName>
     <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
     <TargetFrameworkProfile>
