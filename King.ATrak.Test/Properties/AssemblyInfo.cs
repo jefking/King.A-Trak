@@ -2,7 +2,7 @@
 using System.Runtime.InteropServices;
 
 [assembly: AssemblyTitle("King.ATrak.Test")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("Unit Tests")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Jef King")]
 [assembly: AssemblyProduct("King.ATrak.Test")]
