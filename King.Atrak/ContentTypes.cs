@@ -1,4 +1,4 @@
-﻿namespace Abc.ATrak
+﻿namespace King.ATrak
 {
     using Microsoft.Win32;
     using System;

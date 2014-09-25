@@ -1,4 +1,4 @@
-﻿namespace Abc.ATrak
+﻿namespace King.ATrak
 {
     using Microsoft.WindowsAzure.Storage;
     using Microsoft.WindowsAzure.Storage.Blob;

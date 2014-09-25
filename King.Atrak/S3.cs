@@ -1,4 +1,4 @@
-﻿namespace Abc.ATrak
+﻿namespace King.ATrak
 {
     using Amazon.S3;
     using Amazon.S3.Model;

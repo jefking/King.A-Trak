@@ -1,4 +1,4 @@
-﻿namespace Abc.ATrak
+﻿namespace King.ATrak
 {
     using Amazon;
     using Microsoft.WindowsAzure.Storage;

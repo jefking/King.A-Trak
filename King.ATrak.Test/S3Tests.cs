@@ -1,6 +1,6 @@
 ﻿namespace King.ATrak.Test
 {
-    using Abc.ATrak;
+    using King.ATrak;
     using Amazon.S3;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using NSubstitute;
