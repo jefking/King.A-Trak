@@ -221,7 +221,7 @@
         /// <param name="folder">Folder</param>
         /// <param name="files">Files</param>
         /// <returns>Files</returns>
-        private List<IStorageItem> GetFiles(string root, string folder, List<IStorageItem> files)
+        private IEnumerable<IStorageItem> GetFiles(string root, string folder, List<IStorageItem> files)
         {
             foreach (var dir in Directory.GetDirectories(folder))
             {
