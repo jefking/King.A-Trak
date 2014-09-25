@@ -47,18 +47,16 @@
             {
                 var regPerm = new RegistryPermission(RegistryPermissionAccess.Read, "\\\\HKEY_CLASSES_ROOT");
                 using (var classesRoot = Registry.ClassesRoot)
+                using (var typeKey = classesRoot.OpenSubKey("MIME\\Database\\Content Type"))
                 {
-                    using (var typeKey = classesRoot.OpenSubKey("MIME\\Database\\Content Type"))
+                    foreach (var keyname in typeKey.GetSubKeyNames())
                     {
-                        foreach (var keyname in typeKey.GetSubKeyNames())
+                        using (var curKey = classesRoot.OpenSubKey("MIME\\Database\\Content Type\\" + keyname))
                         {
-                            using (var curKey = classesRoot.OpenSubKey("MIME\\Database\\Content Type\\" + keyname))
+                            var extension = curKey.GetValue("Extension");
+                            if (null != extension && extension.ToString().ToUpperInvariant() == dotExt)
                             {
-                                var extension = curKey.GetValue("Extension");
-                                if (null != extension && extension.ToString().ToUpperInvariant() == dotExt)
-                                {
-                                    return keyname;
-                                }
+                                return keyname;
                             }
                         }
                     }
