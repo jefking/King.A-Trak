@@ -1,11 +1,6 @@
 ﻿namespace King.ATrak
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
-
+    #region IStorageItem
     /// <summary>
     /// Interface for storage items
     /// </summary>
@@ -71,4 +66,14 @@
         void Delete();
         #endregion
     }
+    #endregion
+
+    #region IParameters
+    public interface IParameters
+    {
+        #region Methods
+        StorageFactory Process();
+        #endregion
+    }
+    #endregion
 }

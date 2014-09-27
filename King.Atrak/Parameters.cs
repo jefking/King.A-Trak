@@ -11,13 +11,13 @@
     /// <summary>
     /// Parameters
     /// </summary>
-    public class Parameters
+    public class Parameters : IParameters
     {
         #region Members
         /// <summary>
         /// Arguments
         /// </summary>
-        private readonly string[] arguments;
+        protected readonly string[] arguments;
 
         /// <summary>
         /// Parameters Regex Statement
@@ -61,7 +61,7 @@
         /// Process Settings for Facotry
         /// </summary>
         /// <returns>Storage Factory</returns>
-        public StorageFactory Process()
+        public virtual StorageFactory Process()
         {
             var factory = new StorageFactory();
             var from = ConfigurationManager.AppSettings["From"];
