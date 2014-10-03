@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "King.ATrak.Core", "King.Atr
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "King.ATrak.Program", "King.ATrak.Program\King.ATrak.Program.csproj", "{A54F8F4C-C851-4ED1-9B24-47312D0BB97F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "King.ATrak.Test", "King.ATrak.Test\King.ATrak.Test.csproj", "{B6D12D4F-9163-4790-B4CD-D51B4241D0AB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "King.ATrak.Unit.Test", "King.ATrak.Test\King.ATrak.Unit.Test.csproj", "{B6D12D4F-9163-4790-B4CD-D51B4241D0AB}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{CDD2C937-433C-4FBB-86E9-C86B1BC9CEC8}"
 	ProjectSection(SolutionItems) = preProject

@@ -142,6 +142,7 @@
                 this.blob.Properties.ContentType = source.ContentType;
                 this.blob.Properties.ContentMD5 = source.MD5;
                 this.blob.Properties.CacheControl = cacheControl;
+
                 try
                 {
                     using (var stream = new MemoryStream(source.GetData()))
@@ -196,8 +197,7 @@
         /// </summary>
         public void Delete()
         {
-            var deleted = this.blob.DeleteIfExists(DeleteSnapshotsOption.IncludeSnapshots);
-            if (deleted)
+            if (this.blob.DeleteIfExists(DeleteSnapshotsOption.IncludeSnapshots))
             {
                 Trace.Write(string.Format("{0} deleted.", this.Path));
             }

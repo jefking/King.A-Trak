@@ -28,7 +28,6 @@
             {
                 throw new ArgumentNullException("root");
             }
-
             if (string.IsNullOrWhiteSpace(path))
             {
                 throw new ArgumentNullException("path");
