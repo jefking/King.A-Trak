@@ -16,12 +16,12 @@
         /// <summary>
         /// Cloud Blob
         /// </summary>
-        private readonly CloudBlockBlob blob;
+        protected readonly CloudBlockBlob blob;
 
         /// <summary>
         /// Blob Request Options
         /// </summary>
-        private readonly BlobRequestOptions options = new BlobRequestOptions()
+        protected readonly BlobRequestOptions options = new BlobRequestOptions()
         {
             ServerTimeout = TimeSpan.FromMinutes(15),
         };
