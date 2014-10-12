@@ -29,7 +29,7 @@
                 }
                 else
                 {
-                    Trace.WriteLine("Failed to initialize; invalid parameters");
+                    Trace.WriteLine("Failed to initialize; invalid parameters.");
                 }
             }
             catch (Exception ex)
