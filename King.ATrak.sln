@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.30501.0
+VisualStudioVersion = 12.0.30723.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "King.ATrak.Core", "King.Atrak\King.ATrak.Core.csproj", "{FEFE7B1E-C843-46D6-B4A0-E9F0E1F95136}"
 EndProject
@@ -17,6 +17,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{CDD2C9
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{F6F3EA23-A894-46FA-B096-3CA2EBE00A84}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Examples", "Examples", "{2DF6F868-3988-478B-95E5-3E6E2886F572}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -63,6 +65,7 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
+		{A54F8F4C-C851-4ED1-9B24-47312D0BB97F} = {2DF6F868-3988-478B-95E5-3E6E2886F572}
 		{B6D12D4F-9163-4790-B4CD-D51B4241D0AB} = {F6F3EA23-A894-46FA-B096-3CA2EBE00A84}
 	EndGlobalSection
 EndGlobal

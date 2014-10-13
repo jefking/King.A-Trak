@@ -1,5 +1,6 @@
 ﻿namespace King.ATrak
 {
+    using Abc.ATrak;
     using Microsoft.WindowsAzure;
     using System;
     using System.Collections.Generic;
