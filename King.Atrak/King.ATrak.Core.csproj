@@ -102,7 +102,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Interfaces.cs" />
-    <Compile Include="Parameters.cs" />
     <Compile Include="S3.cs" />
     <Compile Include="Azure.cs">
       <SubType>Code</SubType>

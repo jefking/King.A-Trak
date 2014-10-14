@@ -67,20 +67,4 @@
         #endregion
     }
     #endregion
-
-    #region IParameters
-    /// <summary>
-    /// Command Line Parameters
-    /// </summary>
-    public interface IParameters
-    {
-        #region Methods
-        /// <summary>
-        /// Process
-        /// </summary>
-        /// <returns></returns>
-        StorageFactory Process();
-        #endregion
-    }
-    #endregion
 }

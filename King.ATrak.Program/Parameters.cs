@@ -11,7 +11,7 @@
     /// <summary>
     /// Parameters
     /// </summary>
-    public class Parameters : IParameters
+    public class Parameters
     {
         #region Members
         /// <summary>

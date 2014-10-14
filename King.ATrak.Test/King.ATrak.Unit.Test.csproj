@@ -92,7 +92,6 @@
     <Compile Include="AzureTests.cs" />
     <Compile Include="ContentTypesTests.cs" />
     <Compile Include="DiskTests.cs" />
-    <Compile Include="ParametersTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="S3Tests.cs" />
     <Compile Include="StorageFactoryTests.cs" />
