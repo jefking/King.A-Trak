@@ -3,8 +3,7 @@ Choose to synchronize data in 9 different directions, between Azure, Amazon and 
 
 This is a utility to synchronize files between Azure, Amazon and Windows.
 
-## NuGet
-[Add via NuGet](https://www.nuget.org/packages/King.ATrak)
+## [NuGet](https://www.nuget.org/packages/King.ATrak)
 ```
 PM> Install-Package King.ATrak
 ```
