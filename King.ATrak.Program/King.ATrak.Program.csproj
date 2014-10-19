@@ -52,11 +52,11 @@
     <Content Include="icon.ico" />
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="A-Trak">
-      <HintPath>..\packages\King.ATrak.1.1.2\lib\net451\A-Trak.dll</HintPath>
-    </Reference>
     <Reference Include="AWSSDK">
       <HintPath>..\packages\AWSSDK.2.3.2.1\lib\net45\AWSSDK.dll</HintPath>
+    </Reference>
+    <Reference Include="King.ATrak.Core">
+      <HintPath>..\packages\King.ATrak.1.1.3\lib\net451\King.ATrak.Core.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Data.Edm, Version=5.6.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
