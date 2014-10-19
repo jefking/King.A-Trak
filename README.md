@@ -8,6 +8,9 @@ This is a utility to synchronize files between Azure, Amazon and Windows.
 PM> Install-Package King.ATrak
 ```
 
+### [Wiki](https://github.com/jefking/King.A-Trak/wiki)
+View the wiki to learn how to use this.
+
 ## Current applications
 * For Development teams to enable continuous deployment
 * Make use of CDN's in place
