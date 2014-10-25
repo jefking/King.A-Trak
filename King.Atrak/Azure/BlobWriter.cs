@@ -4,6 +4,9 @@
     using System.Collections.Generic;
     using System.Threading.Tasks;
 
+    /// <summary>
+    /// Blob Writer
+    /// </summary>
     public class BlobWriter
     {
         protected readonly IContainer container = null;
@@ -15,7 +18,10 @@
 
         public virtual void Store(IEnumerable<IStorageItem> items)
         {
+            foreach (var item in items)
+            {
 
+            }
         }
     }
 }

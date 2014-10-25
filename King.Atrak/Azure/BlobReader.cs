@@ -4,6 +4,9 @@
     using System.Collections.Generic;
     using System.Threading.Tasks;
 
+    /// <summary>
+    /// Blob Reader
+    /// </summary>
     public class BlobReader
     {
         protected readonly IContainer container = null;

@@ -4,6 +4,9 @@
     using System.IO;
     using System.Linq;
 
+    /// <summary>
+    /// Folder Reader
+    /// </summary>
     public class FolderReader
     {
         protected readonly string from = null;
