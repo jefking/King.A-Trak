@@ -39,8 +39,6 @@
         /// <returns>Task</returns>
         public virtual async Task Run(Direction direction)
         {
-            await new TaskFactory().StartNew(() => { }); // TEMP
-
             switch (direction)
             {
                 case Direction.BlobToFolder:
@@ -48,13 +46,15 @@
                     var blobItems = blobReader.List();
 
                     var folderWriter = new FolderWriter();
-                    throw new NotImplementedException();
+                    folderWriter.Initialize();
+                    break;
                 case Direction.FolderToBlob:
                     var folderReader = new FolderReader();
                     var folderItems = folderReader.List();
 
                     var blobWriter = new BlobWriter();
-                    throw new NotImplementedException();
+                    await blobWriter.Initialize();
+                    break;
                 default:
                     throw new NotImplementedException();
             }
