@@ -22,6 +22,34 @@
         {
             get;
         }
+
+        /// <summary>
+        /// Gets the Path
+        /// </summary>
+        string Path
+        {
+            get;
+        }
+
+        /// <summary>
+        /// Gets the Relative Path
+        /// </summary>
+        string RelativePath
+        {
+            get;
+        }
+
+        /// <summary>
+        /// Get Data
+        /// </summary>
+        byte[] Data
+        {
+            get;
+        }
+        #endregion
+
+        #region Methods
+        void Load();
         #endregion
     }
     #endregion

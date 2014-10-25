@@ -1,6 +1,7 @@
 ﻿namespace King.ATrak
 {
     using System;
+    using System.IO;
 
     /// <summary>
     /// Disk Storage Item
@@ -67,60 +68,29 @@
             get;
             private set;
         }
+
+        /// <summary>
+        /// Data
+        /// </summary>
+        public byte[] Data
+        {
+            get;
+            private set;
+        }
         #endregion
 
         #region Methods
-        /// <summary>
-        /// Get Data
-        /// </summary>
-        /// <returns>Data for object</returns>
-        public byte[] GetData()
+        public void Load()
         {
-            //if (this.data == null)
-            //{
-            //    this.data = File.ReadAllBytes(this.Path); // < 2 gigs
-            //    using (var createHash = System.Security.Cryptography.MD5.Create())
-            //    {
-            //        var hash = createHash.ComputeHash(this.data);
-            //        this.MD5 = System.Convert.ToBase64String(hash);
-            //    }
-            //}
-
-            //return this.data;
-            throw new NotImplementedException();
-        }
-
-        /// <summary>
-        /// Check to see if item exists
-        /// </summary>
-        /// <returns>Exists</returns>
-        public bool Exists()
-        {
-            //return File.Exists(this.Path);
-            throw new NotImplementedException();
-        }
-
-        /// <summary>
-        /// Save Storage Item
-        /// </summary>
-        /// <param name="storageItem">Storage Item</param>
-        /// <param name="exists">Exists</param>
-        public void Save(IStorageItem storageItem, bool exists = false)
-        {
-            //Directory.CreateDirectory(System.IO.Path.GetDirectoryName(this.Path));
-
-            //File.WriteAllBytes(this.Path, storageItem.GetData());
-            throw new NotImplementedException();
-        }
-
-        /// <summary>
-        /// Delete
-        /// </summary>
-        public void Delete()
-        {
-            //File.Delete(this.Path);
-            //Trace.Write(string.Format("{0} deleted.", this.Path));
-            throw new NotImplementedException();
+            if (this.Data == null)
+            {
+                this.Data = File.ReadAllBytes(this.Path); // < 2 gigs
+                using (var createHash = System.Security.Cryptography.MD5.Create())
+                {
+                    var hash = createHash.ComputeHash(this.Data);
+                    this.MD5 = System.Convert.ToBase64String(hash);
+                }
+            }
         }
         #endregion
     }

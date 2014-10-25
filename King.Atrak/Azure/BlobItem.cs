@@ -62,7 +62,7 @@
         public string MD5
         {
             get;
-            set;
+            private set;
         }
 
         /// <summary>
@@ -71,7 +71,7 @@
         public string ContentType
         {
             get;
-            set;
+            private set;
         }
 
         /// <summary>
@@ -91,9 +91,25 @@
             get;
             set;
         }
+
+        /// <summary>
+        /// Data
+        /// </summary>
+        public byte[] Data
+        {
+            get;
+            private set;
+        }
         #endregion
 
+
+
         #region Methods
+        public void Load()
+        {
+            throw new NotImplementedException();
+        }
+
         /// <summary>
         /// Check to see if item exists
         /// </summary>

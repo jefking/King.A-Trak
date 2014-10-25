@@ -109,7 +109,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="ContentTypes.cs" />
-    <Compile Include="Windows\Disk.cs" />
+    <Compile Include="Windows\FileItem.cs" />
     <Compile Include="Models\ConfigValues.cs" />
     <Compile Include="Models\Interfaces.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

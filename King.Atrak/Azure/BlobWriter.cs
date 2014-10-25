@@ -42,11 +42,12 @@
         /// Store Items
         /// </summary>
         /// <param name="items">Items</param>
-        public virtual void Store(IEnumerable<IStorageItem> items)
+        public virtual async Task Store(IEnumerable<IStorageItem> items)
         {
             foreach (var item in items)
             {
-
+                item.Load();
+                await this.container.Save(item.RelativePath, item.Data, item.ContentType);
             }
         }
         #endregion

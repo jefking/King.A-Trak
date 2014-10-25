@@ -43,7 +43,7 @@
             {
                 case Direction.BlobToFolder:
                     var blobReader = new BlobReader();
-                    var blobItems = await blobReader.List();
+                    var blobItems = blobReader.List();
 
                     var folderWriter = new FolderWriter();
                     folderWriter.Initialize();
@@ -57,7 +57,7 @@
                     var blobWriter = new BlobWriter();
                     await blobWriter.Initialize();
 
-                    blobWriter.Store(folderItems);
+                    await blobWriter.Store(folderItems);
                     break;
                 default:
                     throw new NotImplementedException();
