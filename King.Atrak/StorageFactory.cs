@@ -134,7 +134,7 @@
         {
             if (null != container)
             {
-                return container.ListBlobs(null, true, BlobListingDetails.None).Select(b => new Azure(container, b.Uri.ToString())).Where(c => c.Exists());
+                return container.ListBlobs(null, true, BlobListingDetails.None).Select(b => new AzureDeprecated(container, b.Uri.ToString())).Where(c => c.Exists());
             }
             else
             {
@@ -151,7 +151,7 @@
         {
             if (null != this.toContainer)
             {
-                return new Azure(this.toContainer, existing.RelativePath);
+                return new AzureDeprecated(this.toContainer, existing.RelativePath);
             }
             else
             {

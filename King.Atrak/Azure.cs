@@ -10,7 +10,7 @@
     /// <summary>
     /// Azure Storage Item
     /// </summary>
-    public class Azure : IStorageItem
+    public class AzureDeprecated : IStorageItem
     {
         #region Members
         /// <summary>
@@ -41,7 +41,7 @@
         /// <summary>
         /// Staticly initializes Azure members
         /// </summary>
-        static Azure()
+        static AzureDeprecated()
         {
             bool.TryParse(ConfigurationManager.AppSettings["CreateSnapShot"], out createSnapShot);
             cacheControl = ConfigurationManager.AppSettings["CacheControl"];
@@ -53,7 +53,7 @@
         /// </summary>
         /// <param name="container">Container</param>
         /// <param name="objId">Object Id</param>
-        public Azure(CloudBlobContainer container, string objId)
+        public AzureDeprecated(CloudBlobContainer container, string objId)
         {
             this.Path = objId.Replace('\\', '/');
             this.blob = container.GetBlockBlobReference(this.Path);

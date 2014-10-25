@@ -101,6 +101,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Azure\BlobReader.cs" />
+    <Compile Include="Azure\BlobWriter.cs" />
     <Compile Include="Enums.cs" />
     <Compile Include="Interfaces.cs" />
     <Compile Include="Azure.cs">
@@ -113,6 +115,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StorageFactory.cs" />
     <Compile Include="Synchronizer.cs" />
+    <Compile Include="Windows\FolderReader.cs" />
+    <Compile Include="Windows\FolderWriter.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

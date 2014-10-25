@@ -16,7 +16,7 @@
         /// <summary>
         /// Content Types
         /// </summary>
-        private static IDictionary<string, string> types = new ConcurrentDictionary<string, string>();
+        private readonly static IDictionary<string, string> types = new ConcurrentDictionary<string, string>();
         #endregion
 
         #region Methods
@@ -57,6 +57,8 @@
                             var extension = curKey.GetValue("Extension");
                             if (null != extension && extension.ToString().ToUpperInvariant() == dotExt)
                             {
+                                types.Add(dotExt, keyname);
+
                                 return keyname;
                             }
                         }
