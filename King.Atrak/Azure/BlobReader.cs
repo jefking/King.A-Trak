@@ -2,7 +2,6 @@
 {
     using King.Azure.Data;
     using System.Collections.Generic;
-    using System.Threading.Tasks;
     using System.Linq;
 
     /// <summary>

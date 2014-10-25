@@ -47,6 +47,7 @@
             foreach (var item in items)
             {
                 await item.Load();
+
                 await this.container.Save(item.RelativePath, item.Data, item.ContentType);
             }
         }

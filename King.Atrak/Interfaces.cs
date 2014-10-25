@@ -1,6 +1,7 @@
-﻿using System.Threading.Tasks;
-namespace King.ATrak
+﻿namespace King.ATrak
 {
+    using System.Threading.Tasks;
+
     #region IStorageItem
     /// <summary>
     /// Interface for storage items

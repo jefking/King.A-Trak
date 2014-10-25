@@ -1,4 +1,4 @@
-﻿namespace King.ATrak
+﻿namespace King.ATrak.Windows
 {
     using System;
     using System.IO;

@@ -46,6 +46,7 @@
             foreach (var item in items)
             {
                 await item.Load();
+
                 File.WriteAllBytes(Path.Combine(this.to, item.RelativePath), item.Data);
             }
         }

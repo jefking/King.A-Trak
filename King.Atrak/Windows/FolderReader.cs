@@ -40,7 +40,7 @@
                 this.GetFiles(root, dir, files);
             }
 
-            files.AddRange(Directory.GetFiles(folder).AsParallel().Select(f => new FileItem(root, f)));
+            files.AddRange(Directory.GetFiles(folder).Select(f => new FileItem(root, f)));
 
             return files;
         }
