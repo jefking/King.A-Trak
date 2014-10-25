@@ -1,6 +1,5 @@
 ﻿namespace King.ATrak.Models
 {
-
     /// <summary>
     /// Configuration Values
     /// </summary>
