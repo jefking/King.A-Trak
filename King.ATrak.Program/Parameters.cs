@@ -54,7 +54,7 @@
 
             return new ConfigValues
             {
-                Folder = this.arguments.ElementAt(connectionStringIndex - 1),
+                Folder = connectionStringIndex == 0 ? this.arguments.ElementAt(2) : this.arguments.ElementAt(0),
                 ConnectionString = this.arguments.ElementAt(connectionStringIndex),
                 ContainerName = this.arguments.ElementAt(connectionStringIndex + 1),
                 SyncDirection = connectionStringIndex == 0 ? Direction.BlobToFolder : Direction.FolderToBlob,

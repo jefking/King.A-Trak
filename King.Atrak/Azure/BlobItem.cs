@@ -15,11 +15,6 @@
         /// Cloud Blob
         /// </summary>
         protected readonly IContainer container = null;
-
-        /// <summary>
-        /// Object Id
-        /// </summary>
-        protected readonly Uri objId = null;
         #endregion
 
         #region Constructors
@@ -39,9 +34,9 @@
                 throw new ArgumentNullException("objId");
             }
 
-            this.Path = objId.ToString().Replace('\\', '/');
+            var path = objId.ToString();
+            this.RelativePath = path.Substring(path.IndexOf(container.Name) + container.Name.Length + 2);
             this.container = container;
-            this.RelativePath = this.container.Name;
         }
         #endregion
 
@@ -69,8 +64,10 @@
         /// </summary>
         public virtual string Path
         {
-            get;
-            private set;
+            get
+            {
+                return this.container.Name + this.RelativePath;
+            }
         }
 
         /// <summary>
@@ -101,13 +98,14 @@
         {
             if (null == this.Data)
             {
-                var properties = await this.container.Properties(this.RelativePath);
+                var path = string.Format("/{0}", this.RelativePath);
+                var properties = await this.container.Properties(path);
                 // Content Type
                 this.ContentType = properties.ContentType;
                 this.MD5 = properties.ContentMD5;
 
                 // Data
-                this.Data = await this.container.Get(this.RelativePath);
+                this.Data = await this.container.Get(path);
             }
         }
 
