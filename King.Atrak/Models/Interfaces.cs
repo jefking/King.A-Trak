@@ -8,5 +8,14 @@
 
     public interface IConfigValues
     {
+        #region Properties
+        /// <summary>
+        /// Sync Direction
+        /// </summary>
+        Direction SyncDirection
+        {
+            get;
+        }
+        #endregion
     }
 }

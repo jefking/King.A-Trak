@@ -9,6 +9,14 @@
     public class ConfigValues : IConfigValues
     {
         #region Properties
+        /// <summary>
+        /// Sync Direction
+        /// </summary>
+        public Direction SyncDirection
+        {
+            get;
+            set;
+        }
         #endregion
     }
 }

@@ -4,11 +4,11 @@
     using King.ATrak.Models;
     using King.ATrak.Windows;
     using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
     using System.Threading.Tasks;
 
+    /// <summary>
+    /// Data Synchronizer
+    /// </summary>
     public class Synchronizer
     {
         #region Constructors
@@ -21,6 +21,12 @@
             if (null == config)
             {
                 throw new ArgumentNullException("config");
+            }
+
+            switch (config.SyncDirection)
+            {
+                default:
+                    throw new ArgumentException("Invalid Direction.");
             }
         }
         #endregion
