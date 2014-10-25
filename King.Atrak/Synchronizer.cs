@@ -11,6 +11,28 @@
     /// </summary>
     public class Synchronizer
     {
+        #region Members
+        /// <summary>
+        /// Folder Reader
+        /// </summary>
+        protected readonly FolderReader folderReader = null;
+
+        /// <summary>
+        /// Folder Writer
+        /// </summary>
+        protected readonly FolderWriter folderWriter = null;
+
+        /// <summary>
+        /// Blob Reader
+        /// </summary>
+        protected readonly BlobReader blobReader = null;
+
+        /// <summary>
+        /// Blob Writer
+        /// </summary>
+        protected readonly BlobWriter blobWriter = null;
+        #endregion
+
         #region Constructors
         /// <summary>
         /// Default Constructor
@@ -25,6 +47,14 @@
 
             switch (config.SyncDirection)
             {
+                case Direction.BlobToFolder:
+                    this.blobReader = new BlobReader(config.ContainerName, config.ConnectionString);
+                    this.folderWriter = new FolderWriter(config.Folder);
+                    break;
+                case Direction.FolderToBlob:
+                    var folderReader = new FolderReader(config.Folder);
+                    var blobWriter = new BlobWriter(config.ContainerName, config.ConnectionString);
+                    break;
                 default:
                     throw new ArgumentException("Invalid Direction.");
             }
@@ -42,19 +72,15 @@
             switch (direction)
             {
                 case Direction.BlobToFolder:
-                    var blobReader = new BlobReader();
                     var blobItems = blobReader.List();
 
-                    var folderWriter = new FolderWriter();
                     folderWriter.Initialize();
 
                     await folderWriter.Store(blobItems);
                     break;
                 case Direction.FolderToBlob:
-                    var folderReader = new FolderReader();
                     var folderItems = folderReader.List();
 
-                    var blobWriter = new BlobWriter();
                     await blobWriter.Initialize();
 
                     await blobWriter.Store(folderItems);

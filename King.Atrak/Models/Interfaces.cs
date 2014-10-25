@@ -13,6 +13,30 @@
         {
             get;
         }
+
+        /// <summary>
+        /// Folder
+        /// </summary>
+        string Folder
+        {
+            get;
+        }
+
+        /// <summary>
+        /// Container Name
+        /// </summary>
+        string ContainerName
+        {
+            get;
+        }
+
+        /// <summary>
+        /// Connection String
+        /// </summary>
+        string ConnectionString
+        {
+            get;
+        }
         #endregion
     }
 }

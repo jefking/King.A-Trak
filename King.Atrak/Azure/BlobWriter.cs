@@ -1,6 +1,7 @@
 ﻿namespace King.ATrak.Azure
 {
     using King.Azure.Data;
+    using System;
     using System.Collections.Generic;
     using System.Diagnostics;
     using System.Threading.Tasks;
