@@ -2,6 +2,7 @@
 {
     using Microsoft.Win32;
     using System;
+    using System.Collections.Concurrent;
     using System.Collections.Generic;
     using System.IO;
     using System.Security.Permissions;
@@ -15,7 +16,7 @@
         /// <summary>
         /// Content Types
         /// </summary>
-        private static IDictionary<string, string> types = new Dictionary<string, string>();
+        private static IDictionary<string, string> types = new ConcurrentDictionary<string, string>();
         #endregion
 
         #region Methods
