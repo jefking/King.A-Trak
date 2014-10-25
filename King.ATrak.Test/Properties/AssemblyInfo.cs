@@ -1,8 +1,8 @@
 ﻿using System.Reflection;
 using System.Runtime.InteropServices;
 
-[assembly: AssemblyTitle("King.ATrak.Test")]
-[assembly: AssemblyDescription("Unit Tests")]
+[assembly: AssemblyTitle("King.ATrak.Unit.Test")]
+[assembly: AssemblyDescription("Unit Tests for A-Trak")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Jef King")]
 [assembly: AssemblyProduct("King.ATrak.Test")]
@@ -11,5 +11,5 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyCulture("")]
 [assembly: ComVisible(false)]
 [assembly: Guid("0ae56503-ab37-4e3e-bb2f-ebf4bd7b7183")]
-[assembly: AssemblyVersion("1.0.0.1")]
-[assembly: AssemblyFileVersion("1.0.0.1")]
+[assembly: AssemblyVersion("2.0.0.0")]
+[assembly: AssemblyFileVersion("2.0.0.0")]
