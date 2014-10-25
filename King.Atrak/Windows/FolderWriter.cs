@@ -9,8 +9,17 @@
     /// </summary>
     public class FolderWriter
     {
+        #region Members
+        /// <summary>
+        /// Folder to
+        /// </summary>
         protected readonly string to = null;
+        #endregion
 
+        #region Methods
+        /// <summary>
+        /// Initialize Folder
+        /// </summary>
         public virtual void Initialize()
         {
             if (Directory.Exists(this.to))
@@ -27,6 +36,10 @@
             }
         }
 
+        /// <summary>
+        /// Store Items
+        /// </summary>
+        /// <param name="items">Items</param>
         public virtual void Store(IEnumerable<IStorageItem> items)
         {
             foreach (var item in items)
@@ -34,5 +47,6 @@
 
             }
         }
+        #endregion
     }
 }

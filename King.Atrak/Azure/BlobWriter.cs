@@ -38,6 +38,10 @@
             return created;
         }
 
+        /// <summary>
+        /// Store Items
+        /// </summary>
+        /// <param name="items">Items</param>
         public virtual void Store(IEnumerable<IStorageItem> items)
         {
             foreach (var item in items)
