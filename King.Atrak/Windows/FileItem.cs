@@ -35,7 +35,7 @@
         /// <summary>
         /// Gets the MD5 Hash
         /// </summary>
-        public string MD5
+        public virtual string MD5
         {
             get;
             private set;
@@ -44,7 +44,7 @@
         /// <summary>
         /// Gets the Content Type
         /// </summary>
-        public string ContentType
+        public virtual string ContentType
         {
             get;
             private set;
@@ -53,7 +53,7 @@
         /// <summary>
         /// Gets the Path
         /// </summary>
-        public string Path
+        public virtual string Path
         {
             get;
             private set;
@@ -62,7 +62,7 @@
         /// <summary>
         /// Gets the Relative Path
         /// </summary>
-        public string RelativePath
+        public virtual string RelativePath
         {
             get;
             private set;
@@ -71,7 +71,7 @@
         /// <summary>
         /// Data
         /// </summary>
-        public byte[] Data
+        public virtual byte[] Data
         {
             get;
             private set;
@@ -82,7 +82,7 @@
         /// <summary>
         /// Load data, and calculate Hash
         /// </summary>
-        public async Task Load()
+        public virtual async Task Load()
         {
             if (this.Data == null)
             {

@@ -21,7 +21,7 @@
         /// List Blobs in Container
         /// </summary>
         /// <returns></returns>
-        public IEnumerable<IStorageItem> List()
+        public virtual IEnumerable<IStorageItem> List()
         {
             var blobs = this.container.List(null, true);
 

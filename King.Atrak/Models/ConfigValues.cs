@@ -1,28 +1,34 @@
 ﻿namespace King.ATrak.Models
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
 
+    /// <summary>
+    /// Configuration Values
+    /// </summary>
     public class ConfigValues : IConfigValues
     {
         #region Properties
-        public bool CreateSnapShot
+        /// <summary>
+        /// Create Snapshot
+        /// </summary>
+        public virtual bool CreateSnapshot
         {
             get;
             set;
         }
-        public string CacheControl
+        
+        /// <summary>
+        /// Cache Control
+        /// </summary>
+        public virtual string CacheControl
         {
             get;
             set;
         }
+
         /// <summary>
         /// Sync Direction
         /// </summary>
-        public Direction SyncDirection
+        public virtual Direction SyncDirection
         {
             get;
             set;

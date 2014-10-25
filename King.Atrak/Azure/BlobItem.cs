@@ -49,7 +49,7 @@
         /// <summary>
         /// Gets the MD5 Hash
         /// </summary>
-        public string MD5
+        public virtual string MD5
         {
             get;
             private set;
@@ -58,7 +58,7 @@
         /// <summary>
         /// Gets the Content Type
         /// </summary>
-        public string ContentType
+        public virtual string ContentType
         {
             get;
             private set;
@@ -67,7 +67,7 @@
         /// <summary>
         /// Gets the Path
         /// </summary>
-        public string Path
+        public virtual string Path
         {
             get;
             private set;
@@ -76,7 +76,7 @@
         /// <summary>
         /// Gets the Relative Path
         /// </summary>
-        public string RelativePath
+        public virtual string RelativePath
         {
             get;
             private set;
@@ -85,7 +85,7 @@
         /// <summary>
         /// Data
         /// </summary>
-        public byte[] Data
+        public virtual byte[] Data
         {
             get;
             private set;
@@ -97,7 +97,7 @@
         /// Load Data from storage
         /// </summary>
         /// <returns></returns>
-        public async Task Load()
+        public virtual async Task Load()
         {
             if (null == this.Data)
             {
@@ -115,7 +115,7 @@
         /// Create Snapshot
         /// </summary>
         /// <param name="blob">Cloud Blob</param>
-        private void CreateSnapshot(ICloudBlob blob)
+        protected virtual void CreateSnapshot(ICloudBlob blob)
         {
             //var page = blob as CloudPageBlob;
             //if (null != page)

@@ -21,7 +21,7 @@
         /// List items in folder
         /// </summary>
         /// <returns></returns>
-        public IEnumerable<IStorageItem> List()
+        public virtual IEnumerable<IStorageItem> List()
         {
             return this.GetFiles(this.from, this.from, new List<IStorageItem>());
         }
@@ -33,7 +33,7 @@
         /// <param name="folder">Folder</param>
         /// <param name="files">Files</param>
         /// <returns>Files</returns>
-        private IEnumerable<IStorageItem> GetFiles(string root, string folder, List<IStorageItem> files)
+        protected virtual IEnumerable<IStorageItem> GetFiles(string root, string folder, List<IStorageItem> files)
         {
             foreach (var dir in Directory.GetDirectories(folder))
             {
