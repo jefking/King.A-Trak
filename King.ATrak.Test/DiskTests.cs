@@ -10,13 +10,13 @@
         [TestMethod]
         public void Constructor()
         {
-            new Disk(Guid.NewGuid().ToString(), Guid.NewGuid().ToString());
+            new FileItem(Guid.NewGuid().ToString(), Guid.NewGuid().ToString());
         }
 
         [TestMethod]
         public void IsIStorageItem()
         {
-            var d = new Disk(Guid.NewGuid().ToString(), Guid.NewGuid().ToString());
+            var d = new FileItem(Guid.NewGuid().ToString(), Guid.NewGuid().ToString());
             Assert.IsNotNull(d as IStorageItem);
         }
     }

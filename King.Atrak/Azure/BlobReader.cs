@@ -11,9 +11,23 @@
     {
         protected readonly IContainer container = null;
 
-        public IEnumerable<IStorageItem> List()
+        public async Task<IEnumerable<IStorageItem>> List()
         {
-            return null;
+            var blobs = this.container.List(null, true);
+
+            var items = new List<IStorageItem>();
+            foreach (var blob in blobs)
+            {
+                var properties = await this.container.Properties(blob.Uri.ToString());
+                var item = new BlobItem(this.container, blob.Uri)
+                {
+                    MD5 = properties.ContentMD5,
+                    ContentType = properties.ContentType,
+                };
+                items.Add(item);
+            }
+
+            return items;
         }
     }
 }

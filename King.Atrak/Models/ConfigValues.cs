@@ -9,6 +9,16 @@
     public class ConfigValues : IConfigValues
     {
         #region Properties
+        public bool CreateSnapShot
+        {
+            get;
+            set;
+        }
+        public string CacheControl
+        {
+            get;
+            set;
+        }
         /// <summary>
         /// Sync Direction
         /// </summary>

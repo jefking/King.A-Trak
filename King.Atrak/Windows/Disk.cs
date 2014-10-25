@@ -7,22 +7,15 @@
     /// <summary>
     /// Disk Storage Item
     /// </summary>
-    public class Disk : IStorageItem
+    public class FileItem : IStorageItem
     {
-        #region Members
-        /// <summary>
-        /// File Data
-        /// </summary>
-        private byte[] data = null;
-        #endregion
-
         #region Constructor
         /// <summary>
         /// Initializes a new instance of the Disk
         /// </summary>
         /// <param name="root">Root Path of File</param>
         /// <param name="path">Path of File</param>
-        public Disk(string root, string path)
+        public FileItem(string root, string path)
         {
             if (string.IsNullOrWhiteSpace(root))
             {
@@ -35,12 +28,6 @@
 
             this.Path = path;
             this.RelativePath = path.Replace(root, string.Empty);
-
-            if (File.Exists(this.Path))
-            {
-                this.GetData();
-                this.data = null;
-            }
         }
         #endregion
 
@@ -91,17 +78,18 @@
         /// <returns>Data for object</returns>
         public byte[] GetData()
         {
-            if (this.data == null)
-            {
-                this.data = File.ReadAllBytes(this.Path); // < 2 gigs
-                using (var createHash = System.Security.Cryptography.MD5.Create())
-                {
-                    var hash = createHash.ComputeHash(this.data);
-                    this.MD5 = System.Convert.ToBase64String(hash);
-                }
-            }
+            //if (this.data == null)
+            //{
+            //    this.data = File.ReadAllBytes(this.Path); // < 2 gigs
+            //    using (var createHash = System.Security.Cryptography.MD5.Create())
+            //    {
+            //        var hash = createHash.ComputeHash(this.data);
+            //        this.MD5 = System.Convert.ToBase64String(hash);
+            //    }
+            //}
 
-            return this.data;
+            //return this.data;
+            throw new NotImplementedException();
         }
 
         /// <summary>
@@ -110,7 +98,8 @@
         /// <returns>Exists</returns>
         public bool Exists()
         {
-            return File.Exists(this.Path);
+            //return File.Exists(this.Path);
+            throw new NotImplementedException();
         }
 
         /// <summary>
@@ -120,9 +109,10 @@
         /// <param name="exists">Exists</param>
         public void Save(IStorageItem storageItem, bool exists = false)
         {
-            Directory.CreateDirectory(System.IO.Path.GetDirectoryName(this.Path));
+            //Directory.CreateDirectory(System.IO.Path.GetDirectoryName(this.Path));
 
-            File.WriteAllBytes(this.Path, storageItem.GetData());
+            //File.WriteAllBytes(this.Path, storageItem.GetData());
+            throw new NotImplementedException();
         }
 
         /// <summary>
@@ -130,17 +120,9 @@
         /// </summary>
         public void Delete()
         {
-            File.Delete(this.Path);
-            Trace.Write(string.Format("{0} deleted.", this.Path));
-        }
-
-        /// <summary>
-        /// To String
-        /// </summary>
-        /// <returns>String reprensentation of object</returns>
-        public override string ToString()
-        {
-            return string.Format("{0}", this.Path);
+            //File.Delete(this.Path);
+            //Trace.Write(string.Format("{0} deleted.", this.Path));
+            throw new NotImplementedException();
         }
         #endregion
     }
