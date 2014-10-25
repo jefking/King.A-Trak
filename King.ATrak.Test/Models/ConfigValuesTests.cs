@@ -1,12 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace King.ATrak.Test.Models
+﻿namespace King.ATrak.Test.Models
 {
-    class ConfigValuesTests
+    using NUnit.Framework;
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+
+    [TestFixture]
+    public class ConfigValuesTests
     {
     }
 }

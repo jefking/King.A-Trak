@@ -1,12 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace King.ATrak.Test.Azure
+﻿namespace King.ATrak.Test.Azure
 {
-    class BlobWriterTests
+    using NUnit.Framework;
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+
+    [TestFixture]
+    public class BlobWriterTests
     {
     }
 }
