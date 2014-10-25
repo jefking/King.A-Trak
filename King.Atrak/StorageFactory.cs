@@ -1,7 +1,5 @@
 ﻿namespace King.ATrak
 {
-    using Amazon.S3;
-    using Amazon.S3.Model;
     using Microsoft.WindowsAzure.Storage;
     using Microsoft.WindowsAzure.Storage.Blob;
     using System.Collections.Generic;
@@ -25,11 +23,6 @@
         private CloudBlobContainer fromContainer;
 
         /// <summary>
-        /// From S3
-        /// </summary>
-        private IAmazonS3 fromClient;
-
-        /// <summary>
         /// To Folder, Container, Bucket
         /// </summary>
         private string to;
@@ -38,11 +31,6 @@
         /// To Container
         /// </summary>
         private CloudBlobContainer toContainer;
-
-        /// <summary>
-        /// To S3
-        /// </summary>
-        private IAmazonS3 toClient;
         #endregion
 
         #region Methods
@@ -97,40 +85,12 @@
         }
 
         /// <summary>
-        /// Add Bucket
-        /// </summary>
-        /// <param name="client">Client</param>
-        /// <param name="bucket">Bucket</param>
-        public void AddBucket(IAmazonS3 client, string bucket)
-        {
-            if (string.IsNullOrWhiteSpace(this.from))
-            {
-                this.from = bucket;
-
-                this.fromClient = client;
-            }
-            else
-            {
-                this.to = bucket;
-
-                this.toClient = client;
-
-                var request = new PutBucketRequest()
-                {
-                    BucketName = bucket,
-                };
-
-                var response = client.PutBucket(request);
-            }
-        }
-
-        /// <summary>
         /// Validate Factory
         /// </summary>
         /// <returns>Is Valid</returns>
         public bool Validate()
         {
-            return this.Validate(this.from, this.fromContainer, this.fromClient) && this.Validate(this.to, this.toContainer, this.toClient);
+            return this.Validate(this.from, this.fromContainer) && this.Validate(this.to, this.toContainer);
         }
 
         /// <summary>
@@ -139,11 +99,10 @@
         /// <param name="item">Item</param>
         /// <param name="container">Container</param>
         /// <returns>Is Valid</returns>
-        private bool Validate(string item, CloudBlobContainer container, IAmazonS3 s3)
+        private bool Validate(string item, CloudBlobContainer container)
         {
             return (null == container && Directory.Exists(item))
-                || (null != container && !string.IsNullOrWhiteSpace(item))
-                || null != s3;
+                || (null != container && !string.IsNullOrWhiteSpace(item));
         }
 
         /// <summary>
@@ -152,7 +111,7 @@
         /// <returns>Storage Items</returns>
         public IEnumerable<IStorageItem> Source()
         {
-            return this.GetItems(this.fromContainer, this.fromClient, this.from);
+            return this.GetItems(this.fromContainer, this.from);
         }
 
         /// <summary>
@@ -161,7 +120,7 @@
         /// <returns>Storage Items</returns>
         public IEnumerable<IStorageItem> Destination()
         {
-            return this.GetItems(this.toContainer, this.toClient, this.to);
+            return this.GetItems(this.toContainer, this.to);
         }
 
         /// <summary>
@@ -171,21 +130,11 @@
         /// <param name="client">Client</param>
         /// <param name="path">Path</param>
         /// <returns>Storage Items</returns>
-        private IEnumerable<IStorageItem> GetItems(CloudBlobContainer container, IAmazonS3 client, string path)
+        private IEnumerable<IStorageItem> GetItems(CloudBlobContainer container, string path)
         {
             if (null != container)
             {
                 return container.ListBlobs(null, true, BlobListingDetails.None).Select(b => new Azure(container, b.Uri.ToString())).Where(c => c.Exists());
-            }
-            else if (null != client)
-            {
-                var request = new ListObjectsRequest()
-                {
-                    BucketName = path,
-                };
-
-                var response = client.ListObjects(request);
-                return response.S3Objects.Select(s3 => new S3(client, path, s3.Key, s3.ETag));
             }
             else
             {
@@ -203,10 +152,6 @@
             if (null != this.toContainer)
             {
                 return new Azure(this.toContainer, existing.RelativePath);
-            }
-            else if (null != this.toClient)
-            {
-                return new S3(this.toClient, this.to, existing.RelativePath);
             }
             else
             {

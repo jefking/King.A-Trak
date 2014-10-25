@@ -1,8 +1,8 @@
 ﻿using System.Reflection;
 using System.Runtime.InteropServices;
 
-[assembly: AssemblyTitle("A-Trak Windows Azure Blob, Amazon S3 and File Synchronizer")]
-[assembly: AssemblyDescription("Command line tool for synchronizing File, Windows Azure Blobs and Amazon S3 Buckets.")]
+[assembly: AssemblyTitle("Move content between Windows and Azure.")]
+[assembly: AssemblyDescription("Move content between Windows and Azure.")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Jef King")]
 [assembly: AssemblyProduct("A-Trak")]
@@ -11,5 +11,5 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyCulture("")]
 [assembly: ComVisible(false)]
 [assembly: Guid("a4b17f6c-7cba-4b4b-9826-ec4cafc828ae")]
-[assembly: AssemblyVersion("1.0.3.7")]
-[assembly: AssemblyFileVersion("1.0.3.7")]
+[assembly: AssemblyVersion("2.0.0.0")]
+[assembly: AssemblyFileVersion("2.0.0.0")]
