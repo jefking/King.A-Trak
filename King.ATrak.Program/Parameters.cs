@@ -57,7 +57,7 @@
                 Folder = this.arguments.ElementAt(connectionStringIndex - 1),
                 ConnectionString = this.arguments.ElementAt(connectionStringIndex),
                 ContainerName = this.arguments.ElementAt(connectionStringIndex + 1),
-                SyncDirection = Direction.FolderToBlob,
+                SyncDirection = connectionStringIndex == 0 ? Direction.BlobToFolder : Direction.FolderToBlob,
             };
         }
         #endregion
