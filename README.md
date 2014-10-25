@@ -1,8 +1,14 @@
 Move content between Windows, Azure and Amazon
-- Synchronize from folder to Azure
-- Synchronize from folder to Amazon
-- Synchronize between Azure and Amazon
-- Synchronize from folder to folder
+
+#### Synchronize
+- from folder to Azure
+- from folder to Amazon
+- from Azure to Amazon
+- from Azure to folder
+- from Amazon to folder
+- from folder to folder
+- from Azure to Azure
+- from Amazon to Amazon
 
 ## [NuGet](https://www.nuget.org/packages/King.ATrak)
 ```
