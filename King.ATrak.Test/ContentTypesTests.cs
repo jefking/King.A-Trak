@@ -13,5 +13,34 @@
         {
             ContentTypes.ContentType(null);
         }
+
+        [Test]
+        [ExpectedException(typeof(InvalidOperationException))]
+        public void ContentTypeFilePathWierd()
+        {
+            ContentTypes.ContentType(". ");
+        }
+
+        [TestCase("image/jpeg", ".jpg")]
+        [TestCase("text/css", ".css")]
+        [TestCase("image/png", ".png")]
+        [TestCase("image/x-icon", ".ico")]
+        [TestCase("text/plain", ".txt")]
+        public void Types(string expected, string extension)
+        {
+            Assert.AreEqual(expected, ContentTypes.ContentType(extension));
+        }
+
+        [TestCase("image/jpeg", ".jpg")]
+        [TestCase("text/css", ".css")]
+        [TestCase("image/png", ".png")]
+        [TestCase("image/x-icon", ".ico")]
+        [TestCase("text/plain", ".txt")]
+        public void TypesCached(string expected, string extension)
+        {
+            Assert.AreEqual(expected, ContentTypes.ContentType(extension));
+            Assert.AreEqual(expected, ContentTypes.ContentType(extension));
+            Assert.AreEqual(expected, ContentTypes.ContentType(extension));
+        }
     }
 }
