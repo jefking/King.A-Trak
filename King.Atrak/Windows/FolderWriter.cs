@@ -1,5 +1,6 @@
 ﻿namespace King.ATrak.Windows
 {
+    using System;
     using System.Collections.Generic;
     using System.Diagnostics;
     using System.IO;
@@ -15,6 +16,22 @@
         /// Folder to
         /// </summary>
         protected readonly string to = null;
+        #endregion
+
+        #region Constructors
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// <param name="to">To</param>
+        public FolderWriter(string to)
+        {
+            if (string.IsNullOrWhiteSpace(to))
+            {
+                throw new ArgumentException("to");
+            }
+
+            this.to = to;
+        }
         #endregion
 
         #region Methods

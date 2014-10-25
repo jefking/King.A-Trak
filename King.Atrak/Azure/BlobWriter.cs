@@ -17,6 +17,33 @@
         protected readonly IContainer container = null;
         #endregion
 
+        #region Constructors
+        /// <summary>
+        /// Default Constructor
+        /// </summary>
+        /// <param name="name">Container Name</param>
+        /// <param name="connectionString">Connection String</param>
+        public BlobWriter(string name, string connectionString)
+            : this(new Container(name, connectionString))
+        {
+
+        }
+
+        /// <summary>
+        /// Mockable Constructor
+        /// </summary>
+        /// <param name="container">Container</param>
+        public BlobWriter(IContainer container)
+        {
+            if (null == container)
+            {
+                throw new ArgumentNullException("container");
+            }
+
+            this.container = container;
+        }
+        #endregion
+
         #region Methods
         /// <summary>
         /// Initialize Container

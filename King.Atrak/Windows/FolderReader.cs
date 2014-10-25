@@ -1,5 +1,6 @@
 ﻿namespace King.ATrak.Windows
 {
+    using System;
     using System.Collections.Generic;
     using System.IO;
     using System.Linq;
@@ -14,6 +15,22 @@
         /// From
         /// </summary>
         protected readonly string from = null;
+        #endregion
+
+        #region Constructors
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// <param name="from">From</param>
+        public FolderReader(string from)
+        {
+            if (string.IsNullOrWhiteSpace(from))
+            {
+                throw new ArgumentException("from");
+            }
+
+            this.from = from;
+        }
         #endregion
 
         #region Methods

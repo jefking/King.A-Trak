@@ -1,11 +1,8 @@
 ﻿namespace King.ATrak.Models
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
-
+    /// <summary>
+    /// Configuration Values Interface
+    /// </summary>
     public interface IConfigValues
     {
         #region Properties
