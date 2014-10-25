@@ -39,12 +39,8 @@
             {
                 throw new InvalidOperationException(string.Format("Unknown extension: {0}", dotExt));
             }
-           
-            if (types.ContainsKey(dotExt))
-            {
-                return types[dotExt];
-            }
-            else
+
+            if (!types.ContainsKey(dotExt))
             {
                 var regPerm = new RegistryPermission(RegistryPermissionAccess.Read, "\\\\HKEY_CLASSES_ROOT");
                 using (var classesRoot = Registry.ClassesRoot)
@@ -58,15 +54,14 @@
                             if (null != extension && extension.ToString().ToUpperInvariant() == dotExt)
                             {
                                 types.Add(dotExt, keyname);
-
-                                return keyname;
+                                break;
                             }
                         }
                     }
                 }
-
-                return null;
             }
+
+            return types[dotExt];
         }
         #endregion
     }
