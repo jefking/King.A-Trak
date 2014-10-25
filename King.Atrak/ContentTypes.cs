@@ -61,7 +61,7 @@
                 }
             }
 
-            return types[dotExt];
+            return types.ContainsKey(dotExt) ? types[dotExt] : string.Empty;
         }
         #endregion
     }

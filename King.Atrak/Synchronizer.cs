@@ -53,8 +53,8 @@
                     this.folderWriter = new FolderWriter(config.Folder);
                     break;
                 case Direction.FolderToBlob:
-                    var folderReader = new FolderReader(config.Folder);
-                    var blobWriter = new BlobWriter(config.ContainerName, config.ConnectionString);
+                    this.folderReader = new FolderReader(config.Folder);
+                    this.blobWriter = new BlobWriter(config.ContainerName, config.ConnectionString);
                     break;
                 default:
                     throw new ArgumentException("Invalid Direction.");
@@ -74,23 +74,23 @@
             {
                 case Direction.BlobToFolder:
                     Trace.TraceInformation("Retrieving blobs in container.");
-                    var blobItems = blobReader.List();
+                    var blobItems = this.blobReader.List();
 
                     Trace.TraceInformation("Initializing folder.");
-                    folderWriter.Initialize();
+                    this.folderWriter.Initialize();
 
                     Trace.TraceInformation("Storing blobs.");
-                    await folderWriter.Store(blobItems);
+                    await this.folderWriter.Store(blobItems);
                     break;
                 case Direction.FolderToBlob:
                     Trace.TraceInformation("Retrieving files in folder.");
-                    var folderItems = folderReader.List();
+                    var folderItems = this.folderReader.List();
 
                     Trace.TraceInformation("Initializing container.");
-                    await blobWriter.Initialize();
+                    await this.blobWriter.Initialize();
 
                     Trace.TraceInformation("Storing files.");
-                    await blobWriter.Store(folderItems);
+                    await this.blobWriter.Store(folderItems);
                     break;
                 default:
                     throw new NotImplementedException();
