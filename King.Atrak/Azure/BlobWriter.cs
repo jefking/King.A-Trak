@@ -27,7 +27,6 @@
         public BlobWriter(string name, string connectionString)
             : this(new Container(name, connectionString))
         {
-
         }
 
         /// <summary>

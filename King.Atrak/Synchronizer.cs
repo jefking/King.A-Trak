@@ -4,6 +4,7 @@
     using King.ATrak.Models;
     using King.ATrak.Windows;
     using System;
+    using System.Diagnostics;
     using System.Threading.Tasks;
 
     /// <summary>
@@ -72,17 +73,23 @@
             switch (direction)
             {
                 case Direction.BlobToFolder:
+                    Trace.TraceInformation("Retrieving blobs in container.");
                     var blobItems = blobReader.List();
 
+                    Trace.TraceInformation("Initializing folder.");
                     folderWriter.Initialize();
 
+                    Trace.TraceInformation("Storing blobs.");
                     await folderWriter.Store(blobItems);
                     break;
                 case Direction.FolderToBlob:
+                    Trace.TraceInformation("Retrieving files in folder.");
                     var folderItems = folderReader.List();
 
+                    Trace.TraceInformation("Initializing container.");
                     await blobWriter.Initialize();
 
+                    Trace.TraceInformation("Storing files.");
                     await blobWriter.Store(folderItems);
                     break;
                 default:
