@@ -1,4 +1,5 @@
-﻿namespace King.ATrak
+﻿using System.Threading.Tasks;
+namespace King.ATrak
 {
     #region IStorageItem
     /// <summary>
@@ -49,7 +50,11 @@
         #endregion
 
         #region Methods
-        void Load();
+        /// <summary>
+        /// Load object from data source
+        /// </summary>
+        /// <returns>Task</returns>
+        Task Load();
         #endregion
     }
     #endregion

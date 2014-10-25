@@ -3,6 +3,7 @@
     using System.Collections.Generic;
     using System.Diagnostics;
     using System.IO;
+    using System.Threading.Tasks;
 
     /// <summary>
     /// Folder Writer
@@ -40,11 +41,12 @@
         /// Store Items
         /// </summary>
         /// <param name="items">Items</param>
-        public virtual void Store(IEnumerable<IStorageItem> items)
+        public virtual async Task Store(IEnumerable<IStorageItem> items)
         {
             foreach (var item in items)
             {
-
+                await item.Load();
+                File.WriteAllBytes(Path.Combine(this.to, item.RelativePath), item.Data);
             }
         }
         #endregion

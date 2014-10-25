@@ -2,6 +2,7 @@
 {
     using System;
     using System.IO;
+    using System.Threading.Tasks;
 
     /// <summary>
     /// Disk Storage Item
@@ -45,10 +46,8 @@
         /// </summary>
         public string ContentType
         {
-            get
-            {
-                return ContentTypes.ContentType(this.Path);
-            }
+            get;
+            private set;
         }
 
         /// <summary>
@@ -80,17 +79,28 @@
         #endregion
 
         #region Methods
-        public void Load()
+        /// <summary>
+        /// Load data, and calculate Hash
+        /// </summary>
+        public async Task Load()
         {
             if (this.Data == null)
             {
+                // Set Content Type
+                this.ContentType = ContentTypes.ContentType(this.Path);
+
+                // Load Data
                 this.Data = File.ReadAllBytes(this.Path); // < 2 gigs
                 using (var createHash = System.Security.Cryptography.MD5.Create())
                 {
                     var hash = createHash.ComputeHash(this.Data);
+
+                    // Create Hash
                     this.MD5 = System.Convert.ToBase64String(hash);
                 }
             }
+
+            await new TaskFactory().StartNew(() => {});
         }
         #endregion
     }

@@ -4,6 +4,7 @@
     using Microsoft.WindowsAzure.Storage.Blob;
     using System;
     using System.Configuration;
+    using System.Threading.Tasks;
 
     /// <summary>
     /// Azure Storage Item
@@ -14,7 +15,7 @@
         /// <summary>
         /// Cloud Blob
         /// </summary>
-        protected readonly IContainer blob = null;
+        protected readonly IContainer container = null;
 
         protected readonly Uri objId = null;
 
@@ -48,10 +49,10 @@
         public BlobItem(IContainer container, Uri objId)
         {
             //this.Path = objId.Replace('\\', '/');
-            this.blob = container;
+            this.container = container;
             //this.blob = container.GetBlockBlobReference(this.Path);
 
-            this.RelativePath = this.blob.Name;
+            this.RelativePath = this.container.Name;
         }
         #endregion
 
@@ -80,7 +81,7 @@
         public string Path
         {
             get;
-            set;
+            private set;
         }
 
         /// <summary>
@@ -89,7 +90,7 @@
         public string RelativePath
         {
             get;
-            set;
+            private set;
         }
 
         /// <summary>
@@ -102,12 +103,19 @@
         }
         #endregion
 
-
-
         #region Methods
-        public void Load()
+        public async Task Load()
         {
-            throw new NotImplementedException();
+            if (null == this.Data)
+            {
+                var properties = await this.container.Properties(this.RelativePath);
+                // Content Type
+                this.ContentType = properties.ContentType;
+                this.MD5 = properties.ContentMD5;
+
+                // Data
+                this.Data = await this.container.Get(this.RelativePath);
+            }
         }
 
         /// <summary>

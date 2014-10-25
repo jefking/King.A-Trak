@@ -48,7 +48,7 @@
                     var folderWriter = new FolderWriter();
                     folderWriter.Initialize();
 
-                    folderWriter.Store(blobItems);
+                    await folderWriter.Store(blobItems);
                     break;
                 case Direction.FolderToBlob:
                     var folderReader = new FolderReader();
