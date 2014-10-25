@@ -1,11 +1,7 @@
 ﻿namespace King.ATrak.Windows
 {
-    using System;
     using System.Collections.Generic;
     using System.IO;
-    using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
 
     public class FolderWriter
     {
@@ -17,6 +13,11 @@
             {
                 Directory.CreateDirectory(this.to);
             }
+        }
+
+        public virtual void Store(IEnumerable<IStorageItem> items)
+        {
+
         }
     }
 }
