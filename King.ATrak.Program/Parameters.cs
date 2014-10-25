@@ -33,7 +33,7 @@
             {
                 throw new ArgumentNullException("arguments");
             }
-            if (!arguments.Any() || arguments.Count() != 2)
+            if (!arguments.Any() || arguments.Count() != 3)
             {
                 throw new ArgumentException("Invalid parameter count.");
             }
@@ -51,7 +51,10 @@
         {
             return new ConfigValues
             {
-
+                Folder = this.arguments.ElementAt(0),
+                ConnectionString = this.arguments.ElementAt(1),
+                ContainerName = this.arguments.ElementAt(2),
+                SyncDirection = Direction.FolderToBlob,
             };
         }
         #endregion
