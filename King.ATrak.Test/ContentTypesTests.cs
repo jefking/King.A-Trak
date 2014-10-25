@@ -26,6 +26,7 @@
         [TestCase("image/png", ".png")]
         [TestCase("image/x-icon", ".ico")]
         [TestCase("text/plain", ".txt")]
+        [TestCase("", ".jrnl")]
         public void Types(string expected, string extension)
         {
             Assert.AreEqual(expected, ContentTypes.ContentType(extension));
