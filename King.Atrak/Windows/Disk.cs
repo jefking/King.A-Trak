@@ -1,8 +1,6 @@
 ﻿namespace King.ATrak
 {
     using System;
-    using System.Diagnostics;
-    using System.IO;
 
     /// <summary>
     /// Disk Storage Item

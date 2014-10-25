@@ -9,8 +9,18 @@
     /// </summary>
     public class FolderReader
     {
+        #region Members
+        /// <summary>
+        /// From
+        /// </summary>
         protected readonly string from = null;
+        #endregion
 
+        #region Methods
+        /// <summary>
+        /// List items in folder
+        /// </summary>
+        /// <returns></returns>
         public IEnumerable<IStorageItem> List()
         {
             return this.GetFiles(this.from, this.from, new List<IStorageItem>());
@@ -34,5 +44,6 @@
 
             return files;
         }
+        #endregion
     }
 }

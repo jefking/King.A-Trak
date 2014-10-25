@@ -2,6 +2,7 @@
 {
     using King.Azure.Data;
     using System.Collections.Generic;
+    using System.Diagnostics;
     using System.Threading.Tasks;
 
     /// <summary>
@@ -9,11 +10,32 @@
     /// </summary>
     public class BlobWriter
     {
+        #region Members
+        /// <summary>
+        /// Container
+        /// </summary>
         protected readonly IContainer container = null;
+        #endregion
 
+        #region Methods
+        /// <summary>
+        /// Initialize Container
+        /// </summary>
+        /// <returns></returns>
         public virtual async Task<bool> Initialize()
         {
-            return await this.container.CreateIfNotExists();
+            var created = await this.container.CreateIfNotExists();
+
+            if (created)
+            {
+                Trace.TraceInformation("Container created: '{0}'.", this.container.Name);
+            }
+            else
+            {
+                Trace.TraceInformation("Container already exists: '{0}'.", this.container.Name);
+            }
+
+            return created;
         }
 
         public virtual void Store(IEnumerable<IStorageItem> items)
@@ -23,5 +45,6 @@
 
             }
         }
+        #endregion
     }
 }

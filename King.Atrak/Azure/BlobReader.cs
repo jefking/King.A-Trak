@@ -9,8 +9,18 @@
     /// </summary>
     public class BlobReader
     {
+        #region Members
+        /// <summary>
+        /// Container
+        /// </summary>
         protected readonly IContainer container = null;
+        #endregion
 
+        #region Methods
+        /// <summary>
+        /// List Blobs in Container
+        /// </summary>
+        /// <returns></returns>
         public async Task<IEnumerable<IStorageItem>> List()
         {
             var blobs = this.container.List(null, true);
@@ -29,5 +39,6 @@
 
             return items;
         }
+        #endregion
     }
 }
