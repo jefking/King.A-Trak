@@ -1,9 +1,9 @@
 Move content between Windows and Azure.
 
 #### Synchronize
-- from folder to Azure
-- from Azure to folder
-- from folder to folder
+- from Windows to Azure
+- from Azure to Windows
+- from Windows to Windows
 - from Azure to Azure
 
 ## [NuGet](https://www.nuget.org/packages/King.ATrak)
