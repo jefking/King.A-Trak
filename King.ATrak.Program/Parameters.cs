@@ -49,11 +49,14 @@
         /// <returns>Storage Factory</returns>
         public virtual IConfigValues Process()
         {
+            var first = this.arguments.ElementAt(0).ToLowerInvariant();
+            var connectionStringIndex = first.Contains("usedevelopmentstorage") || first.Contains("accountname") ? 0 : 1;
+
             return new ConfigValues
             {
-                Folder = this.arguments.ElementAt(0),
-                ConnectionString = this.arguments.ElementAt(1),
-                ContainerName = this.arguments.ElementAt(2),
+                Folder = this.arguments.ElementAt(connectionStringIndex - 1),
+                ConnectionString = this.arguments.ElementAt(connectionStringIndex),
+                ContainerName = this.arguments.ElementAt(connectionStringIndex + 1),
                 SyncDirection = Direction.FolderToBlob,
             };
         }

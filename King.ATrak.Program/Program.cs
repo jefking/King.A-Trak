@@ -5,7 +5,7 @@
     using System.Threading;
 
     /// <summary>
-    /// A-Trak synchronizer, for Azure, folders and Amazon
+    /// A-Trak synchronizer, between Azure and Windows
     /// </summary>
     public class Program
     {
