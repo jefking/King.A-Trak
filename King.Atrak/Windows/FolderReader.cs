@@ -8,5 +8,11 @@
 
     public class FolderReader
     {
+        protected readonly string from = null;
+
+        public IEnumerable<IStorageItem> List()
+        {
+            return null;
+        }
     }
 }

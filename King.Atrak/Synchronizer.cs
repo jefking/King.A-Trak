@@ -45,10 +45,14 @@
             {
                 case Direction.BlobToFolder:
                     var blobReader = new BlobReader();
+                    var blobItems = blobReader.List();
+
                     var folderWriter = new FolderWriter();
                     throw new NotImplementedException();
                 case Direction.FolderToBlob:
                     var folderReader = new FolderReader();
+                    var folderItems = folderReader.List();
+
                     var blobWriter = new BlobWriter();
                     throw new NotImplementedException();
                 default:

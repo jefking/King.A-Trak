@@ -1,5 +1,6 @@
 ﻿namespace King.ATrak.Azure
 {
+    using King.Azure.Data;
     using System;
     using System.Collections.Generic;
     using System.Linq;
@@ -8,5 +9,11 @@
 
     public class BlobReader
     {
+        protected readonly IContainer container = null;
+
+        public IEnumerable<IStorageItem> List()
+        {
+            return null;
+        }
     }
 }
