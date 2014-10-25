@@ -16,7 +16,7 @@
         /// <summary>
         /// Content Types
         /// </summary>
-        protected readonly static IDictionary<string, string> types = new ConcurrentDictionary<string, string>();
+        private readonly static IDictionary<string, string> types = new ConcurrentDictionary<string, string>();
         #endregion
 
         #region Methods
@@ -25,7 +25,7 @@
         /// </summary>
         /// <param name="filepath">File Path</param>
         /// <returns>Content Type</returns>
-        public virtual static string ContentType(string filepath)
+        public static string ContentType(string filepath)
         {
             if (string.IsNullOrWhiteSpace(filepath))
             {
