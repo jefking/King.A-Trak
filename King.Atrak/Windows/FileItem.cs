@@ -91,6 +91,7 @@
 
                 // Load Data
                 this.Data = File.ReadAllBytes(this.Path); // < 2 gigs
+
                 using (var createHash = System.Security.Cryptography.MD5.Create())
                 {
                     var hash = createHash.ComputeHash(this.Data);
