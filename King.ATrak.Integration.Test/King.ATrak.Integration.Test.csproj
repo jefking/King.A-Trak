@@ -84,6 +84,10 @@
   </Choose>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SynchronizerTests.cs" />
+    <Compile Include="Windows\FileItemTests.cs" />
+    <Compile Include="Windows\FolderReaderTests.cs" />
+    <Compile Include="Windows\FolderWriterTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
@@ -95,10 +99,7 @@
       <Name>King.ATrak.Core</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Azure\" />
-    <Folder Include="Windows\" />
-  </ItemGroup>
+  <ItemGroup />
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
       <ItemGroup>
