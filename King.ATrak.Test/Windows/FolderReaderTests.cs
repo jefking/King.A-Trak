@@ -10,7 +10,7 @@
         [Test]
         public void Constructor()
         {
-            new FolderReader("C:\\happy");
+            new FolderReader("C:\\folder");
         }
 
         [Test]
@@ -18,6 +18,12 @@
         public void ConstructorFromNull()
         {
             new FolderReader(null);
+        }
+
+        [Test]
+        public void IsIDataLister()
+        {
+            Assert.IsNotNull(new FolderReader("C:\\folder") as IDataLister);
         }
     }
 }

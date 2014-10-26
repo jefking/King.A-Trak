@@ -26,6 +26,12 @@
         }
 
         [Test]
+        public void IsIDataLister()
+        {
+            Assert.IsNotNull(new BlobReader("test", "UseDevelopmentStorage=true;") as IDataLister);
+        }
+
+        [Test]
         public void List()
         {
             var uri = new Uri("http://google.com/container/item.txt");
