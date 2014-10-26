@@ -46,7 +46,7 @@
         public virtual string MD5
         {
             get;
-            private set;
+            protected set;
         }
 
         /// <summary>
@@ -55,7 +55,7 @@
         public virtual string ContentType
         {
             get;
-            private set;
+            protected set;
         }
 
         /// <summary>
@@ -65,7 +65,7 @@
         {
             get
             {
-                return this.container.Name + this.RelativePath;
+                return string.Format("{0}{1}", this.container.Name, this.RelativePath);
             }
         }
 
@@ -75,7 +75,7 @@
         public virtual string RelativePath
         {
             get;
-            private set;
+            protected set;
         }
 
         /// <summary>
@@ -84,7 +84,7 @@
         public virtual byte[] Data
         {
             get;
-            private set;
+            protected set;
         }
         #endregion
 

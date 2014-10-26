@@ -15,5 +15,20 @@
             var container = Substitute.For<IContainer>();
             new BlobItem(container, new Uri("http://google.com"));
         }
+
+        [Test]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void ConstructorContainerNull()
+        {
+            new BlobItem(null, new Uri("http://google.com"));
+        }
+
+        [Test]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void ConstructorObjectIdNull()
+        {
+            var container = Substitute.For<IContainer>();
+            new BlobItem(container, null);
+        }
     }
 }
