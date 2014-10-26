@@ -24,8 +24,8 @@
         }
 
         [Test]
-        [ExpectedException(typeof(ArgumentNullException))]
-        public void ConstructorObjectIdNull()
+        [ExpectedException(typeof(ArgumentException))]
+        public void ConstructorPathNull()
         {
             var container = Substitute.For<IContainer>();
             new BlobItem(container, null);
