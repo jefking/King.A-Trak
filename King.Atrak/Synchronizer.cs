@@ -93,7 +93,7 @@
                     await this.blobWriter.Store(folderItems);
                     break;
                 default:
-                    throw new NotImplementedException();
+                    throw new InvalidOperationException("Invalid Direction");
             }
         }
         #endregion

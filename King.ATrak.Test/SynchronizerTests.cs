@@ -3,6 +3,7 @@
     using King.ATrak.Models;
     using NUnit.Framework;
     using System;
+    using System.Threading.Tasks;
 
     [TestFixture]
     public class SynchronizerTests
@@ -55,6 +56,22 @@
             };
 
             new Synchronizer(config);
+        }
+
+        [Test]
+        [ExpectedException(typeof(InvalidOperationException))]
+        public async Task SyncUnknownDirection()
+        {
+            var config = new ConfigValues
+            {
+                ConnectionString = "UseDevelopmentStorage=true;",
+                ContainerName = "test",
+                Folder = "C:\\happy",
+                SyncDirection = Direction.FolderToBlob,
+            };
+
+            var s = new Synchronizer(config);
+            await s.Run(Direction.Unknown);
         }
     }
 }
