@@ -1,14 +1,19 @@
 ﻿namespace King.ATrak.Test.Azure
 {
+    using King.ATrak.Azure;
+    using King.Azure.Data;
+    using NSubstitute;
     using NUnit.Framework;
     using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
 
     [TestFixture]
     public class BlobItemTests
     {
+        [Test]
+        public void Constructor()
+        {
+            var container = Substitute.For<IContainer>();
+            new BlobItem(container, new Uri("http://google.com"));
+        }
     }
 }

@@ -1,7 +1,6 @@
 ﻿namespace King.ATrak.Azure
 {
     using King.Azure.Data;
-    using Microsoft.WindowsAzure.Storage.Blob;
     using System;
     using System.Threading.Tasks;
 
