@@ -1,14 +1,23 @@
 ﻿namespace King.ATrak.Test.Windows
 {
+    using King.ATrak.Windows;
     using NUnit.Framework;
     using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
 
     [TestFixture]
     public class FolderReaderTests
     {
+        [Test]
+        public void Constructor()
+        {
+            new FolderReader("C:\\happy");
+        }
+
+        [Test]
+        [ExpectedException(typeof(ArgumentException))]
+        public void ConstructorFromNull()
+        {
+            new FolderReader(null);
+        }
     }
 }

@@ -30,5 +30,12 @@
             var container = Substitute.For<IContainer>();
             new BlobItem(container, null);
         }
+
+        [Test]
+        public void IsIStorageItem()
+        {
+            var container = Substitute.For<IContainer>();
+            Assert.IsNotNull(new BlobItem(container, new Uri("http://google.com")) as IStorageItem);
+        }
     }
 }

@@ -19,11 +19,11 @@
         {
             if (string.IsNullOrWhiteSpace(root))
             {
-                throw new ArgumentNullException("root");
+                throw new ArgumentException("root");
             }
             if (string.IsNullOrWhiteSpace(path))
             {
-                throw new ArgumentNullException("path");
+                throw new ArgumentException("path");
             }
 
             this.Path = path;
