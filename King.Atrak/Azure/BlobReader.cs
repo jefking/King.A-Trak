@@ -1,6 +1,7 @@
 ﻿namespace King.ATrak.Azure
 {
     using King.Azure.Data;
+    using Microsoft.WindowsAzure.Storage.Blob;
     using System;
     using System.Collections.Generic;
     using System.Linq;
@@ -26,7 +27,6 @@
         public BlobReader(string name, string connectionString)
             : this(new Container(name, connectionString))
         {
-
         }
 
         /// <summary>
@@ -53,7 +53,7 @@
         {
             var blobs = this.container.List(null, true);
 
-            return blobs.Select(b => new BlobItem(this.container, b.Uri));
+            return null != blobs ? blobs.Select(b => new BlobItem(this.container, ((CloudBlockBlob)b).Name)) : null;
         }
         #endregion
     }

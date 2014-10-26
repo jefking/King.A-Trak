@@ -13,14 +13,14 @@
         public void Constructor()
         {
             var container = Substitute.For<IContainer>();
-            new BlobItem(container, new Uri("http://google.com"));
+            new BlobItem(container, "/file.txt");
         }
 
         [Test]
         [ExpectedException(typeof(ArgumentNullException))]
         public void ConstructorContainerNull()
         {
-            new BlobItem(null, new Uri("http://google.com"));
+            new BlobItem(null, "/file.txt");
         }
 
         [Test]
@@ -35,7 +35,7 @@
         public void IsIStorageItem()
         {
             var container = Substitute.For<IContainer>();
-            Assert.IsNotNull(new BlobItem(container, new Uri("http://google.com")) as IStorageItem);
+            Assert.IsNotNull(new BlobItem(container, "/file.txt") as IStorageItem);
         }
     }
 }

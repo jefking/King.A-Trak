@@ -21,20 +21,19 @@
         /// Initializes a new instance of the Azure
         /// </summary>
         /// <param name="container">Container</param>
-        /// <param name="objId">Object Id</param>
-        public BlobItem(IContainer container, Uri objId)
+        /// <param name="path">Relative Path</param>
+        public BlobItem(IContainer container, string path)
         {
             if (null == container)
             {
                 throw new ArgumentNullException("container");
             }
-            if (null == objId)
+            if (string.IsNullOrWhiteSpace(path))
             {
-                throw new ArgumentNullException("objId");
+                throw new ArgumentException("path");
             }
 
-            var path = objId.ToString();
-            this.RelativePath = path.Substring(path.IndexOf(container.Name) + container.Name.Length + 2);
+            this.RelativePath = path.StartsWith("/") ? path.Substring(1) : path;
             this.container = container;
         }
         #endregion
