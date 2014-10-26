@@ -64,7 +64,7 @@
         {
             get
             {
-                return string.Format("{0}{1}", this.container.Name, this.RelativePath);
+                return string.Format("{0}/{1}", this.container.Name, this.RelativePath);
             }
         }
 
