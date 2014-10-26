@@ -8,7 +8,7 @@
     public class SynchronizerTests
     {
         [Test]
-        public void Constructor()
+        public void ConstructorFolderToBlob()
         {
             var config = new ConfigValues
             {
@@ -16,6 +16,20 @@
                 ContainerName = "test",
                 Folder = "C:\\happy",
                 SyncDirection = Direction.FolderToBlob,
+            };
+
+            new Synchronizer(config);
+        }
+
+        [Test]
+        public void ConstructorBlobToFolder()
+        {
+            var config = new ConfigValues
+            {
+                ConnectionString = "UseDevelopmentStorage=true;",
+                ContainerName = "test",
+                Folder = "C:\\happy",
+                SyncDirection = Direction.BlobToFolder,
             };
 
             new Synchronizer(config);
