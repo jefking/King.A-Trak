@@ -9,7 +9,7 @@
     /// <summary>
     /// Blob Reader
     /// </summary>
-    public class BlobReader
+    public class BlobReader : IDataLister
     {
         #region Members
         /// <summary>
@@ -48,7 +48,7 @@
         /// <summary>
         /// List Blobs in Container
         /// </summary>
-        /// <returns></returns>
+        /// <returns>Storage Items</returns>
         public virtual IEnumerable<IStorageItem> List()
         {
             var blobs = this.container.List(null, true);

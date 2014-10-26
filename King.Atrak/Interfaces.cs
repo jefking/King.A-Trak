@@ -1,5 +1,6 @@
 ﻿namespace King.ATrak
 {
+    using System.Collections.Generic;
     using System.Threading.Tasks;
 
     #region IStorageItem
@@ -56,6 +57,22 @@
         /// </summary>
         /// <returns>Task</returns>
         Task Load();
+        #endregion
+    }
+    #endregion
+
+    #region IDataLister
+    /// <summary>
+    /// Data Listing Operation
+    /// </summary>
+    public interface IDataLister
+    {
+        #region Methods
+        /// <summary>
+        /// List Data Items
+        /// </summary>
+        /// <returns>Storage Items</returns>
+        IEnumerable<IStorageItem> List();
         #endregion
     }
     #endregion

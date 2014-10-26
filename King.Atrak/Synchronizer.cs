@@ -14,19 +14,14 @@
     {
         #region Members
         /// <summary>
-        /// Folder Reader
+        /// Data Lister
         /// </summary>
-        protected readonly FolderReader folderReader = null;
+        protected readonly IDataLister lister = null;
 
         /// <summary>
         /// Folder Writer
         /// </summary>
         protected readonly FolderWriter folderWriter = null;
-
-        /// <summary>
-        /// Blob Reader
-        /// </summary>
-        protected readonly BlobReader blobReader = null;
 
         /// <summary>
         /// Blob Writer
@@ -49,11 +44,11 @@
             switch (config.SyncDirection)
             {
                 case Direction.BlobToFolder:
-                    this.blobReader = new BlobReader(config.ContainerName, config.ConnectionString);
+                    this.lister = new BlobReader(config.ContainerName, config.ConnectionString);
                     this.folderWriter = new FolderWriter(config.Folder);
                     break;
                 case Direction.FolderToBlob:
-                    this.folderReader = new FolderReader(config.Folder);
+                    this.lister = new FolderReader(config.Folder);
                     this.blobWriter = new BlobWriter(config.ContainerName, config.ConnectionString);
                     break;
                 default:
@@ -74,7 +69,7 @@
             {
                 case Direction.BlobToFolder:
                     Trace.TraceInformation("Retrieving blobs in container.");
-                    var blobItems = this.blobReader.List();
+                    var blobItems = this.lister.List();
 
                     Trace.TraceInformation("Initializing folder.");
                     this.folderWriter.Initialize();
@@ -84,7 +79,7 @@
                     break;
                 case Direction.FolderToBlob:
                     Trace.TraceInformation("Retrieving files in folder.");
-                    var folderItems = this.folderReader.List();
+                    var folderItems = this.lister.List();
 
                     Trace.TraceInformation("Initializing container.");
                     await this.blobWriter.Initialize();

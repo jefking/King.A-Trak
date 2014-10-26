@@ -8,7 +8,7 @@
     /// <summary>
     /// Folder Reader
     /// </summary>
-    public class FolderReader
+    public class FolderReader : IDataLister
     {
         #region Members
         /// <summary>
