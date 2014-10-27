@@ -42,8 +42,6 @@
         {
             if (!Directory.Exists(this.to))
             {
-                Trace.TraceInformation("Creating directory: '{0}'.", this.to);
-
                 Directory.CreateDirectory(this.to);
 
                 Trace.TraceInformation("Created directory: '{0}'.", this.to);
