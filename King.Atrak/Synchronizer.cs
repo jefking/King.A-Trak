@@ -59,13 +59,13 @@
         /// <returns>Task</returns>
         public virtual async Task Run()
         {
-            Trace.TraceInformation("Retrieving items.");
-            var items = this.lister.List();
-
-            Trace.TraceInformation("Initializing storage.");
+            Trace.TraceInformation("Initializing storage...");
             await this.writer.Initialize();
 
-            Trace.TraceInformation("Storing items.");
+            Trace.TraceInformation("Retrieving list...");
+            var items = this.lister.List();
+
+            Trace.TraceInformation("Storing...");
             await this.writer.Store(items);
         }
         #endregion
