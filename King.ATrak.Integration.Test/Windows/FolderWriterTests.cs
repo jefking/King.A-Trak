@@ -22,6 +22,17 @@
         }
 
         [Test]
+        public void InitializeExists()
+        {
+            var root = Environment.CurrentDirectory;
+            var writer = new FolderWriter(root);
+            writer.Initialize();
+
+            var exists = Directory.Exists(root);
+            Assert.IsTrue(exists);
+        }
+
+        [Test]
         public async Task Store()
         {
             var root = string.Format("{0}\\{1}", Environment.CurrentDirectory, Guid.NewGuid());
