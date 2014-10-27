@@ -12,7 +12,7 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Move content between Windows and Azure.</description>
     <summary>Move content between Windows and Azure.</summary>
-    <releaseNotes />
+    <releaseNotes>Major re-write, much less confusing and simple!</releaseNotes>
     <copyright>Jef King</copyright>
     <language>en-US</language>
     <tags>King.ATrak Azure Windows File Sync Data Blob Cloud Files Synchronize Blob-Storage Windows-Azure Synchronize Synchronization CDN King.Azure</tags>
