@@ -3,7 +3,6 @@
     using King.ATrak.Models;
     using NUnit.Framework;
     using System;
-    using System.Threading.Tasks;
 
     [TestFixture]
     public class SynchronizerTests
@@ -17,6 +16,34 @@
                 ContainerName = "test",
                 Folder = "C:\\happy",
                 SyncDirection = Direction.FolderToBlob,
+            };
+
+            new Synchronizer(config);
+        }
+
+        [Test]
+        public void ConstructorFolderToFolder()
+        {
+            var config = new ConfigValues
+            {
+                ConnectionString = "UseDevelopmentStorage=true;",
+                ContainerName = "test",
+                Folder = "C:\\happy",
+                SyncDirection = Direction.FolderToFolder,
+            };
+
+            new Synchronizer(config);
+        }
+
+        [Test]
+        public void ConstructorBlobToBlob()
+        {
+            var config = new ConfigValues
+            {
+                ConnectionString = "UseDevelopmentStorage=true;",
+                ContainerName = "test",
+                Folder = "C:\\happy",
+                SyncDirection = Direction.BlobToBlob,
             };
 
             new Synchronizer(config);

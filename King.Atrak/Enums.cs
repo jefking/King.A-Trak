@@ -9,6 +9,8 @@
         Unknown = 0,
         FolderToBlob = 1,
         BlobToFolder = 2,
+        BlobToBlob = 3,
+        FolderToFolder = 4,
     }
     #endregion
 }

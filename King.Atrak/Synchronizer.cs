@@ -35,19 +35,33 @@
             {
                 throw new ArgumentNullException("config");
             }
+            if (Direction.Unknown == config.SyncDirection)
+            {
+                throw new ArgumentException("Invalid Direction.");
+            }
 
             switch (config.SyncDirection)
             {
+                case Direction.BlobToBlob:
                 case Direction.BlobToFolder:
                     this.lister = new BlobReader(config.ContainerName, config.ConnectionString);
+                    break;
+                case Direction.FolderToFolder:
+                case Direction.FolderToBlob:
+                    this.lister = new FolderReader(config.Folder);
+                    break;
+            }
+
+            switch (config.SyncDirection)
+            {
+                case Direction.FolderToFolder:
+                case Direction.BlobToFolder:
                     this.writer = new FolderWriter(config.Folder);
                     break;
                 case Direction.FolderToBlob:
-                    this.lister = new FolderReader(config.Folder);
+                case Direction.BlobToBlob:
                     this.writer = new BlobWriter(config.ContainerName, config.ConnectionString);
                     break;
-                default:
-                    throw new ArgumentException("Invalid Direction.");
             }
         }
         #endregion
