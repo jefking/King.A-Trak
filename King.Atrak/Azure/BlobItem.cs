@@ -96,14 +96,13 @@
         {
             if (null == this.Data)
             {
-                var path = string.Format("/{0}", this.RelativePath);
-                var properties = await this.container.Properties(path);
+                var properties = await this.container.Properties(this.RelativePath);
                 // Content Type
                 this.ContentType = properties.ContentType;
                 this.MD5 = properties.ContentMD5;
 
                 // Data
-                this.Data = await this.container.Get(path);
+                this.Data = await this.container.Get(this.RelativePath);
             }
         }
 

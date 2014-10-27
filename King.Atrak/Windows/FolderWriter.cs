@@ -40,11 +40,7 @@
         /// </summary>
         public virtual void Initialize()
         {
-            if (Directory.Exists(this.to))
-            {
-                Trace.TraceInformation("Directory already exists: '{0}'.", this.to);
-            }
-            else
+            if (!Directory.Exists(this.to))
             {
                 Trace.TraceInformation("Creating directory: '{0}'.", this.to);
 
