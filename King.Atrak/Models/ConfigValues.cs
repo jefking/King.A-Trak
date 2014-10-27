@@ -25,6 +25,15 @@
         }
 
         /// <summary>
+        /// Echo
+        /// </summary>
+        public virtual bool Echo
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
         /// Folder
         /// </summary>
         public string Folder

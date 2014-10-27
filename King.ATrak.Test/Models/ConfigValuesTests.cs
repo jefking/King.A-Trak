@@ -3,10 +3,6 @@
     using King.ATrak.Models;
     using NUnit.Framework;
     using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
 
     [TestFixture]
     public class ConfigValuesTests
@@ -21,6 +17,18 @@
         public void IsIConfigValues()
         {
             Assert.IsNotNull(new ConfigValues() as IConfigValues);
+        }
+
+        [Test]
+        public void Echo()
+        {
+            var expected = true;
+            var c = new ConfigValues
+            {
+                Echo = expected,
+            };
+
+            Assert.AreEqual(expected, c.Echo);
         }
 
         [Test]

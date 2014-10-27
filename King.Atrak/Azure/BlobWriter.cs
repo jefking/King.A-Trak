@@ -57,10 +57,6 @@
             {
                 Trace.TraceInformation("Container created: '{0}'.", this.container.Name);
             }
-            else
-            {
-                Trace.TraceInformation("Container already exists: '{0}'.", this.container.Name);
-            }
 
             return created;
         }
