@@ -3,10 +3,6 @@
     using King.ATrak.Windows;
     using NUnit.Framework;
     using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
 
     [TestFixture]
     public class FileItemTests
@@ -35,6 +31,20 @@
         public void IsIStorageItem()
         {
             Assert.IsNotNull(new FileItem("C:\\happy", "temp.csv") as IStorageItem);
+        }
+
+        [Test]
+        public void RelativePath()
+        {
+            var f = new FileItem("C:\\happy", "C:\\happy\\temp.csv");
+            Assert.AreEqual("temp.csv", f.RelativePath);
+        }
+
+        [Test]
+        public void RelativePathBackSlashes()
+        {
+            var f = new FileItem("C:\\happy\\", "C:\\happy\\temp.csv");
+            Assert.AreEqual("temp.csv", f.RelativePath);
         }
     }
 }
