@@ -23,7 +23,7 @@
                 var parameters = new Parameters(args);
                 var config = parameters.Process();
 
-                Trace.TraceInformation("Connection String: '{0}'{3}{3}Container: '{1}'{3}Folder: '{2}'{3}"
+                Trace.TraceInformation("{3}Connection String: '{0}'{3}Container: '{1}'{3}Folder: '{2}'{3}"
                     , config.ConnectionString
                     , config.ContainerName
                     , config.Folder
