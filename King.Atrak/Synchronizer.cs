@@ -10,7 +10,7 @@
     /// <summary>
     /// Data Synchronizer
     /// </summary>
-    public class Synchronizer
+    public class Synchronizer : ISynchronizer
     {
         #region Members
         /// <summary>
@@ -27,6 +27,11 @@
         /// Blob Writer
         /// </summary>
         protected readonly BlobWriter blobWriter = null;
+
+        /// <summary>
+        /// Synchronization Direction
+        /// </summary>
+        protected readonly Direction direction = Direction.Unknown;
         #endregion
 
         #region Constructors
@@ -40,6 +45,8 @@
             {
                 throw new ArgumentNullException("config");
             }
+
+            this.direction = config.SyncDirection;
 
             switch (config.SyncDirection)
             {
@@ -61,34 +68,28 @@
         /// <summary>
         /// Run Synchronization
         /// </summary>
-        /// <param name="direction">Direction</param>
         /// <returns>Task</returns>
-        public virtual async Task Run(Direction direction)
+        public virtual async Task Run()
         {
-            switch (direction)
+            Trace.TraceInformation("Retrieving items to be synchrnonized.");
+            var items = this.lister.List();
+
+            switch (this.direction)
             {
                 case Direction.BlobToFolder:
-                    Trace.TraceInformation("Retrieving blobs in container.");
-                    var blobItems = this.lister.List();
-
                     Trace.TraceInformation("Initializing folder.");
                     this.folderWriter.Initialize();
 
                     Trace.TraceInformation("Storing blobs.");
-                    await this.folderWriter.Store(blobItems);
+                    await this.folderWriter.Store(items);
                     break;
                 case Direction.FolderToBlob:
-                    Trace.TraceInformation("Retrieving files in folder.");
-                    var folderItems = this.lister.List();
-
                     Trace.TraceInformation("Initializing container.");
                     await this.blobWriter.Initialize();
 
                     Trace.TraceInformation("Storing files.");
-                    await this.blobWriter.Store(folderItems);
+                    await this.blobWriter.Store(items);
                     break;
-                default:
-                    throw new InvalidOperationException("Invalid Direction");
             }
         }
         #endregion

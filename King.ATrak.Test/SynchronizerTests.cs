@@ -59,8 +59,7 @@
         }
 
         [Test]
-        [ExpectedException(typeof(InvalidOperationException))]
-        public async Task SyncUnknownDirection()
+        public void IsISynchronizer()
         {
             var config = new ConfigValues
             {
@@ -70,8 +69,7 @@
                 SyncDirection = Direction.FolderToBlob,
             };
 
-            var s = new Synchronizer(config);
-            await s.Run(Direction.Unknown);
+            Assert.IsNotNull(new Synchronizer(config) as ISynchronizer);
         }
     }
 }

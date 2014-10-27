@@ -76,4 +76,30 @@
         #endregion
     }
     #endregion
+
+    #region ISynchronizer
+    /// <summary>
+    /// Data Synchronizer Interface
+    /// </summary>
+    public interface ISynchronizer
+    {
+        #region Methods
+        /// <summary>
+        /// Run Synchronization
+        /// </summary>
+        /// <returns>Task</returns>
+        Task Run();
+        #endregion
+    }
+    #endregion
+
+    #region IDataWriter
+    /// <summary>
+    /// Data Writer
+    /// </summary>
+    public interface IDataWriter
+    {
+
+    }
+    #endregion
 }
