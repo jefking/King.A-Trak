@@ -72,6 +72,26 @@
         {
             var containerName = 'a' + Guid.NewGuid().ToString().Replace("-", "");
             var root = string.Format("{0}\\{1}", Environment.CurrentDirectory, Guid.NewGuid());
+            Directory.CreateDirectory(root);
+
+            var random = new Random();
+            var count = random.Next(1, 25);
+            var toValidate = new List<Validation>(count);
+            for (var i = 0; i < count; i++)
+            {
+                var v = new Validation
+                {
+                    Data = new byte[64],
+                    FileName = string.Format("{0}.{1}", Guid.NewGuid(), i),
+                };
+
+                var bytes = new byte[64];
+                random.NextBytes(v.Data);
+
+                File.WriteAllBytes(string.Format("{0}\\{1}", root, v.FileName), v.Data);
+
+                toValidate.Add(v);
+            }
 
             var config = new ConfigValues
             {
@@ -84,7 +104,14 @@
             var s = new Synchronizer(config);
             await s.Run(Direction.FolderToBlob);
 
-            Assert.Inconclusive();
+            var to = new Container(containerName, ConnectionString);
+            foreach (var v in toValidate)
+            {
+                var data = await to.Get(v.FileName);
+                Assert.AreEqual(v.Data, data);
+            }
+
+            await to.Delete();
         }
     }
 }

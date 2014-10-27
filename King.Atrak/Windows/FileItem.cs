@@ -28,6 +28,7 @@
 
             this.Path = path;
             this.RelativePath = path.Replace(root, string.Empty);
+            this.RelativePath = this.RelativePath.StartsWith("\\") ? this.RelativePath.Substring(1) : this.RelativePath;
         }
         #endregion
 

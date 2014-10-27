@@ -54,6 +54,26 @@
         }
 
         [Test]
+        public void RelativePath()
+        {
+            var container = Substitute.For<IContainer>();
+
+            var bi = new BlobItem(container, "/file.txt");
+
+            Assert.AreEqual("file.txt", bi.RelativePath);
+        }
+
+        [Test]
+        public void RelativePathNoForwardSlash()
+        {
+            var container = Substitute.For<IContainer>();
+
+            var bi = new BlobItem(container, "file.txt");
+
+            Assert.AreEqual("file.txt", bi.RelativePath);
+        }
+
+        [Test]
         public async Task Load()
         {
             var random = new Random();
@@ -66,8 +86,8 @@
             };
 
             var container = Substitute.For<IContainer>();
-            container.Properties("/file.txt").Returns(Task.FromResult(p));
-            container.Get("/file.txt").Returns(Task.FromResult(bytes));
+            container.Properties("file.txt").Returns(Task.FromResult(p));
+            container.Get("file.txt").Returns(Task.FromResult(bytes));
 
             var bi = new BlobItem(container, "/file.txt");
             await bi.Load();
@@ -76,8 +96,8 @@
             Assert.AreEqual(p.ContentMD5, bi.MD5);
             Assert.AreEqual(bytes, bi.Data);
 
-            container.Received().Properties("/file.txt");
-            container.Received().Get("/file.txt");
+            container.Received().Properties("file.txt");
+            container.Received().Get("file.txt");
         }
     }
 }
