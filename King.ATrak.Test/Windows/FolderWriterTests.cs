@@ -19,5 +19,11 @@
         {
             new FolderWriter(null);
         }
+
+        [Test]
+        public void IsIDataWriter()
+        {
+            Assert.IsNotNull(new FolderWriter("C:\\happy") as IDataWriter);
+        }
     }
 }

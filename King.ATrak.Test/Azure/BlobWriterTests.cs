@@ -24,6 +24,12 @@
         }
 
         [Test]
+        public void IsIDataWriter()
+        {
+            Assert.IsNotNull(new BlobWriter("test", "UseDevelopmentStorage=true;") as IDataWriter);
+        }
+
+        [Test]
         public async Task Initialize()
         {
             var container = Substitute.For<IContainer>();

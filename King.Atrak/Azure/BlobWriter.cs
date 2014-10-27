@@ -9,7 +9,7 @@
     /// <summary>
     /// Blob Writer
     /// </summary>
-    public class BlobWriter
+    public class BlobWriter : IDataWriter
     {
         #region Members
         /// <summary>

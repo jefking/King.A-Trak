@@ -99,7 +99,19 @@
     /// </summary>
     public interface IDataWriter
     {
+        #region Methods
+        /// <summary>
+        /// Initialize Container
+        /// </summary>
+        /// <returns>Success</returns>
+        Task<bool> Initialize();
 
+        /// <summary>
+        /// Store Items
+        /// </summary>
+        /// <param name="items">Items</param>
+        Task Store(IEnumerable<IStorageItem> items);
+        #endregion
     }
     #endregion
 }

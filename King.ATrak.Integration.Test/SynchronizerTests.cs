@@ -56,7 +56,7 @@
             };
 
             var s = new Synchronizer(config);
-            await s.Run(Direction.BlobToFolder);
+            await s.Run();
 
             foreach (var v in toValidate)
             {
@@ -102,7 +102,7 @@
             };
 
             var s = new Synchronizer(config);
-            await s.Run(Direction.FolderToBlob);
+            await s.Run();
 
             var to = new Container(containerName, ConnectionString);
             foreach (var v in toValidate)

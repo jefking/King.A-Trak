@@ -9,7 +9,7 @@
     /// <summary>
     /// Folder Writer
     /// </summary>
-    public class FolderWriter
+    public class FolderWriter : IDataWriter
     {
         #region Members
         /// <summary>
@@ -38,7 +38,7 @@
         /// <summary>
         /// Initialize Folder
         /// </summary>
-        public virtual void Initialize()
+        public virtual async Task<bool> Initialize()
         {
             if (!Directory.Exists(this.to))
             {
@@ -48,6 +48,8 @@
 
                 Trace.TraceInformation("Created directory: '{0}'.", this.to);
             }
+
+            return await Task.FromResult(true);
         }
 
         /// <summary>
