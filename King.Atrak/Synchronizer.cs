@@ -35,32 +35,36 @@
             {
                 throw new ArgumentNullException("config");
             }
-            if (Direction.Unknown == config.SyncDirection)
+            if (null == config.Source)
+            {
+                throw new ArgumentNullException("source");
+            }
+            if (null == config.Destination)
+            {
+                throw new ArgumentNullException("destination");
+            }
+            if (Direction.Unknown == config.Direction)
             {
                 throw new ArgumentException("Invalid Direction.");
             }
 
-            switch (config.SyncDirection)
+            switch (config.Direction)
             {
                 case Direction.BlobToBlob:
+                    this.lister = new BlobReader(config.Source.ContainerName, config.Source.ConnectionString);
+                    this.writer = new BlobWriter(config.Destination.ContainerName, config.Destination.ConnectionString);
+                    break;
                 case Direction.BlobToFolder:
-                    this.lister = new BlobReader(config.ContainerName, config.ConnectionString);
+                    this.lister = new BlobReader(config.Source.ContainerName, config.Source.ConnectionString);
+                    this.writer = new FolderWriter(config.Destination.Folder);
                     break;
                 case Direction.FolderToFolder:
-                case Direction.FolderToBlob:
-                    this.lister = new FolderReader(config.Folder);
-                    break;
-            }
-
-            switch (config.SyncDirection)
-            {
-                case Direction.FolderToFolder:
-                case Direction.BlobToFolder:
-                    this.writer = new FolderWriter(config.Folder);
+                    this.lister = new FolderReader(config.Source.Folder);
+                    this.writer = new FolderWriter(config.Destination.Folder);
                     break;
                 case Direction.FolderToBlob:
-                case Direction.BlobToBlob:
-                    this.writer = new BlobWriter(config.ContainerName, config.ConnectionString);
+                    this.lister = new FolderReader(config.Source.Folder);
+                    this.writer = new BlobWriter(config.Destination.ContainerName, config.Destination.ConnectionString);
                     break;
             }
         }

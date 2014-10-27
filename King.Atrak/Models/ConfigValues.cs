@@ -34,36 +34,27 @@
         }
 
         /// <summary>
-        /// Folder
-        /// </summary>
-        public string Folder
-        {
-            get;
-            set;
-        }
-
-        /// <summary>
-        /// Container Name
-        /// </summary>
-        public string ContainerName
-        {
-            get;
-            set;
-        }
-
-        /// <summary>
-        /// Connection String
-        /// </summary>
-        public string ConnectionString
-        {
-            get;
-            set;
-        }
-
-        /// <summary>
         /// Sync Direction
         /// </summary>
-        public virtual Direction SyncDirection
+        public virtual Direction Direction
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// Data Source
+        /// </summary>
+        public IDataSource Source
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// Data Destination
+        /// </summary>
+        public IDataSource Destination
         {
             get;
             set;

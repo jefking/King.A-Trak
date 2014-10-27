@@ -12,10 +12,16 @@
         {
             var config = new ConfigValues
             {
-                ConnectionString = "UseDevelopmentStorage=true;",
-                ContainerName = "test",
-                Folder = "C:\\happy",
-                SyncDirection = Direction.FolderToBlob,
+                Source = new DataSource
+                {
+                    Folder = "C:\\testing",
+                },
+                Destination = new DataSource
+                {
+                    ConnectionString = "UseDevelopmentStorage=true;",
+                    ContainerName = "test",
+                },
+                Direction = Direction.FolderToBlob,
             };
 
             new Synchronizer(config);
@@ -26,10 +32,15 @@
         {
             var config = new ConfigValues
             {
-                ConnectionString = "UseDevelopmentStorage=true;",
-                ContainerName = "test",
-                Folder = "C:\\happy",
-                SyncDirection = Direction.FolderToFolder,
+                Source = new DataSource
+                {
+                    Folder = "C:\\testing",
+                },
+                Destination = new DataSource
+                {
+                    Folder = "C:\\copy",
+                },
+                Direction = Direction.FolderToFolder,
             };
 
             new Synchronizer(config);
@@ -40,10 +51,17 @@
         {
             var config = new ConfigValues
             {
-                ConnectionString = "UseDevelopmentStorage=true;",
-                ContainerName = "test",
-                Folder = "C:\\happy",
-                SyncDirection = Direction.BlobToBlob,
+                Source = new DataSource
+                {
+                    ConnectionString = "UseDevelopmentStorage=true;",
+                    ContainerName = "copy",
+                },
+                Destination = new DataSource
+                {
+                    ConnectionString = "UseDevelopmentStorage=true;",
+                    ContainerName = "test",
+                },
+                Direction = Direction.BlobToBlob,
             };
 
             new Synchronizer(config);
@@ -54,10 +72,16 @@
         {
             var config = new ConfigValues
             {
-                ConnectionString = "UseDevelopmentStorage=true;",
-                ContainerName = "test",
-                Folder = "C:\\happy",
-                SyncDirection = Direction.BlobToFolder,
+                Source = new DataSource
+                {
+                    ConnectionString = "UseDevelopmentStorage=true;",
+                    ContainerName = "test",
+                },
+                Destination = new DataSource
+                {
+                    Folder = "C:\\testing",
+                },
+                Direction = Direction.BlobToFolder,
             };
 
             new Synchronizer(config);
@@ -76,10 +100,37 @@
         {
             var config = new ConfigValues
             {
-                ConnectionString = "UseDevelopmentStorage=true;",
-                ContainerName = "test",
-                Folder = "C:\\happy",
-                SyncDirection = Direction.Unknown,
+                Source = new DataSource(),
+                Destination = new DataSource(),
+                Direction = Direction.Unknown,
+            };
+
+            new Synchronizer(config);
+        }
+
+        [Test]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void ConstructorSourceNull()
+        {
+            var config = new ConfigValues
+            {
+                Source = null,
+                Destination = new DataSource(),
+                Direction = Direction.FolderToBlob,
+            };
+
+            new Synchronizer(config);
+        }
+
+        [Test]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void ConstructorDestinationNull()
+        {
+            var config = new ConfigValues
+            {
+                Source = new DataSource(),
+                Destination = null,
+                Direction = Direction.BlobToBlob,
             };
 
             new Synchronizer(config);
@@ -90,10 +141,15 @@
         {
             var config = new ConfigValues
             {
-                ConnectionString = "UseDevelopmentStorage=true;",
-                ContainerName = "test",
-                Folder = "C:\\happy",
-                SyncDirection = Direction.FolderToBlob,
+                Source = new DataSource
+                {
+                    Folder = "C:\\From",
+                },
+                Destination = new DataSource
+                {
+                    Folder = "C:\\To",
+                },
+                Direction = Direction.FolderToFolder,
             };
 
             Assert.IsNotNull(new Synchronizer(config) as ISynchronizer);

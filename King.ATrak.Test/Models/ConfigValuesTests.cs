@@ -56,39 +56,27 @@
         }
 
         [Test]
-        public void Folder()
+        public void Destination()
         {
-            var expected = Guid.NewGuid().ToString();
+            var expected = new DataSource();
             var c = new ConfigValues
             {
-                Folder = expected,
+                Destination = expected,
             };
 
-            Assert.AreEqual(expected, c.Folder);
+            Assert.AreEqual(expected, c.Destination);
         }
 
         [Test]
-        public void ContainerName()
+        public void Source()
         {
-            var expected = Guid.NewGuid().ToString();
+            var expected = new DataSource();
             var c = new ConfigValues
             {
-                ContainerName = expected,
+                Source = expected,
             };
 
-            Assert.AreEqual(expected, c.ContainerName);
-        }
-
-        [Test]
-        public void ConnectionString()
-        {
-            var expected = Guid.NewGuid().ToString();
-            var c = new ConfigValues
-            {
-                ConnectionString = expected,
-            };
-
-            Assert.AreEqual(expected, c.ConnectionString);
+            Assert.AreEqual(expected, c.Source);
         }
 
         [Test]
@@ -97,10 +85,10 @@
             var expected = Direction.FolderToBlob;
             var c = new ConfigValues
             {
-                SyncDirection = expected,
+                Direction = expected,
             };
 
-            Assert.AreEqual(expected, c.SyncDirection);
+            Assert.AreEqual(expected, c.Direction);
         }
     }
 }

@@ -6,8 +6,6 @@
     using System;
     using System.Collections.Generic;
     using System.IO;
-    using System.Linq;
-    using System.Text;
     using System.Threading.Tasks;
 
     [TestFixture]
@@ -19,6 +17,7 @@
             public string FileName;
             public byte[] Data;
         }
+
         [Test]
         public async Task BlobToFolder()
         {
@@ -49,10 +48,16 @@
 
             var config = new ConfigValues
             {
-                ConnectionString = ConnectionString,
-                ContainerName = containerName,
-                Folder = root,
-                SyncDirection = Direction.BlobToFolder,
+                Source = new DataSource
+                {
+                    ConnectionString = ConnectionString,
+                    ContainerName = containerName,  
+                },
+                Destination = new DataSource
+                {
+                    Folder = root,
+                },
+                Direction = Direction.BlobToFolder,
             };
 
             var s = new Synchronizer(config);
@@ -95,10 +100,16 @@
 
             var config = new ConfigValues
             {
-                ConnectionString = ConnectionString,
-                ContainerName = containerName,
-                Folder = root,
-                SyncDirection = Direction.FolderToBlob,
+                Source = new DataSource
+                {
+                    Folder = root,
+                },
+                Destination = new DataSource
+                {
+                    ConnectionString = ConnectionString,
+                    ContainerName = containerName,
+                },
+                Direction = Direction.FolderToBlob,
             };
 
             var s = new Synchronizer(config);
@@ -112,6 +123,52 @@
             }
 
             await to.Delete();
+        }
+
+        [Test]
+        public async Task FolderToFolder()
+        {
+            Assert.Inconclusive();
+
+            var config = new ConfigValues
+            {
+                Source = new DataSource
+                {
+                    Folder = "C:\\From",
+                },
+                Destination = new DataSource
+                {
+                    Folder = "C:\\To",
+                },
+                Direction = Direction.FolderToFolder,
+            };
+
+            var s = new Synchronizer(config);
+            await s.Run();
+        }
+
+        [Test]
+        public async Task BlobToBlob()
+        {
+            Assert.Inconclusive();
+
+            var config = new ConfigValues
+            {
+                Source = new DataSource
+                {
+                    ConnectionString = ConnectionString,
+                    ContainerName = "",
+                },
+                Destination = new DataSource
+                {
+                    ConnectionString = ConnectionString,
+                    ContainerName = "",
+                },
+                Direction = Direction.BlobToBlob,
+            };
+
+            var s = new Synchronizer(config);
+            await s.Run();
         }
     }
 }

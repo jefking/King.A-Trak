@@ -1,5 +1,6 @@
 ﻿namespace King.ATrak.Models
 {
+    #region IConfigValues
     /// <summary>
     /// Configuration Values Interface
     /// </summary>
@@ -9,11 +10,37 @@
         /// <summary>
         /// Sync Direction
         /// </summary>
-        Direction SyncDirection
+        Direction Direction
         {
             get;
         }
 
+        /// <summary>
+        /// Data Source
+        /// </summary>
+        IDataSource Source
+        {
+            get;
+        }
+
+        /// <summary>
+        /// Data Destination
+        /// </summary>
+        IDataSource Destination
+        {
+            get;
+        }
+        #endregion
+    }
+    #endregion
+
+    #region IConfigValues
+    /// <summary>
+    /// Data Source Interface
+    /// </summary>
+    public interface IDataSource
+    {
+        #region Properties
         /// <summary>
         /// Folder
         /// </summary>
@@ -39,4 +66,5 @@
         }
         #endregion
     }
+    #endregion
 }
