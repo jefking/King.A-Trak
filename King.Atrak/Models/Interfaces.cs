@@ -8,6 +8,14 @@
     {
         #region Properties
         /// <summary>
+        /// Create Snapshot
+        /// </summary>
+        bool CreateSnapshot
+        {
+            get;
+        }
+
+        /// <summary>
         /// Sync Direction
         /// </summary>
         Direction Direction

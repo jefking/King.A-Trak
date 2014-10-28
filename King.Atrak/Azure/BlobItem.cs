@@ -110,21 +110,9 @@
         /// Create Snapshot
         /// </summary>
         /// <param name="blob">Cloud Blob</param>
-        //protected virtual void CreateSnapshot(ICloudBlob blob)
-        //{
-        //    var page = blob as CloudPageBlob;
-        //    if (null != page)
-        //    {
-        //        page.CreateSnapshot();
-        //    }
-
-        //    var block = blob as CloudBlockBlob;
-        //    if (null != block)
-        //    {
-        //        block.CreateSnapshot();
-        //    }
-        //    throw new NotImplementedException();
-        //}
+        protected virtual void CreateSnapshot()
+        {
+        }
         #endregion
     }
 }

@@ -16,6 +16,11 @@
         /// Container
         /// </summary>
         protected readonly IContainer container = null;
+
+        /// <summary>
+        /// Create Snapshot
+        /// </summary>
+        protected readonly bool createSnapshot = false;
         #endregion
 
         #region Constructors
@@ -24,8 +29,8 @@
         /// </summary>
         /// <param name="name">Container Name</param>
         /// <param name="connectionString">Connection String</param>
-        public BlobWriter(string name, string connectionString)
-            : this(new Container(name, connectionString))
+        public BlobWriter(string name, string connectionString, bool createSnapshot = false)
+            : this(new Container(name, connectionString), createSnapshot)
         {
         }
 
@@ -33,7 +38,7 @@
         /// Mockable Constructor
         /// </summary>
         /// <param name="container">Container</param>
-        public BlobWriter(IContainer container)
+        public BlobWriter(IContainer container, bool createSnapshot = false)
         {
             if (null == container)
             {
@@ -41,6 +46,7 @@
             }
 
             this.container = container;
+            this.createSnapshot = createSnapshot;
         }
         #endregion
 
@@ -72,6 +78,15 @@
                 await item.Load();
 
                 var path = item.RelativePath.Replace("\\", "/");
+
+                if (this.createSnapshot)
+                {
+                    var exists = await this.container.Exists(path);
+                    if (exists)
+                    {
+                        await this.container.Snapshot(path);
+                    }
+                }
 
                 await this.container.Save(path, item.Data, item.ContentType);
             }
