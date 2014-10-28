@@ -69,7 +69,7 @@
   <ItemGroup>
     <Reference Include="King.ATrak.Core, Version=2.0.0.1, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\King.ATrak.2.0.1\lib\net451\King.ATrak.Core.dll</HintPath>
+      <HintPath>..\packages\King.ATrak.2.0.2\lib\net451\King.ATrak.Core.dll</HintPath>
     </Reference>
     <Reference Include="King.Azure, Version=1.0.1.8, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
