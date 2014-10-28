@@ -23,14 +23,13 @@
                 var parameters = new Parameters(args);
                 var config = parameters.Process();
 
-                Trace.TraceInformation("{3}Connection String: '{0}'{3}Container: '{1}'{3}Folder: '{2}'{3}"
-                    , config.ConnectionString
-                    , config.ContainerName
-                    , config.Folder
+                Trace.TraceInformation("{2}From: '{0}'{2}To: '{1}'{2}"
+                    , string.Format("{0}", config.Source.Folder ?? config.Source.ContainerName)
+                    , string.Format("{0}", config.Destination.Folder ?? config.Destination.ContainerName)
                     , Environment.NewLine);
 
                 var sync = new Synchronizer(config);
-                sync.Run(config.SyncDirection).Wait();
+                sync.Run().Wait();
             }
             catch (Exception ex)
             {

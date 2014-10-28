@@ -33,7 +33,7 @@
             {
                 throw new ArgumentNullException("arguments");
             }
-            if (!arguments.Any() || arguments.Count() != 3)
+            if (!arguments.Any() || arguments.Count() > 4)
             {
                 throw new ArgumentException("Invalid parameter count.");
             }
@@ -49,16 +49,50 @@
         /// <returns>Storage Factory</returns>
         public virtual IConfigValues Process()
         {
-            var first = this.arguments.ElementAt(0).ToLowerInvariant();
-            var connectionStringIndex = first.Contains("usedevelopmentstorage") || first.Contains("accountname") ? 0 : 1;
+            
+            var config = new ConfigValues();
+            var source = new DataSource();
+            var destination = new DataSource();
 
-            return new ConfigValues
+            switch (this.arguments.Count())
             {
-                Folder = connectionStringIndex == 0 ? this.arguments.ElementAt(2) : this.arguments.ElementAt(0),
-                ConnectionString = this.arguments.ElementAt(connectionStringIndex),
-                ContainerName = this.arguments.ElementAt(connectionStringIndex + 1),
-                SyncDirection = connectionStringIndex == 0 ? Direction.BlobToFolder : Direction.FolderToBlob,
-            };
+                case 2:
+                    source.Folder = this.arguments.ElementAt(0);
+                    destination.Folder = this.arguments.ElementAt(1);
+                    config.Direction = Direction.FolderToFolder;
+                    break;
+                case 3:
+                    var first = this.arguments.ElementAt(0).ToLowerInvariant();
+                    var connectionStringIndex = first.Contains("usedevelopmentstorage") || first.Contains("accountname") ? 0 : 1;
+
+                    switch (connectionStringIndex)
+                    {
+                        case 0:
+                            source.ConnectionString = this.arguments.ElementAt(0);
+                            source.ContainerName = this.arguments.ElementAt(1);
+                            destination.Folder = this.arguments.ElementAt(2);
+                            config.Direction = Direction.BlobToFolder;
+                            break;
+                        case 1:
+                            source.Folder = this.arguments.ElementAt(0);
+                            destination.ConnectionString = this.arguments.ElementAt(1);
+                            destination.ContainerName = this.arguments.ElementAt(2);
+                            config.Direction = Direction.FolderToBlob;
+                            break;
+                    }
+                    break;
+                case 4:
+                    source.ConnectionString = this.arguments.ElementAt(0);
+                    source.ContainerName = this.arguments.ElementAt(1);
+                    destination.ConnectionString = this.arguments.ElementAt(2);
+                    destination.ContainerName = this.arguments.ElementAt(3);
+                    config.Direction = Direction.BlobToBlob;
+                    break;
+            }
+            config.Source = source;
+            config.Destination = destination;
+            
+            return config;
         }
         #endregion
     }
