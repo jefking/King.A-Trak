@@ -71,7 +71,9 @@
             {
                 await item.Load();
 
-                await this.container.Save(item.RelativePath, item.Data, item.ContentType);
+                var path = item.RelativePath.Replace("\\", "/");
+
+                await this.container.Save(path, item.Data, item.ContentType);
             }
         }
         #endregion
