@@ -48,7 +48,7 @@
         /// <summary>
         /// Initialize Container
         /// </summary>
-        /// <returns></returns>
+        /// <returns>Succcess</returns>
         public virtual async Task<bool> Initialize()
         {
             var created = await this.container.CreateIfNotExists();

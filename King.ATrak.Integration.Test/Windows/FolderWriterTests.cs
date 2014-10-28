@@ -11,22 +11,22 @@
     public class FolderWriterTests
     {
         [Test]
-        public void Initialize()
+        public async Task Initialize()
         {
             var root = string.Format("{0}\\{1}", Environment.CurrentDirectory, Guid.NewGuid());
             var writer = new FolderWriter(root);
-            writer.Initialize();
+            await writer.Initialize();
 
             var exists = Directory.Exists(root);
             Assert.IsTrue(exists);
         }
 
         [Test]
-        public void InitializeExists()
+        public async Task InitializeExists()
         {
             var root = Environment.CurrentDirectory;
             var writer = new FolderWriter(root);
-            writer.Initialize();
+            await writer.Initialize();
 
             var exists = Directory.Exists(root);
             Assert.IsTrue(exists);
@@ -37,6 +37,50 @@
         {
             var root = string.Format("{0}\\{1}", Environment.CurrentDirectory, Guid.NewGuid());
             var file = string.Format("{0}.bin", Guid.NewGuid());
+            Directory.CreateDirectory(root);
+
+            var random = new Random();
+            var bytes = new byte[8];
+            random.NextBytes(bytes);
+
+            var item = Substitute.For<IStorageItem>();
+            item.Load();
+            item.Data.Returns(bytes);
+            item.RelativePath.Returns(file);
+
+            var writer = new FolderWriter(root);
+            await writer.Store(new[] { item });
+
+            Assert.IsTrue(File.Exists(string.Format("{0}\\{1}", root, file)));
+        }
+
+        [Test]
+        public async Task StoreSubFolderForwardSlash()
+        {
+            var root = string.Format("{0}\\{1}", Environment.CurrentDirectory, Guid.NewGuid());
+            var file = string.Format("{0}/{0}/{0}.bin", Guid.NewGuid());
+            Directory.CreateDirectory(root);
+
+            var random = new Random();
+            var bytes = new byte[8];
+            random.NextBytes(bytes);
+
+            var item = Substitute.For<IStorageItem>();
+            item.Load();
+            item.Data.Returns(bytes);
+            item.RelativePath.Returns(file);
+
+            var writer = new FolderWriter(root);
+            await writer.Store(new[] { item });
+
+            Assert.IsTrue(File.Exists(string.Format("{0}\\{1}", root, file)));
+        }
+
+        [Test]
+        public async Task StoreSubFolderBackwardSlash()
+        {
+            var root = string.Format("{0}\\{1}", Environment.CurrentDirectory, Guid.NewGuid());
+            var file = string.Format("{0}\\{0}\\{0}.bin", Guid.NewGuid());
             Directory.CreateDirectory(root);
 
             var random = new Random();

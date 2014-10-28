@@ -1,6 +1,7 @@
 ﻿namespace King.ATrak.Windows
 {
     using System;
+    using System.Linq;
     using System.Collections.Generic;
     using System.Diagnostics;
     using System.IO;
@@ -60,7 +61,19 @@
             {
                 await item.Load();
 
-                File.WriteAllBytes(Path.Combine(this.to, item.RelativePath), item.Data);
+                var path = item.RelativePath.Replace("/", "\\");
+                var folders = path.Split('\\');
+                if (1 < folders.Count())
+                {
+                    var pathcreate = this.to;
+                    for (var i = 0; i < folders.Count(); i++)
+                    {
+                        Directory.CreateDirectory(pathcreate);
+                        pathcreate = string.Format("{0}\\{1}", pathcreate, folders.ElementAt(i));
+                    }
+                }
+
+                File.WriteAllBytes(Path.Combine(this.to, path), item.Data);
             }
         }
         #endregion
