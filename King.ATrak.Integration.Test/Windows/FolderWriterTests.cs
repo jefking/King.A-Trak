@@ -44,6 +44,7 @@
             random.NextBytes(bytes);
 
             var item = Substitute.For<IStorageItem>();
+            item.LoadMD5();
             item.Load();
             item.Data.Returns(bytes);
             item.RelativePath.Returns(file);
@@ -66,6 +67,7 @@
             random.NextBytes(bytes);
 
             var item = Substitute.For<IStorageItem>();
+            item.LoadMD5();
             item.Load();
             item.Data.Returns(bytes);
             item.RelativePath.Returns(file);
@@ -88,6 +90,7 @@
             random.NextBytes(bytes);
 
             var item = Substitute.For<IStorageItem>();
+            item.LoadMD5();
             item.Load();
             item.Data.Returns(bytes);
             item.RelativePath.Returns(file);
