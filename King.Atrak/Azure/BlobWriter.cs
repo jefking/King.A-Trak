@@ -76,7 +76,6 @@
             foreach (var item in items)
             {
                 await item.LoadMD5();
-                await item.Load();
 
                 var path = item.RelativePath.Replace("\\", "/");
 
@@ -88,6 +87,8 @@
                         await this.container.Snapshot(path);
                     }
                 }
+
+                await item.Load();
 
                 await this.container.Save(path, item.Data, item.ContentType);
             }

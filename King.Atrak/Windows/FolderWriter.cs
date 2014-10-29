@@ -59,9 +59,6 @@
         {
             foreach (var item in items)
             {
-                await item.LoadMD5();
-                await item.Load();
-
                 var path = item.RelativePath.Replace("/", "\\");
                 var folders = path.Split('\\');
                 if (1 < folders.Count())
@@ -73,6 +70,9 @@
                         pathcreate = string.Format("{0}\\{1}", pathcreate, folders.ElementAt(i));
                     }
                 }
+
+                await item.LoadMD5();
+                await item.Load();
 
                 File.WriteAllBytes(Path.Combine(this.to, path), item.Data);
             }
