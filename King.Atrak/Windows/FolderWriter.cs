@@ -74,7 +74,9 @@
                 await item.LoadMD5();
                 await item.Load();
 
-                File.WriteAllBytes(Path.Combine(this.to, path), item.Data);
+                path = Path.Combine(this.to, path);
+                Trace.TraceInformation("Writing to file: '{0}'.", path);
+                File.WriteAllBytes(path, item.Data);
             }
         }
         #endregion

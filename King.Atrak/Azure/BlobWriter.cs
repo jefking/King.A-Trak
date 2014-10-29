@@ -90,6 +90,7 @@
 
                 await item.Load();
 
+                Trace.TraceInformation("Uploading to blob:> '{0}'.", path);
                 await this.container.Save(path, item.Data, item.ContentType);
             }
         }
