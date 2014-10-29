@@ -70,6 +70,7 @@
             item.RelativePath.Returns(relPath);
             item.Data.Returns(data);
             item.ContentType.Returns(contentType);
+            item.LoadMD5();
             item.Load();
 
             var container = Substitute.For<IContainer>();
@@ -81,6 +82,7 @@
             var x = item.Received().RelativePath;
             var y = item.Received().Data;
             var z = item.Received().ContentType;
+            item.Received().LoadMD5();
             item.Received().Load();
             container.Received().Save(relPath, data, contentType);
         }
@@ -98,6 +100,7 @@
             item.RelativePath.Returns(relPath);
             item.Data.Returns(data);
             item.ContentType.Returns(contentType);
+            item.LoadMD5();
             item.Load();
 
             var container = Substitute.For<IContainer>();
@@ -111,6 +114,7 @@
             var x = item.Received().RelativePath;
             var y = item.Received().Data;
             var z = item.Received().ContentType;
+            item.Received().LoadMD5();
             item.Received().Load();
             container.Received().Save(relPath, data, contentType);
             container.Received().Exists(relPath);
@@ -130,6 +134,7 @@
             item.RelativePath.Returns(relPath);
             item.Data.Returns(data);
             item.ContentType.Returns(contentType);
+            item.LoadMD5();
             item.Load();
 
             var container = Substitute.For<IContainer>();
@@ -142,6 +147,7 @@
             var x = item.Received().RelativePath;
             var y = item.Received().Data;
             var z = item.Received().ContentType;
+            item.Received().LoadMD5();
             item.Received().Load();
             container.Received().Save(relPath, data, contentType);
             container.Received().Exists(relPath);

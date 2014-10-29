@@ -75,6 +75,7 @@
         {
             foreach (var item in items)
             {
+                await item.LoadMD5();
                 await item.Load();
 
                 var path = item.RelativePath.Replace("\\", "/");
