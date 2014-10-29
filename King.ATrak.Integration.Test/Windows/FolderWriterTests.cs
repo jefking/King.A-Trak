@@ -100,5 +100,27 @@
 
             Assert.IsTrue(File.Exists(string.Format("{0}\\{1}", root, file)));
         }
+
+        [Test]
+        public async Task StoreSameMd5()
+        {
+            var root = string.Format("{0}\\{1}", Environment.CurrentDirectory, Guid.NewGuid());
+            var file = string.Format("{0}.bin", Guid.NewGuid());
+            var path = Path.Combine(root, file);
+            Directory.CreateDirectory(root);
+
+            var random = new Random();
+            var bytes = new byte[8];
+            random.NextBytes(bytes);
+            File.WriteAllBytes(path, bytes);
+            var writtenOn = File.GetLastWriteTimeUtc(path);
+
+            var item = new FileItem(root, path);
+
+            var writer = new FolderWriter(root);
+            await writer.Store(new[] { item });
+
+            Assert.AreEqual(writtenOn, File.GetLastWriteTimeUtc(path));
+        }
     }
 }

@@ -71,10 +71,23 @@
                     }
                 }
 
-                await item.LoadMD5();
-                await item.Load();
-
                 path = Path.Combine(this.to, path);
+
+                if (File.Exists(path))
+                {
+                    await item.LoadMD5();
+
+                    var existing = new FileItem(this.to, path);
+                    await existing.LoadMD5();
+
+                    if (item.MD5 == existing.MD5)
+                    {
+                        Trace.TraceInformation("Synchronization avoided: '{0}'.", item.Path);
+                        continue;
+                    }
+                }
+
+                await item.Load();
                 Trace.TraceInformation("Writing to file: '{0}'.", path);
                 File.WriteAllBytes(path, item.Data);
             }

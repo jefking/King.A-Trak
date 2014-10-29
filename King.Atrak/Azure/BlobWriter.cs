@@ -85,6 +85,7 @@
                     await existing.LoadMD5();
                     if (item.MD5 == existing.MD5)
                     {
+                        Trace.TraceInformation("Synchronization avoided: '{0}'.", item.Path);
                         continue;
                     }
 
