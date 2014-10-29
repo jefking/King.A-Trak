@@ -49,8 +49,10 @@
         /// <returns>Storage Factory</returns>
         public virtual IConfigValues Process()
         {
-            
-            var config = new ConfigValues();
+            var config = new ConfigValues()
+            {
+                CreateSnapshot = true,
+            };
             var source = new DataSource();
             var destination = new DataSource();
 

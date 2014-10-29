@@ -67,10 +67,6 @@
     <Content Include="icon.ico" />
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="King.ATrak.Core, Version=2.0.0.1, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\King.ATrak.2.0.2\lib\net451\King.ATrak.Core.dll</HintPath>
-    </Reference>
     <Reference Include="King.Azure, Version=1.0.1.8, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\King.Azure.1.1.5\lib\net451\King.Azure.dll</HintPath>
