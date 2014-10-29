@@ -2,6 +2,7 @@
 {
     using King.ATrak.Azure;
     using King.Azure.Data;
+    using Microsoft.WindowsAzure.Storage.Blob;
     using NSubstitute;
     using NUnit.Framework;
     using System;
@@ -75,6 +76,7 @@
 
             var container = Substitute.For<IContainer>();
             container.Save(relPath, data, contentType);
+            container.Exists(relPath).Returns(Task.FromResult(false));
 
             var w = new BlobWriter(container);
             await w.Store(new[] { item });
@@ -85,6 +87,7 @@
             item.Received().LoadMD5();
             item.Received().Load();
             container.Received().Save(relPath, data, contentType);
+            container.Received().Exists(relPath);
         }
 
         [Test]
@@ -95,6 +98,12 @@
             random.NextBytes(data);
             var relPath = Guid.NewGuid().ToString();
             var contentType = Guid.NewGuid().ToString();
+
+            var p = new BlobProperties()
+            {
+                ContentType = Guid.NewGuid().ToString(),
+                ContentMD5 = Guid.NewGuid().ToString(),
+            };
 
             var item = Substitute.For<IStorageItem>();
             item.RelativePath.Returns(relPath);
@@ -107,6 +116,7 @@
             container.Save(relPath, data, contentType);
             container.Exists(relPath).Returns(Task.FromResult(true));
             container.Snapshot(relPath);
+            container.Properties(relPath).Returns(Task.FromResult(p));
 
             var w = new BlobWriter(container, true);
             await w.Store(new[] { item });
@@ -119,6 +129,7 @@
             container.Received().Save(relPath, data, contentType);
             container.Received().Exists(relPath);
             container.Received().Snapshot(relPath);
+            container.Received().Properties(relPath);
         }
 
         [Test]
@@ -152,6 +163,47 @@
             container.Received().Save(relPath, data, contentType);
             container.Received().Exists(relPath);
             container.Received(0).Snapshot(relPath);
+            container.Received().Exists(relPath);
+        }
+
+        [Test]
+        public async Task StoreSameMd5()
+        {
+            var random = new Random();
+            var data = new byte[64];
+            random.NextBytes(data);
+            var relPath = Guid.NewGuid().ToString();
+            var contentType = Guid.NewGuid().ToString();
+
+            var p = new BlobProperties()
+            {
+                ContentType = Guid.NewGuid().ToString(),
+                ContentMD5 = Guid.NewGuid().ToString(),
+            };
+
+            var item = Substitute.For<IStorageItem>();
+            item.RelativePath.Returns(relPath);
+            item.MD5.Returns(p.ContentMD5);
+            item.LoadMD5();
+
+            var container = Substitute.For<IContainer>();
+            container.Save(relPath, data, contentType);
+            container.Exists(relPath).Returns(Task.FromResult(true));
+            container.Snapshot(relPath);
+            container.Properties(relPath).Returns(Task.FromResult(p));
+
+            var w = new BlobWriter(container, true);
+            await w.Store(new[] { item });
+
+            var u = item.Received().MD5;
+            var x = item.Received().RelativePath;
+            var y = item.Received(0).Data;
+            item.Received().LoadMD5();
+            item.Received(0).Load();
+            container.Received().Save(relPath, data, contentType);
+            container.Received().Exists(relPath);
+            container.Received().Snapshot(relPath);
+            container.Received().Properties(relPath);
         }
     }
 }

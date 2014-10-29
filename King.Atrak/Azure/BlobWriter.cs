@@ -75,22 +75,29 @@
         {
             foreach (var item in items)
             {
-                await item.LoadMD5();
-
                 var path = item.RelativePath.Replace("\\", "/");
 
-                if (this.createSnapshot)
+                var exists = await this.container.Exists(path);
+                if (exists)
                 {
-                    var exists = await this.container.Exists(path);
-                    if (exists)
+                    await item.LoadMD5();
+                    var existing = new BlobItem(container, path);
+                    await existing.LoadMD5();
+                    if (item.MD5 == existing.MD5)
+                    {
+                        continue;
+                    }
+
+                    if (this.createSnapshot)
                     {
                         await this.container.Snapshot(path);
                     }
                 }
 
+                await item.LoadMD5();
                 await item.Load();
 
-                Trace.TraceInformation("Uploading to blob:> '{0}'.", path);
+                Trace.TraceInformation("Uploading to blob: '{0}'.", path);
                 await this.container.Save(path, item.Data, item.ContentType);
             }
         }
