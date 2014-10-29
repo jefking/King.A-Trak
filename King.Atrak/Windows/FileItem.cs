@@ -81,6 +81,15 @@
 
         #region Methods
         /// <summary>
+        /// Load MD5
+        /// </summary>
+        /// <returns>Task</returns>
+        public async Task LoadMD5()
+        {
+            await this.Load();
+        }
+
+        /// <summary>
         /// Load data, and calculate Hash
         /// </summary>
         public virtual async Task Load()
