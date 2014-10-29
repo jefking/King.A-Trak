@@ -53,6 +53,12 @@
 
         #region Methods
         /// <summary>
+        /// Load MD5
+        /// </summary>
+        /// <returns>Task</returns>
+        Task LoadMD5();
+
+        /// <summary>
         /// Load object from data source
         /// </summary>
         /// <returns>Task</returns>
