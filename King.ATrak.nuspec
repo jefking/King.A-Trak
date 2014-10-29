@@ -15,7 +15,7 @@
     <releaseNotes>MD5 Checks to avoid Synchronization.</releaseNotes>
     <copyright>Jef King</copyright>
     <language>en-US</language>
-    <tags>King.ATrak Azure Windows File Sync Data Blob Cloud Files Synchronize Blob-Storage Windows-Azure Synchronize Synchronization CDN King.Azure</tags>
+    <tags>King.ATrak Azure Windows File Sync Data Blob Cloud Files Snapshot MD5 Mime-Type Content-Type Synchronize Blob-Storage Windows-Azure Synchronize Synchronization CDN King.Azure</tags>
     <dependencies>
       <dependency id="King.Azure" />
     </dependencies>
