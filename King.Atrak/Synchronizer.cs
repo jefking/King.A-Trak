@@ -52,7 +52,7 @@
             {
                 case Direction.BlobToBlob:
                     this.lister = new BlobReader(config.Source.ContainerName, config.Source.ConnectionString);
-                    this.writer = new BlobWriter(config.Destination.ContainerName, config.Destination.ConnectionString);
+                    this.writer = new BlobWriter(config.Destination.ContainerName, config.Destination.ConnectionString, config.CreateSnapshot);
                     break;
                 case Direction.BlobToFolder:
                     this.lister = new BlobReader(config.Source.ContainerName, config.Source.ConnectionString);

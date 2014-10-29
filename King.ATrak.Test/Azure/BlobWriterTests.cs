@@ -84,5 +84,68 @@
             item.Received().Load();
             container.Received().Save(relPath, data, contentType);
         }
+
+        [Test]
+        public async Task StoreCreateSnapshot()
+        {
+            var random = new Random();
+            var data = new byte[64];
+            random.NextBytes(data);
+            var relPath = Guid.NewGuid().ToString();
+            var contentType = Guid.NewGuid().ToString();
+
+            var item = Substitute.For<IStorageItem>();
+            item.RelativePath.Returns(relPath);
+            item.Data.Returns(data);
+            item.ContentType.Returns(contentType);
+            item.Load();
+
+            var container = Substitute.For<IContainer>();
+            container.Save(relPath, data, contentType);
+            container.Exists(relPath).Returns(Task.FromResult(true));
+            container.Snapshot(relPath);
+
+            var w = new BlobWriter(container, true);
+            await w.Store(new[] { item });
+
+            var x = item.Received().RelativePath;
+            var y = item.Received().Data;
+            var z = item.Received().ContentType;
+            item.Received().Load();
+            container.Received().Save(relPath, data, contentType);
+            container.Received().Exists(relPath);
+            container.Received().Snapshot(relPath);
+        }
+
+        [Test]
+        public async Task StoreCreateSnapshotDoesntExist()
+        {
+            var random = new Random();
+            var data = new byte[64];
+            random.NextBytes(data);
+            var relPath = Guid.NewGuid().ToString();
+            var contentType = Guid.NewGuid().ToString();
+
+            var item = Substitute.For<IStorageItem>();
+            item.RelativePath.Returns(relPath);
+            item.Data.Returns(data);
+            item.ContentType.Returns(contentType);
+            item.Load();
+
+            var container = Substitute.For<IContainer>();
+            container.Save(relPath, data, contentType);
+            container.Exists(relPath).Returns(Task.FromResult(false));
+
+            var w = new BlobWriter(container, true);
+            await w.Store(new[] { item });
+
+            var x = item.Received().RelativePath;
+            var y = item.Received().Data;
+            var z = item.Received().ContentType;
+            item.Received().Load();
+            container.Received().Save(relPath, data, contentType);
+            container.Received().Exists(relPath);
+            container.Received(0).Snapshot(relPath);
+        }
     }
 }
