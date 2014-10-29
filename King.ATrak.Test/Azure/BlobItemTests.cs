@@ -86,18 +86,38 @@
             };
 
             var container = Substitute.For<IContainer>();
-            container.Properties("file.txt").Returns(Task.FromResult(p));
             container.Get("file.txt").Returns(Task.FromResult(bytes));
 
             var bi = new BlobItem(container, "/file.txt");
             await bi.Load();
 
-            Assert.AreEqual(p.ContentType, bi.ContentType);
-            Assert.AreEqual(p.ContentMD5, bi.MD5);
             Assert.AreEqual(bytes, bi.Data);
 
-            container.Received().Properties("file.txt");
             container.Received().Get("file.txt");
+        }
+
+        [Test]
+        public async Task LoadMD5()
+        {
+            var random = new Random();
+            var bytes = new byte[64];
+            random.NextBytes(bytes);
+            var p = new BlobProperties()
+            {
+                ContentType = Guid.NewGuid().ToString(),
+                ContentMD5 = Guid.NewGuid().ToString(),
+            };
+
+            var container = Substitute.For<IContainer>();
+            container.Properties("file.txt").Returns(Task.FromResult(p));
+
+            var bi = new BlobItem(container, "/file.txt");
+            await bi.LoadMD5();
+
+            Assert.AreEqual(p.ContentType, bi.ContentType);
+            Assert.AreEqual(p.ContentMD5, bi.MD5);
+
+            container.Received().Properties("file.txt");
         }
     }
 }

@@ -89,6 +89,20 @@
 
         #region Methods
         /// <summary>
+        /// Load MD5
+        /// </summary>
+        /// <returns>Task</returns>
+        public async Task LoadMD5()
+        {
+            if (string.IsNullOrWhiteSpace(this.MD5))
+            {
+                var properties = await this.container.Properties(this.RelativePath);
+                this.ContentType = properties.ContentType;
+                this.MD5 = properties.ContentMD5;
+            }
+        }
+
+        /// <summary>
         /// Load Data from storage
         /// </summary>
         /// <returns></returns>
@@ -96,23 +110,10 @@
         {
             if (null == this.Data)
             {
-                var properties = await this.container.Properties(this.RelativePath);
-                // Content Type
-                this.ContentType = properties.ContentType;
-                this.MD5 = properties.ContentMD5;
-
-                // Data
                 this.Data = await this.container.Get(this.RelativePath);
             }
         }
-
-        /// <summary>
-        /// Create Snapshot
-        /// </summary>
-        /// <param name="blob">Cloud Blob</param>
-        protected virtual void CreateSnapshot()
-        {
-        }
         #endregion
+
     }
 }
