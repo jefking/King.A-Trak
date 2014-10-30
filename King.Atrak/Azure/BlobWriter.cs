@@ -21,24 +21,26 @@
         /// Create Snapshot
         /// </summary>
         protected readonly bool createSnapshot = false;
+
+        /// <summary>
+        /// Cache Control Duration
+        /// </summary>
+        protected readonly int cacheControlDuration = 0;
         #endregion
 
         #region Constructors
         /// <summary>
         /// Default Constructor
         /// </summary>
-        /// <param name="name">Container Name</param>
-        /// <param name="connectionString">Connection String</param>
-        public BlobWriter(string name, string connectionString, bool createSnapshot = false)
-            : this(new Container(name, connectionString), createSnapshot)
+        public BlobWriter(string name, string connectionString, bool createSnapshot = false, int cacheControlDuration = 0)
+            : this(new Container(name, connectionString), createSnapshot, cacheControlDuration)
         {
         }
 
         /// <summary>
         /// Mockable Constructor
         /// </summary>
-        /// <param name="container">Container</param>
-        public BlobWriter(IContainer container, bool createSnapshot = false)
+        public BlobWriter(IContainer container, bool createSnapshot = false, int cacheControlDuration = 0)
         {
             if (null == container)
             {
@@ -47,6 +49,7 @@
 
             this.container = container;
             this.createSnapshot = createSnapshot;
+            this.cacheControlDuration = cacheControlDuration;
         }
         #endregion
 
@@ -100,6 +103,11 @@
 
                 Trace.TraceInformation("Uploading to blob: '{0}'.", path);
                 await this.container.Save(path, item.Data, item.ContentType);
+
+                if (0 < this.cacheControlDuration)
+                {
+                    await this.container.SetCacheControl(path, this.cacheControlDuration);
+                }
             }
         }
         #endregion
