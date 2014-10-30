@@ -52,7 +52,7 @@
             var config = new ConfigValues()
             {
                 CreateSnapshot = bool.Parse(ConfigurationManager.AppSettings["CreateSnapshot"]),
-                //CacheControl = int.Parse(ConfigurationManager.AppSettings["CacheControl"]),
+                CacheControlDuration = int.Parse(ConfigurationManager.AppSettings["CacheControlDuration"]),
             };
             var source = new DataSource();
             var destination = new DataSource();
