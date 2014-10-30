@@ -16,9 +16,9 @@
         }
         
         /// <summary>
-        /// Cache Control
+        /// Cache Control Duration (in seconds)
         /// </summary>
-        public virtual string CacheControl
+        public virtual int CacheControlDuration
         {
             get;
             set;

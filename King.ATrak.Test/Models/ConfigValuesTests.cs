@@ -46,13 +46,14 @@
         [Test]
         public void CacheControl()
         {
-            var expected = Guid.NewGuid().ToString();
+            var random = new Random();
+            var expected = random.Next();
             var c = new ConfigValues
             {
-                CacheControl = expected,
+                CacheControlDuration = expected,
             };
 
-            Assert.AreEqual(expected, c.CacheControl);
+            Assert.AreEqual(expected, c.CacheControlDuration);
         }
 
         [Test]

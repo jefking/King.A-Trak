@@ -14,6 +14,13 @@
         {
             get;
         }
+        /// <summary>
+        /// Cache Control Duration (in seconds)
+        /// </summary>
+        int CacheControlDuration
+        {
+            get;
+        }
 
         /// <summary>
         /// Sync Direction
