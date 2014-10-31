@@ -9,6 +9,13 @@
     /// </summary>
     public class FileItem : IStorageItem
     {
+        #region Members
+        /// <summary>
+        /// Content Types
+        /// </summary>
+        protected readonly IContentTypes contentTypes = new ContentTypes();
+        #endregion
+
         #region Constructor
         /// <summary>
         /// Initializes a new instance of the Disk
@@ -97,7 +104,7 @@
             if (this.Data == null)
             {
                 // Set Content Type
-                this.ContentType = ContentTypes.ContentType(this.Path);
+                this.ContentType = this.contentTypes.ContentType(this.Path);
 
                 // Load Data
                 this.Data = File.ReadAllBytes(this.Path); // < 2 gigs

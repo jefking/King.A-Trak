@@ -12,6 +12,7 @@
         [Test]
         public async Task Load()
         {
+            var c = new ContentTypes();
             var root = Environment.CurrentDirectory;
             var path = string.Format("{0}\\{1}.bin", root, Guid.NewGuid());
 
@@ -32,13 +33,14 @@
             await item.Load();
 
             Assert.AreEqual(bytes, item.Data);
-            Assert.AreEqual(ContentTypes.ContentType(path), item.ContentType);
+            Assert.AreEqual(c.ContentType(path), item.ContentType);
             Assert.AreEqual(md5, item.MD5);
         }
 
         [Test]
         public async Task LoadMD5()
         {
+            var c = new ContentTypes();
             var root = Environment.CurrentDirectory;
             var path = string.Format("{0}\\{1}.bin", root, Guid.NewGuid());
 
@@ -59,7 +61,7 @@
             await item.LoadMD5();
 
             Assert.AreEqual(bytes, item.Data);
-            Assert.AreEqual(ContentTypes.ContentType(path), item.ContentType);
+            Assert.AreEqual(c.ContentType(path), item.ContentType);
             Assert.AreEqual(md5, item.MD5);
         }
     }

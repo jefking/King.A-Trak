@@ -120,4 +120,21 @@
         #endregion
     }
     #endregion
+
+    #region IContentTypes
+    /// <summary>
+    /// Content Types Interface
+    /// </summary>
+    public interface IContentTypes
+    {
+        #region Methods
+        /// <summary>
+        /// Content Type
+        /// </summary>
+        /// <param name="filepath">File Path</param>
+        /// <returns>Content Type</returns>
+        string ContentType(string filepath);
+        #endregion
+    }
+    #endregion
 }

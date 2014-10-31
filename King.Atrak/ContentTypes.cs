@@ -10,7 +10,7 @@
     /// <summary>
     /// Content Types
     /// </summary>
-    public static class ContentTypes
+    public class ContentTypes : IContentTypes
     {
         #region Members
         /// <summary>
@@ -25,7 +25,7 @@
         /// </summary>
         /// <param name="filepath">File Path</param>
         /// <returns>Content Type</returns>
-        public static string ContentType(string filepath)
+        public string ContentType(string filepath)
         {
             if (string.IsNullOrWhiteSpace(filepath))
             {
