@@ -23,6 +23,14 @@
         }
 
         /// <summary>
+        /// Echo
+        /// </summary>
+        bool Echo
+        {
+            get;
+        }
+
+        /// <summary>
         /// Sync Direction
         /// </summary>
         Direction Direction

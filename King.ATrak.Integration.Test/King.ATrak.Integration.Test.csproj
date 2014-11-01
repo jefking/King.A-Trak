@@ -91,6 +91,7 @@
     <Compile Include="Azure\BlobWriterTests.cs" />
     <Compile Include="Initialize.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SynchronizerEchoTests.cs" />
     <Compile Include="SynchronizerTests.cs" />
     <Compile Include="Windows\FileItemTests.cs" />
     <Compile Include="Windows\FolderReaderTests.cs" />
