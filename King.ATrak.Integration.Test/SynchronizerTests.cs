@@ -51,7 +51,7 @@
                 Source = new DataSource
                 {
                     ConnectionString = ConnectionString,
-                    ContainerName = containerName,  
+                    ContainerName = containerName,
                 },
                 Destination = new DataSource
                 {
@@ -70,7 +70,7 @@
             }
 
             await from.Delete();
-            Directory.Delete(to);
+            Directory.Delete(to, true);
         }
 
         [Test]
@@ -124,7 +124,7 @@
             }
 
             await to.Delete();
-            Directory.Delete(from);
+            Directory.Delete(from, true);
         }
 
         [Test]
@@ -168,7 +168,7 @@
 
             var s = new Synchronizer(config);
             await s.Run();
-            
+
             // Validate
             foreach (var v in toValidate)
             {
@@ -176,8 +176,8 @@
                 Assert.AreEqual(v.Data, data);
             }
 
-            Directory.Delete(to);
-            Directory.Delete(from);
+            Directory.Delete(to, true);
+            Directory.Delete(from, true);
         }
 
         [Test]

@@ -93,7 +93,7 @@
                 Assert.IsFalse(exists);
             }
 
-            Directory.Delete(to);
+            Directory.Delete(to, true);
 
             await from.Delete();
         }
@@ -102,7 +102,7 @@
         public async Task FolderToBlob()
         {
             var random = new Random();
-            
+
             var containerName = 'a' + Guid.NewGuid().ToString().Replace("-", "");
             var from = string.Format("{0}\\{1}", Environment.CurrentDirectory, Guid.NewGuid());
             Directory.CreateDirectory(from);
@@ -173,7 +173,7 @@
             }
 
             await to.Delete();
-            Directory.Delete(from);
+            Directory.Delete(from, true);
         }
 
         [Test]
@@ -248,8 +248,8 @@
                 Assert.IsFalse(exists);
             }
 
-            Directory.Delete(to);
-            Directory.Delete(from);
+            Directory.Delete(to, true);
+            Directory.Delete(from, true);
         }
 
         [Test]
