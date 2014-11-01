@@ -22,11 +22,29 @@
         [Test]
         public async Task BlobToFolder()
         {
+            var random = new Random();
             var containerName = 'a' + Guid.NewGuid().ToString().Replace("-", "");
             var from = new Container(containerName, ConnectionString);
             await from.CreateIfNotExists();
 
-            var random = new Random();
+            var to = string.Format("{0}\\{1}", Environment.CurrentDirectory, Guid.NewGuid());
+
+            //Extra files for echo to clean-up
+            Directory.CreateDirectory(to);
+            var extraCount = random.Next(1, 25);
+            var extra = new List<Validation>(extraCount);
+            for (var i = 0; i < extraCount; i++)
+            {
+                var v = new Validation
+                {
+                    Data = Guid.NewGuid().ToByteArray(),
+                    FileName = Guid.NewGuid().ToString(),
+                };
+
+                File.WriteAllBytes(string.Format("{0}\\{1}", from, v.FileName), v.Data);
+                extra.Add(v);
+            }
+
             var count = random.Next(1, 25);
             var toValidate = new List<Validation>(count);
             for (var i = 0; i < count; i++)
@@ -45,8 +63,6 @@
                 toValidate.Add(v);
             }
 
-            var root = string.Format("{0}\\{1}", Environment.CurrentDirectory, Guid.NewGuid());
-
             var config = new ConfigValues
             {
                 Echo = true,
@@ -57,7 +73,7 @@
                 },
                 Destination = new DataSource
                 {
-                    Folder = root,
+                    Folder = to,
                 },
                 Direction = Direction.BlobToFolder,
             };
@@ -67,9 +83,17 @@
 
             foreach (var v in toValidate)
             {
-                var data = File.ReadAllBytes(string.Format("{0}\\{1}", root, v.FileName));
+                var data = File.ReadAllBytes(string.Format("{0}\\{1}", to, v.FileName));
                 Assert.AreEqual(v.Data, data);
             }
+
+            foreach (var v in extra)
+            {
+                var exists = File.Exists(string.Format("{0}\\{1}", to, v.FileName));
+                Assert.IsFalse(exists);
+            }
+
+            Directory.Delete(to);
 
             await from.Delete();
         }
@@ -154,11 +178,27 @@
         [Test]
         public async Task FolderToFolder()
         {
+            var random = new Random();
             var from = string.Format("{0}\\{1}", Environment.CurrentDirectory, Guid.NewGuid());
             Directory.CreateDirectory(from);
             var to = string.Format("{0}\\{1}", Environment.CurrentDirectory, Guid.NewGuid());
 
-            var random = new Random();
+            //Extra files for echo to clean-up
+            Directory.CreateDirectory(to);
+            var extraCount = random.Next(1, 25);
+            var extra = new List<Validation>(extraCount);
+            for (var i = 0; i < extraCount; i++)
+            {
+                var v = new Validation
+                {
+                    Data = Guid.NewGuid().ToByteArray(),
+                    FileName = Guid.NewGuid().ToString(),
+                };
+
+                File.WriteAllBytes(string.Format("{0}\\{1}", from, v.FileName), v.Data);
+                extra.Add(v);
+            }
+
             var count = random.Next(1, 25);
             var toValidate = new List<Validation>(count);
             for (var i = 0; i < count; i++)
@@ -200,6 +240,15 @@
                 var data = File.ReadAllBytes(string.Format("{0}\\{1}", to, v.FileName));
                 Assert.AreEqual(v.Data, data);
             }
+
+            foreach (var v in extra)
+            {
+                var exists = File.Exists(string.Format("{0}\\{1}", to, v.FileName));
+                Assert.IsFalse(exists);
+            }
+
+            Directory.Delete(to);
+            Directory.Delete(from);
         }
 
         [Test]
