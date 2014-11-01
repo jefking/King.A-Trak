@@ -12,6 +12,7 @@
     public class SynchronizerEchoTests
     {
         private readonly string ConnectionString = "UseDevelopmentStorage=true;";
+
         private class Validation
         {
             public string FileName;
@@ -48,6 +49,7 @@
 
             var config = new ConfigValues
             {
+                Echo = true,
                 Source = new DataSource
                 {
                     ConnectionString = ConnectionString,
@@ -100,6 +102,7 @@
 
             var config = new ConfigValues
             {
+                Echo = true,
                 Source = new DataSource
                 {
                     Folder = root,
@@ -153,6 +156,7 @@
 
             var config = new ConfigValues
             {
+                Echo = true,
                 Source = new DataSource
                 {
                     Folder = from,
@@ -204,6 +208,7 @@
 
             var config = new ConfigValues
             {
+                Echo = true,
                 Source = new DataSource
                 {
                     ConnectionString = ConnectionString,
