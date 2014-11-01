@@ -44,7 +44,7 @@
                 toValidate.Add(v);
             }
 
-            var root = string.Format("{0}\\{1}", Environment.CurrentDirectory, Guid.NewGuid());
+            var to = string.Format("{0}\\{1}", Environment.CurrentDirectory, Guid.NewGuid());
 
             var config = new ConfigValues
             {
@@ -55,7 +55,7 @@
                 },
                 Destination = new DataSource
                 {
-                    Folder = root,
+                    Folder = to,
                 },
                 Direction = Direction.BlobToFolder,
             };
@@ -65,19 +65,20 @@
 
             foreach (var v in toValidate)
             {
-                var data = File.ReadAllBytes(string.Format("{0}\\{1}", root, v.FileName));
+                var data = File.ReadAllBytes(string.Format("{0}\\{1}", to, v.FileName));
                 Assert.AreEqual(v.Data, data);
             }
 
             await from.Delete();
+            Directory.Delete(to);
         }
 
         [Test]
         public async Task FolderToBlob()
         {
             var containerName = 'a' + Guid.NewGuid().ToString().Replace("-", "");
-            var root = string.Format("{0}\\{1}", Environment.CurrentDirectory, Guid.NewGuid());
-            Directory.CreateDirectory(root);
+            var from = string.Format("{0}\\{1}", Environment.CurrentDirectory, Guid.NewGuid());
+            Directory.CreateDirectory(from);
 
             var random = new Random();
             var count = random.Next(1, 25);
@@ -93,7 +94,7 @@
                 var bytes = new byte[64];
                 random.NextBytes(v.Data);
 
-                File.WriteAllBytes(string.Format("{0}\\{1}", root, v.FileName), v.Data);
+                File.WriteAllBytes(string.Format("{0}\\{1}", from, v.FileName), v.Data);
 
                 toValidate.Add(v);
             }
@@ -102,7 +103,7 @@
             {
                 Source = new DataSource
                 {
-                    Folder = root,
+                    Folder = from,
                 },
                 Destination = new DataSource
                 {
@@ -123,6 +124,7 @@
             }
 
             await to.Delete();
+            Directory.Delete(from);
         }
 
         [Test]
@@ -173,6 +175,9 @@
                 var data = File.ReadAllBytes(string.Format("{0}\\{1}", to, v.FileName));
                 Assert.AreEqual(v.Data, data);
             }
+
+            Directory.Delete(to);
+            Directory.Delete(from);
         }
 
         [Test]

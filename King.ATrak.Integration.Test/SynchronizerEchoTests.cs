@@ -104,8 +104,8 @@
             var random = new Random();
             
             var containerName = 'a' + Guid.NewGuid().ToString().Replace("-", "");
-            var root = string.Format("{0}\\{1}", Environment.CurrentDirectory, Guid.NewGuid());
-            Directory.CreateDirectory(root);
+            var from = string.Format("{0}\\{1}", Environment.CurrentDirectory, Guid.NewGuid());
+            Directory.CreateDirectory(from);
 
             //Extra files for echo to clean-up
             var to = new Container(containerName, ConnectionString);
@@ -137,7 +137,7 @@
                 var bytes = new byte[64];
                 random.NextBytes(v.Data);
 
-                File.WriteAllBytes(string.Format("{0}\\{1}", root, v.FileName), v.Data);
+                File.WriteAllBytes(string.Format("{0}\\{1}", from, v.FileName), v.Data);
 
                 toValidate.Add(v);
             }
@@ -147,7 +147,7 @@
                 Echo = true,
                 Source = new DataSource
                 {
-                    Folder = root,
+                    Folder = from,
                 },
                 Destination = new DataSource
                 {
@@ -173,6 +173,7 @@
             }
 
             await to.Delete();
+            Directory.Delete(from);
         }
 
         [Test]
