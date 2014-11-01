@@ -24,12 +24,16 @@
         [Test]
         public async Task InitializeExists()
         {
-            var root = Environment.CurrentDirectory;
+            var root = string.Format("{0}\\{1}", Environment.CurrentDirectory, Guid.NewGuid());
+            Directory.CreateDirectory(root);
+            
             var writer = new FolderWriter(root);
             await writer.Initialize();
 
             var exists = Directory.Exists(root);
             Assert.IsTrue(exists);
+
+            Directory.Delete(root, true);
         }
 
         [Test]
@@ -53,6 +57,8 @@
             await writer.Store(new[] { item });
 
             Assert.IsTrue(File.Exists(string.Format("{0}\\{1}", root, file)));
+
+            Directory.Delete(root, true);
         }
 
         [Test]
@@ -76,6 +82,8 @@
             await writer.Store(new[] { item });
 
             Assert.IsTrue(File.Exists(string.Format("{0}\\{1}", root, file)));
+
+            Directory.Delete(root, true);
         }
 
         [Test]
@@ -99,6 +107,8 @@
             await writer.Store(new[] { item });
 
             Assert.IsTrue(File.Exists(string.Format("{0}\\{1}", root, file)));
+
+            Directory.Delete(root, true);
         }
 
         [Test]
@@ -121,6 +131,8 @@
             await writer.Store(new[] { item });
 
             Assert.AreEqual(writtenOn, File.GetLastWriteTimeUtc(path));
+
+            Directory.Delete(root, true);
         }
     }
 }
