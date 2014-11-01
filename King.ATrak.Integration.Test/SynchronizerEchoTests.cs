@@ -77,11 +77,29 @@
         [Test]
         public async Task FolderToBlob()
         {
+            var random = new Random();
+            
             var containerName = 'a' + Guid.NewGuid().ToString().Replace("-", "");
             var root = string.Format("{0}\\{1}", Environment.CurrentDirectory, Guid.NewGuid());
             Directory.CreateDirectory(root);
 
-            var random = new Random();
+            //Extra files for echo to clean-up
+            var to = new Container(containerName, ConnectionString);
+            await to.CreateIfNotExists();
+            var extraCount = random.Next(1, 25);
+            var extra = new List<Validation>(extraCount);
+            for (var i = 0; i < extraCount; i++)
+            {
+                var v = new Validation
+                {
+                    Data = Guid.NewGuid().ToByteArray(),
+                    FileName = Guid.NewGuid().ToString(),
+                };
+
+                await to.Save(v.FileName, v.Data);
+                extra.Add(v);
+            }
+
             var count = random.Next(1, 25);
             var toValidate = new List<Validation>(count);
             for (var i = 0; i < count; i++)
@@ -118,11 +136,16 @@
             var s = new Synchronizer(config);
             await s.Run();
 
-            var to = new Container(containerName, ConnectionString);
             foreach (var v in toValidate)
             {
                 var data = await to.Get(v.FileName);
                 Assert.AreEqual(v.Data, data);
+            }
+
+            foreach (var v in extra)
+            {
+                var exists = await to.Exists(v.FileName);
+                Assert.IsFalse(exists);
             }
 
             await to.Delete();
@@ -182,12 +205,29 @@
         [Test]
         public async Task BlobToBlob()
         {
+            var random = new Random();
             var containerName = 'a' + Guid.NewGuid().ToString().Replace("-", "");
             var destContainerName = 'b' + Guid.NewGuid().ToString().Replace("-", "");
             var from = new Container(containerName, ConnectionString);
             await from.CreateIfNotExists();
 
-            var random = new Random();
+            //Extra files for echo to clean-up
+            var to = new Container(containerName, ConnectionString);
+            await to.CreateIfNotExists();
+            var extraCount = random.Next(1, 25);
+            var extra = new List<Validation>(extraCount);
+            for (var i = 0; i < extraCount; i++)
+            {
+                var v = new Validation
+                {
+                    Data = Guid.NewGuid().ToByteArray(),
+                    FileName = Guid.NewGuid().ToString(),
+                };
+
+                await to.Save(v.FileName, v.Data);
+                extra.Add(v);
+            }
+
             var count = random.Next(1, 25);
             var toValidate = new List<Validation>(count);
             for (var i = 0; i < count; i++)
@@ -226,11 +266,16 @@
             await s.Run();
 
             //Validate
-            var to = new Container(destContainerName, ConnectionString);
             foreach (var v in toValidate)
             {
                 var data = await to.Get(v.FileName);
                 Assert.AreEqual(v.Data, data);
+            }
+
+            foreach (var v in extra)
+            {
+                var exists = await to.Exists(v.FileName);
+                Assert.IsFalse(exists);
             }
 
             //Clean-Up
