@@ -113,6 +113,15 @@
                 this.Data = await this.container.Get(this.RelativePath);
             }
         }
+
+        /// <summary>
+        /// Delete Item
+        /// </summary>
+        /// <returns>Task</returns>
+        public virtual async Task Delete()
+        {
+            await this.container.Delete(this.RelativePath);
+        }
         #endregion
 
     }

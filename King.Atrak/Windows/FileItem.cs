@@ -120,6 +120,17 @@
 
             await new TaskFactory().StartNew(() => {});
         }
+
+        /// <summary>
+        /// Delete Item
+        /// </summary>
+        /// <returns>Task</returns>
+        public virtual async Task Delete()
+        {
+            File.Delete(this.Path);
+
+            await new TaskFactory().StartNew(() => { });
+        }
         #endregion
     }
 }

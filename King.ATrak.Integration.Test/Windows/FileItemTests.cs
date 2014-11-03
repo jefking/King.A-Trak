@@ -38,6 +38,25 @@
         }
 
         [Test]
+        public async Task Delete()
+        {
+            var c = new ContentTypes();
+            var root = Environment.CurrentDirectory;
+            var path = string.Format("{0}\\{1}.bin", root, Guid.NewGuid());
+
+            var random = new Random();
+            var bytes = new byte[64];
+            random.NextBytes(bytes);
+
+            File.WriteAllBytes(path, bytes);
+
+            var item = new FileItem(root, path);
+            await item.Delete();
+
+            Assert.IsFalse(File.Exists(path));
+        }
+
+        [Test]
         public async Task LoadMD5()
         {
             var c = new ContentTypes();

@@ -119,5 +119,17 @@
 
             container.Received().Properties("file.txt");
         }
+
+        [Test]
+        public async Task Delete()
+        {
+            var container = Substitute.For<IContainer>();
+            container.Delete("file.txt");
+
+            var bi = new BlobItem(container, "/file.txt");
+            await bi.Delete();
+
+            container.Received().Delete("file.txt");
+        }
     }
 }
