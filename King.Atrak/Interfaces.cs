@@ -63,6 +63,12 @@
         /// </summary>
         /// <returns>Task</returns>
         Task Load();
+
+        /// <summary>
+        /// Delete Item
+        /// </summary>
+        /// <returns>Task</returns>
+        Task Delete();
         #endregion
     }
     #endregion
