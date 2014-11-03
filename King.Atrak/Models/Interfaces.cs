@@ -14,6 +14,7 @@
         {
             get;
         }
+
         /// <summary>
         /// Cache Control Duration (in seconds)
         /// </summary>

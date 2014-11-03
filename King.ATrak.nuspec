@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
   <metadata>
     <id>King.ATrak</id>
-    <version>2.0.5</version>
+    <version>2.0.6</version>
     <title>King.A-Trak</title>
     <authors>Jef King</authors>
     <owners>Jef King</owners>
@@ -12,10 +12,10 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Move content between Windows and Azure.</description>
     <summary>Move content between Windows and Azure.</summary>
-    <releaseNotes>Azure Cache Control for CDN assets.</releaseNotes>
+    <releaseNotes>Supports Echo to delete files at destination that don't exist in source.</releaseNotes>
     <copyright>Jef King</copyright>
     <language>en-US</language>
-    <tags>King.ATrak Azure Windows File Sync Data Blob Cloud Files Snapshot MD5 Mime-Type Content-Type Synchronize Blob-Storage Windows-Azure Synchronize Synchronization CDN King.Azure</tags>
+    <tags>King.ATrak Azure Windows File Sync Data Blob Cloud Files Snapshot MD5 Mime-Type Content-Type Synchronize Blob-Storage Windows-Azure Synchronize Synchronization CDN King.Azure echo</tags>
     <dependencies>
       <dependency id="King.Azure" />
     </dependencies>
