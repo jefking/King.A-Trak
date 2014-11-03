@@ -67,13 +67,13 @@
     <Content Include="icon.ico" />
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="King.ATrak.Core, Version=2.0.0.3, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="King.ATrak.Core, Version=2.0.0.6, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\King.ATrak.2.0.5\lib\net451\King.ATrak.Core.dll</HintPath>
+      <HintPath>..\packages\King.ATrak.2.0.6\lib\net451\King.ATrak.Core.dll</HintPath>
     </Reference>
-    <Reference Include="King.Azure, Version=1.0.1.13, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="King.Azure, Version=1.0.1.14, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\King.Azure.1.1.9\lib\net451\King.Azure.dll</HintPath>
+      <HintPath>..\packages\King.Azure.1.1.10\lib\net451\King.Azure.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Data.Edm, Version=5.6.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
