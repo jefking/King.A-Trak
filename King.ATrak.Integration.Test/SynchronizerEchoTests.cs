@@ -262,7 +262,7 @@
             await from.CreateIfNotExists();
 
             //Extra files for echo to clean-up
-            var to = new Container(containerName, ConnectionString);
+            var to = new Container(destContainerName, ConnectionString);
             await to.CreateIfNotExists();
             var extraCount = random.Next(1, 25);
             var extra = new List<Validation>(extraCount);

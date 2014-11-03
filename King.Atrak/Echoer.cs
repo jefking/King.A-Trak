@@ -46,18 +46,15 @@
                 throw new ArgumentNullException("sourceItems");
             }
 
-            if (sourceItems.Any())
+            var destinationItems = this.destination.List();
+            if (null != destinationItems && destinationItems.Any())
             {
-                var destinationItems = this.destination.List();
-                if (null != destinationItems && destinationItems.Any())
+                var notFoundItems = destinationItems.Where(di => !sourceItems.Any(si => si.RelativePath == di.RelativePath));
+                foreach (var item in notFoundItems)
                 {
-                    var notFoundItems = destinationItems.Where(di => !sourceItems.Any(si => si.RelativePath == di.RelativePath));
-                    foreach (var item in notFoundItems)
-                    {
-                        Trace.TraceInformation("Deleting item in destination: '{0}'.", item.RelativePath);
+                    Trace.TraceInformation("Deleting item in destination: '{0}'.", item.RelativePath);
 
-                        await item.Delete();
-                    }
+                    await item.Delete();
                 }
             }
         }

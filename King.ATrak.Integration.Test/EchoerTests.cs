@@ -31,11 +31,9 @@
             await from.CreateIfNotExists();
 
             var to = string.Format("{0}\\{1}", Environment.CurrentDirectory, Guid.NewGuid());
-
             Directory.CreateDirectory(to);
 
             var count = random.Next(1, 25);
-            var toValidate = new List<Validation>(count);
             for (var i = 0; i < count; i++)
             {
                 var v = new Validation
@@ -47,9 +45,7 @@
                 var bytes = new byte[64];
                 random.NextBytes(v.Data);
 
-                await from.Save(v.FileName, v.Data);
-
-                toValidate.Add(v);
+                File.WriteAllBytes(string.Format("{0}\\{1}", to, v.FileName), v.Data);
             }
 
             var e = new Echoer(new FolderReader(to));
@@ -104,9 +100,8 @@
             var random = new Random();
             var from = string.Format("{0}\\{1}", Environment.CurrentDirectory, Guid.NewGuid());
             Directory.CreateDirectory(from);
-            var to = string.Format("{0}\\{1}", Environment.CurrentDirectory, Guid.NewGuid());
 
-            //Extra files for echo to clean-up
+            var to = string.Format("{0}\\{1}", Environment.CurrentDirectory, Guid.NewGuid());
             Directory.CreateDirectory(to);
 
             var count = random.Next(1, 25);
@@ -138,13 +133,13 @@
         public async Task BlobToBlob()
         {
             var random = new Random();
-            var containerName = 'a' + Guid.NewGuid().ToString().Replace("-", "");
-            var destContainerName = 'b' + Guid.NewGuid().ToString().Replace("-", "");
+            var containerName = string.Format("a{0}b", random.Next());
+            var destContainerName = string.Format("c{0}d", random.Next());
             
             var from = new Container(containerName, ConnectionString);
             await from.CreateIfNotExists();
 
-            var to = new Container(containerName, ConnectionString);
+            var to = new Container(destContainerName, ConnectionString);
             await to.CreateIfNotExists();
 
             var count = random.Next(1, 25);
@@ -158,9 +153,11 @@
 
                 await to.Save(v.FileName, v.Data);
             }
-            
+
+            var sourceItems = new BlobReader(from).List();
+
             var e = new Echoer(new BlobReader(to));
-            await e.CleanDestination(new BlobReader(from).List());
+            await e.CleanDestination(sourceItems);
 
             var items = to.List();
             Assert.AreEqual(0, items.Count());
