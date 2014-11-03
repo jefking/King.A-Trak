@@ -72,6 +72,23 @@
                     this.writer = new BlobWriter(config.Destination.ContainerName, config.Destination.ConnectionString);
                     break;
             }
+
+            if (config.Echo)
+            {
+                IDataLister echoLister = null;
+                switch (config.Direction)
+                {
+                    case Direction.FolderToBlob:
+                    case Direction.BlobToBlob:
+                        echoLister = new BlobReader(config.Destination.ContainerName, config.Destination.ConnectionString);
+                        break;
+                    case Direction.FolderToFolder:
+                    case Direction.BlobToFolder:
+                        echoLister = new FolderReader(config.Destination.Folder);
+                        break;
+                }
+                this.echoer = new Echoer(echoLister);
+            }
         }
         #endregion
 
@@ -90,6 +107,12 @@
 
             Trace.TraceInformation("Storing...");
             await this.writer.Store(items);
+
+            if (null != this.echoer)
+            {
+                Trace.TraceInformation("Removing uneeded resources at destination...");
+                await this.echoer.CleanDestination(items);
+            }
         }
         #endregion
     }
