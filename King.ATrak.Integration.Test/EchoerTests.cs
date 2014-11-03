@@ -69,17 +69,8 @@
             var e = new Echoer(new FolderReader(to));
             e.CleanDestination(new BlobReader(from).List());
 
-            //foreach (var v in toValidate)
-            //{
-            //    var data = File.ReadAllBytes(string.Format("{0}\\{1}", to, v.FileName));
-            //    Assert.AreEqual(v.Data, data);
-            //}
-
-            //foreach (var v in extra)
-            //{
-            //    var exists = File.Exists(string.Format("{0}\\{1}", to, v.FileName));
-            //    Assert.IsFalse(exists);
-            //}
+            var items = Directory.GetFiles(to);
+            Assert.AreEqual(0, items.Count());
 
             Directory.Delete(to, true);
 
@@ -133,24 +124,15 @@
             var e = new Echoer(new BlobReader(to));
             e.CleanDestination(new FolderReader(from).List());
 
-            //foreach (var v in toValidate)
-            //{
-            //    var data = await to.Get(v.FileName);
-            //    Assert.AreEqual(v.Data, data);
-            //}
-
-            //foreach (var v in extra)
-            //{
-            //    var exists = await to.Exists(v.FileName);
-            //    Assert.IsFalse(exists);
-            //}
+            var items = to.List();
+            Assert.AreEqual(0, items.Count());
 
             await to.Delete();
             Directory.Delete(from, true);
         }
 
         [Test]
-        public async Task FolderToFolder()
+        public void FolderToFolder()
         {
             var random = new Random();
             var from = string.Format("{0}\\{1}", Environment.CurrentDirectory, Guid.NewGuid());
@@ -194,18 +176,8 @@
             var e = new Echoer(new FolderReader(to));
             e.CleanDestination(new FolderReader(from).List());
 
-            // Validate
-            //foreach (var v in toValidate)
-            //{
-            //    var data = File.ReadAllBytes(string.Format("{0}\\{1}", to, v.FileName));
-            //    Assert.AreEqual(v.Data, data);
-            //}
-
-            //foreach (var v in extra)
-            //{
-            //    var exists = File.Exists(string.Format("{0}\\{1}", to, v.FileName));
-            //    Assert.IsFalse(exists);
-            //}
+            var items = Directory.GetFiles(to);
+            Assert.AreEqual(0, items.Count());
 
             Directory.Delete(to, true);
             Directory.Delete(from, true);
@@ -258,18 +230,8 @@
             var e = new Echoer(new BlobReader(to));
             e.CleanDestination(new BlobReader(from).List());
 
-            //Validate
-            //foreach (var v in toValidate)
-            //{
-            //    var data = await to.Get(v.FileName);
-            //    Assert.AreEqual(v.Data, data);
-            //}
-
-            //foreach (var v in extra)
-            //{
-            //    var exists = await to.Exists(v.FileName);
-            //    Assert.IsFalse(exists);
-            //}
+            var items = to.List();
+            Assert.AreEqual(0, items.Count());
 
             //Clean-Up
             await from.Delete();
