@@ -41,7 +41,7 @@
                     FileName = Guid.NewGuid().ToString(),
                 };
 
-                File.WriteAllBytes(string.Format("{0}\\{1}", from, v.FileName), v.Data);
+                File.WriteAllBytes(string.Format("{0}\\{1}", to, v.FileName), v.Data);
                 extra.Add(v);
             }
 
@@ -196,7 +196,7 @@
                     FileName = Guid.NewGuid().ToString(),
                 };
 
-                File.WriteAllBytes(string.Format("{0}\\{1}", from, v.FileName), v.Data);
+                File.WriteAllBytes(string.Format("{0}\\{1}", to, v.FileName), v.Data);
                 extra.Add(v);
             }
 
