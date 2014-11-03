@@ -93,6 +93,7 @@
     <Compile Include="Azure\BlobReaderTests.cs" />
     <Compile Include="Azure\BlobWriterTests.cs" />
     <Compile Include="ContentTypesTests.cs" />
+    <Compile Include="EchoerTests.cs" />
     <Compile Include="Models\ConfigValuesTests.cs" />
     <Compile Include="Models\DataSourceTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -104,6 +104,7 @@
   <ItemGroup>
     <Compile Include="Azure\BlobReader.cs" />
     <Compile Include="Azure\BlobWriter.cs" />
+    <Compile Include="Echoer.cs" />
     <Compile Include="Enums.cs" />
     <Compile Include="Interfaces.cs" />
     <Compile Include="Azure\BlobItem.cs">
