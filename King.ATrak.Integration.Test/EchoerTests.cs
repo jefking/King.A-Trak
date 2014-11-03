@@ -32,21 +32,7 @@
 
             var to = string.Format("{0}\\{1}", Environment.CurrentDirectory, Guid.NewGuid());
 
-            //Extra files for echo to clean-up
             Directory.CreateDirectory(to);
-            var extraCount = random.Next(1, 25);
-            var extra = new List<Validation>(extraCount);
-            for (var i = 0; i < extraCount; i++)
-            {
-                var v = new Validation
-                {
-                    Data = Guid.NewGuid().ToByteArray(),
-                    FileName = Guid.NewGuid().ToString(),
-                };
-
-                File.WriteAllBytes(string.Format("{0}\\{1}", from, v.FileName), v.Data);
-                extra.Add(v);
-            }
 
             var count = random.Next(1, 25);
             var toValidate = new List<Validation>(count);
@@ -67,7 +53,7 @@
             }
 
             var e = new Echoer(new FolderReader(to));
-            e.CleanDestination(new BlobReader(from).List());
+            await e.CleanDestination(new BlobReader(from).List());
 
             var items = Directory.GetFiles(to);
             Assert.AreEqual(0, items.Count());
@@ -86,7 +72,6 @@
             var from = string.Format("{0}\\{1}", Environment.CurrentDirectory, Guid.NewGuid());
             Directory.CreateDirectory(from);
 
-            //Extra files for echo to clean-up
             var to = new Container(containerName, ConnectionString);
             await to.CreateIfNotExists();
             var extraCount = random.Next(1, 25);
@@ -103,26 +88,8 @@
                 extra.Add(v);
             }
 
-            var count = random.Next(1, 25);
-            var toValidate = new List<Validation>(count);
-            for (var i = 0; i < count; i++)
-            {
-                var v = new Validation
-                {
-                    Data = new byte[64],
-                    FileName = string.Format("{0}.{1}", Guid.NewGuid(), i),
-                };
-
-                var bytes = new byte[64];
-                random.NextBytes(v.Data);
-
-                File.WriteAllBytes(string.Format("{0}\\{1}", from, v.FileName), v.Data);
-
-                toValidate.Add(v);
-            }
-
             var e = new Echoer(new BlobReader(to));
-            e.CleanDestination(new FolderReader(from).List());
+            await e.CleanDestination(new FolderReader(from).List());
 
             var items = to.List();
             Assert.AreEqual(0, items.Count());
@@ -132,7 +99,7 @@
         }
 
         [Test]
-        public void FolderToFolder()
+        public async Task FolderToFolder()
         {
             var random = new Random();
             var from = string.Format("{0}\\{1}", Environment.CurrentDirectory, Guid.NewGuid());
@@ -141,22 +108,8 @@
 
             //Extra files for echo to clean-up
             Directory.CreateDirectory(to);
-            var extraCount = random.Next(1, 25);
-            var extra = new List<Validation>(extraCount);
-            for (var i = 0; i < extraCount; i++)
-            {
-                var v = new Validation
-                {
-                    Data = Guid.NewGuid().ToByteArray(),
-                    FileName = Guid.NewGuid().ToString(),
-                };
-
-                File.WriteAllBytes(string.Format("{0}\\{1}", from, v.FileName), v.Data);
-                extra.Add(v);
-            }
 
             var count = random.Next(1, 25);
-            var toValidate = new List<Validation>(count);
             for (var i = 0; i < count; i++)
             {
                 var v = new Validation
@@ -168,13 +121,11 @@
                 var bytes = new byte[64];
                 random.NextBytes(v.Data);
 
-                File.WriteAllBytes(string.Format("{0}\\{1}", from, v.FileName), v.Data);
-
-                toValidate.Add(v);
+                File.WriteAllBytes(string.Format("{0}\\{1}", to, v.FileName), v.Data);
             }
 
             var e = new Echoer(new FolderReader(to));
-            e.CleanDestination(new FolderReader(from).List());
+            await e.CleanDestination(new FolderReader(from).List());
 
             var items = Directory.GetFiles(to);
             Assert.AreEqual(0, items.Count());
@@ -189,15 +140,15 @@
             var random = new Random();
             var containerName = 'a' + Guid.NewGuid().ToString().Replace("-", "");
             var destContainerName = 'b' + Guid.NewGuid().ToString().Replace("-", "");
+            
             var from = new Container(containerName, ConnectionString);
             await from.CreateIfNotExists();
 
-            //Extra files for echo to clean-up
             var to = new Container(containerName, ConnectionString);
             await to.CreateIfNotExists();
-            var extraCount = random.Next(1, 25);
-            var extra = new List<Validation>(extraCount);
-            for (var i = 0; i < extraCount; i++)
+
+            var count = random.Next(1, 25);
+            for (var i = 0; i < count; i++)
             {
                 var v = new Validation
                 {
@@ -206,29 +157,10 @@
                 };
 
                 await to.Save(v.FileName, v.Data);
-                extra.Add(v);
-            }
-
-            var count = random.Next(1, 25);
-            var toValidate = new List<Validation>(count);
-            for (var i = 0; i < count; i++)
-            {
-                var v = new Validation
-                {
-                    Data = new byte[64],
-                    FileName = string.Format("{0}.{1}", Guid.NewGuid(), i),
-                };
-
-                var bytes = new byte[64];
-                random.NextBytes(v.Data);
-
-                await from.Save(v.FileName, v.Data);
-
-                toValidate.Add(v);
             }
             
             var e = new Echoer(new BlobReader(to));
-            e.CleanDestination(new BlobReader(from).List());
+            await e.CleanDestination(new BlobReader(from).List());
 
             var items = to.List();
             Assert.AreEqual(0, items.Count());

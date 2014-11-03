@@ -155,7 +155,7 @@
         /// Clean Destination
         /// </summary>
         /// <param name="sourceItems">Source Items</param>
-        void CleanDestination(IEnumerable<IStorageItem> sourceItems);
+        Task CleanDestination(IEnumerable<IStorageItem> sourceItems);
         #endregion
     }
     #endregion

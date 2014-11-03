@@ -39,7 +39,7 @@
         /// Clean Destination
         /// </summary>
         /// <param name="sourceItems">Source Items</param>
-        public virtual void CleanDestination(IEnumerable<IStorageItem> sourceItems)
+        public virtual async Task CleanDestination(IEnumerable<IStorageItem> sourceItems)
         {
             if (null == sourceItems)
             {
@@ -54,8 +54,9 @@
                     var notFoundItems = destinationItems.Where(di => !sourceItems.Any(si => si.RelativePath == di.RelativePath));
                     foreach (var item in notFoundItems)
                     {
-                        //Delete Item;
                         Trace.TraceInformation("Deleting item in destination: '{0}'.", item.RelativePath);
+
+                        await item.Delete();
                     }
                 }
             }
