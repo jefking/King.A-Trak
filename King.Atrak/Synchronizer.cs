@@ -22,6 +22,11 @@
         /// Data Writer
         /// </summary>
         protected readonly IDataWriter writer = null;
+
+        /// <summary>
+        /// Echo deletions to destination
+        /// </summary>
+        protected readonly IEchoer echoer = null;
         #endregion
 
         #region Constructors

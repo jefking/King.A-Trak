@@ -137,4 +137,20 @@
         #endregion
     }
     #endregion
+
+    #region IEchoer
+    /// <summary>
+    /// Echo Interface deletions to destination
+    /// </summary>
+    public interface IEchoer
+    {
+        #region Methods
+        /// <summary>
+        /// Clean Destination
+        /// </summary>
+        /// <param name="sourceItems">Source Items</param>
+        void CleanDestination(IEnumerable<IStorageItem> sourceItems);
+        #endregion
+    }
+    #endregion
 }
