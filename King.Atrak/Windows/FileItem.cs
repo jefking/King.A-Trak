@@ -61,7 +61,7 @@
         /// <summary>
         /// Gets the Path
         /// </summary>
-        public virtual string Path
+        public string Path
         {
             get;
             protected set;
@@ -70,7 +70,7 @@
         /// <summary>
         /// Gets the Relative Path
         /// </summary>
-        public virtual string RelativePath
+        public string RelativePath
         {
             get;
             protected set;
