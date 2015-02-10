@@ -18,6 +18,12 @@
         }
 
         [Test]
+        public void ConstructorCacheControllNegative()
+        {
+            new BlobWriter("test", "UseDevelopmentStorage=true;", false, -100);
+        }
+
+        [Test]
         [ExpectedException(typeof(ArgumentNullException))]
         public void ConstructorContainerNull()
         {

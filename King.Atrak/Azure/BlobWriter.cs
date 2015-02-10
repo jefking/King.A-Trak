@@ -25,7 +25,7 @@
         /// <summary>
         /// Cache Control Duration
         /// </summary>
-        protected readonly int cacheControlDuration = 0;
+        protected readonly uint cacheControlDuration = 0;
         #endregion
 
         #region Constructors
@@ -49,7 +49,7 @@
 
             this.container = container;
             this.createSnapshot = createSnapshot;
-            this.cacheControlDuration = cacheControlDuration;
+            this.cacheControlDuration = (0 > cacheControlDuration) ? 0 : (uint)cacheControlDuration;
         }
         #endregion
 
