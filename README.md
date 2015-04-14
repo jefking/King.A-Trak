@@ -13,3 +13,6 @@ PM> Install-Package King.ATrak
 
 ### [Wiki](https://github.com/jefking/King.A-Trak/wiki)
 View the wiki to learn how to use this.
+
+### [AzCopy](http://azure.microsoft.com/en-us/documentation/articles/storage-use-azcopy/)
+Make sure you check out AzCopy if you are looking a command line tool and not binaries for copying data.
