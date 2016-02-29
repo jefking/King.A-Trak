@@ -46,7 +46,7 @@
 
             Assert.IsTrue(result);
 
-            container.Received().CreateIfNotExists();
+            await container.Received().CreateIfNotExists();
         }
 
         [Test]
@@ -60,7 +60,7 @@
 
             Assert.IsFalse(result);
 
-            container.Received().CreateIfNotExists();
+            await container.Received().CreateIfNotExists();
         }
 
         [Test]
