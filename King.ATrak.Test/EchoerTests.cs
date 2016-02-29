@@ -17,10 +17,9 @@
         }
 
         [Test]
-        [ExpectedException(typeof(ArgumentNullException))]
         public void ConstructorDestinationNull()
         {
-            new Echoer(null);
+            Assert.That(() => new Echoer(null), Throws.TypeOf<ArgumentNullException>());
         }
 
         [Test]
@@ -31,12 +30,11 @@
         }
 
         [Test]
-        [ExpectedException(typeof(ArgumentNullException))]
         public async Task CleanDestinationSourceItemsNull()
         {
             var destination = Substitute.For<IDataLister>();
             var e = new Echoer(destination);
-            await e.CleanDestination(null);
+            Assert.That(async () => await e.CleanDestination(null), Throws.TypeOf<ArgumentNullException>());
         }
 
         [Test]

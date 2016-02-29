@@ -88,14 +88,12 @@
         }
 
         [Test]
-        [ExpectedException(typeof(ArgumentNullException))]
         public void ConstructorConfigNull()
         {
-            new Synchronizer(null);
+            Assert.That(() => new Synchronizer(null), Throws.TypeOf<ArgumentNullException>());
         }
 
         [Test]
-        [ExpectedException(typeof(ArgumentException))]
         public void ConstructorDirectionUnknown()
         {
             var config = new ConfigValues
@@ -105,11 +103,10 @@
                 Direction = Direction.Unknown,
             };
 
-            new Synchronizer(config);
+            Assert.That(() => new Synchronizer(config), Throws.TypeOf<ArgumentException>());
         }
 
         [Test]
-        [ExpectedException(typeof(ArgumentNullException))]
         public void ConstructorSourceNull()
         {
             var config = new ConfigValues
@@ -119,11 +116,10 @@
                 Direction = Direction.FolderToBlob,
             };
 
-            new Synchronizer(config);
+            Assert.That(() => new Synchronizer(config), Throws.TypeOf<ArgumentNullException>());
         }
 
         [Test]
-        [ExpectedException(typeof(ArgumentNullException))]
         public void ConstructorDestinationNull()
         {
             var config = new ConfigValues
@@ -133,7 +129,7 @@
                 Direction = Direction.BlobToBlob,
             };
 
-            new Synchronizer(config);
+            Assert.That(() => new Synchronizer(config), Throws.TypeOf<ArgumentNullException>());
         }
 
         [Test]

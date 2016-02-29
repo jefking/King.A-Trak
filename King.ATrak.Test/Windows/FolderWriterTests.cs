@@ -14,10 +14,9 @@
         }
 
         [Test]
-        [ExpectedException(typeof(ArgumentException))]
         public void ConstructorToNull()
         {
-            new FolderWriter(null);
+            Assert.That(() => new FolderWriter(null), Throws.TypeOf<ArgumentException>());
         }
 
         [Test]

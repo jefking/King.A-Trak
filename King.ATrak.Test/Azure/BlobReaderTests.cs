@@ -19,10 +19,9 @@
         }
 
         [Test]
-        [ExpectedException(typeof(ArgumentNullException))]
         public void ConstructorContainerNull()
         {
-            new BlobReader(null);
+            Assert.That(() => new BlobReader(null), Throws.TypeOf<ArgumentNullException>());
         }
 
         [Test]

@@ -14,17 +14,15 @@
         }
 
         [Test]
-        [ExpectedException(typeof(ArgumentException))]
         public void ConstructorRootNull()
         {
-            new FileItem(null, "temp.csv");
+            Assert.That(() => new FileItem(null, "temp.csv"), Throws.TypeOf<ArgumentException>());
         }
 
         [Test]
-        [ExpectedException(typeof(ArgumentException))]
         public void ConstructorPathNull()
         {
-            new FileItem("C:\\happy", null);
+            Assert.That(() => new FileItem("C:\\happy", null), Throws.TypeOf<ArgumentException>());
         }
 
         [Test]

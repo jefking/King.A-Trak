@@ -19,18 +19,17 @@
         }
 
         [Test]
-        [ExpectedException(typeof(ArgumentNullException))]
         public void ConstructorContainerNull()
         {
-            new BlobItem(null, "/file.txt");
+            Assert.That(() => new BlobItem(null, "/file.txt"), Throws.TypeOf<ArgumentNullException>());
         }
 
         [Test]
-        [ExpectedException(typeof(ArgumentException))]
         public void ConstructorPathNull()
         {
             var container = Substitute.For<IContainer>();
-            new BlobItem(container, null);
+
+            Assert.That(() => new BlobItem(container, null), Throws.TypeOf<ArgumentException>());
         }
 
         [Test]

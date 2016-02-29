@@ -20,19 +20,17 @@
         }
 
         [Test]
-        [ExpectedException(typeof(ArgumentException))]
         public void ContentTypeFilePathInvalid()
         {
             var c = new ContentTypes();
-            c.ContentType(null);
+            Assert.That(() => c.ContentType(null), Throws.TypeOf<ArgumentException>());
         }
 
         [Test]
-        [ExpectedException(typeof(InvalidOperationException))]
         public void ContentTypeFilePathWierd()
         {
             var c = new ContentTypes();
-            c.ContentType(". ");
+            Assert.That(() => c.ContentType(". "), Throws.TypeOf<InvalidOperationException>());
         }
 
         [TestCase("image/jpeg", ".jpg")]
