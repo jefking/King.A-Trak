@@ -87,6 +87,7 @@
                         echoLister = new FolderReader(config.Destination.Folder);
                         break;
                 }
+
                 this.echoer = new Echoer(echoLister);
             }
         }
