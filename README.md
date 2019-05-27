@@ -14,3 +14,6 @@ View the wiki to learn how to use this.
 
 ### [AzCopy](http://azure.microsoft.com/en-us/documentation/articles/storage-use-azcopy/)
 Make sure you check out [AzCopy](https://azure.microsoft.com/en-us/documentation/articles/storage-use-azcopy/) if you are looking a command line tool and not binaries for copying data.
+
+### CI
+[![Build status](https://dev.azure.com/jefkin/oss/_apis/build/status/King.A-Trak)](https://dev.azure.com/jefkin/oss/_build/latest?definitionId=16)
